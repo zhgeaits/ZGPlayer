@@ -15,3 +15,5 @@ ffmpeg编译：使用ffmpeg-2.4.2+android-ndk32-r10b-linux-x86，在ubuntu14.04_
 编译完毕以后，复制include头文件和so库文件到jni和lib目录去使用。
 
 在eclipse下，右键项目，选择add native support来添加jni的支持。
+
+在jni目录下新建ffmpeg，并且添加一个android.mk，详细内容看项目，这样每次build时候就不会删除了。
