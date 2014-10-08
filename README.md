@@ -13,3 +13,5 @@ ffmpeg编译：使用ffmpeg-2.4.2+android-ndk32-r10b-linux-x86，在ubuntu14.04_
 应该根据自己的环境来修改脚本相关内容。
 
 编译完毕以后，复制include头文件和so库文件到jni和lib目录去使用。
+
+在eclipse下，右键项目，选择add native support来添加jni的支持。
