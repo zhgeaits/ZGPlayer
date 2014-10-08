@@ -8,3 +8,4 @@ ZGPlayer
 
 
 ffmpeg编译：使用ffmpeg-2.4.2+android-ndk32-r10b-linux-x86，在ubuntu14.04_32下编译
+复制脚本build_android_arm.sh到ffmpeg根目录即可进行编译
