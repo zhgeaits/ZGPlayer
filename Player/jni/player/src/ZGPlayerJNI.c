@@ -14,6 +14,7 @@ JNIEXPORT void JNICALL Java_org_zhangge_zgplayer_lib_LibZGPlayer_setVideoPath
 
 JNIEXPORT void JNICALL Java_org_zhangge_zgplayer_lib_LibZGPlayer_setSurface
   (JNIEnv *env, jclass jclazz, jobject surface){
+	LOGI("Java_org_zhangge_zgplayer_lib_LibZGPlayer_setSurface");
 	player_setSurface(env, surface);
 }
 

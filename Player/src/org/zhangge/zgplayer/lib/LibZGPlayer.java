@@ -4,13 +4,9 @@ import android.view.Surface;
 
 public class LibZGPlayer {
 	
-	static {
-		loadLibrary();
-	}
-	
 	public static void loadLibrary() {
-		System.loadLibrary("ffmpeg");
 		System.loadLibrary("ZGPlayer");
+		System.loadLibrary("ffmpeg");
 	}
 
 	public static native void play();

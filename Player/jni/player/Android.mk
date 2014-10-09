@@ -18,15 +18,15 @@ LOCAL_CFLAGS := \
 	-I$(LOCAL_PATH)"/include" \
 	-I$(LOCAL_PATH)"/../ffmpeg/include"
 	
-LOCAL_LDLIBS := -llog -ljnigraphics -lz -landroid
-LOCAL_SHARED_LIBRARIES := libffmpeg
+LOCAL_LDLIBS := -llog -ljnigraphics -lz -landroid "C:/Users/Administrator/Documents/GitHub/ZGPlayer/Player/jni/ffmpeg/libffmpeg.so"
+#LOCAL_SHARED_LIBRARIES := libffmpeg
 	
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 #C编译器的可选标记选项
 	LOCAL_CFLAGS += -DHAVE_NEON=1
 
 #这个会使得去编译,.neon文件，还没测试过。。
-	LOCAL_ARM_NEON := true
+	#LOCAL_ARM_NEON := true
 endif
 
 #为了建立供主应用程序使用的模块，必须将该模块编程共享库。这个变量指向了build-shared-library.mk的位置，这个makefie包含了构建的过程。

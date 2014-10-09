@@ -8,9 +8,8 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="org.zhangge.zgplayer.MainActivity$PlaceholderFragment" >
 
-    <TextView
-        android:id="@+id/section_label"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
 
+    <SurfaceView android:id="@+id/surface"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </RelativeLayout>

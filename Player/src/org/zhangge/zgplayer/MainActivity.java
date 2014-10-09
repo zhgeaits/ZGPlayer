@@ -1,22 +1,22 @@
 package org.zhangge.zgplayer;
 
-import android.app.Activity;
+import org.zhangge.zgplayer.lib.LibZGPlayer;
 
 import android.app.ActionBar;
+import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
-import android.os.Build;
 import android.os.Bundle;
-import android.view.Gravity;
+import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.SurfaceHolder;
+import android.view.SurfaceHolder.Callback;
+import android.view.SurfaceView;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.TextView;
 
 public class MainActivity extends Activity implements
 		NavigationDrawerFragment.NavigationDrawerCallbacks {
@@ -37,7 +37,7 @@ public class MainActivity extends Activity implements
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		LibZGPlayer.loadLibrary();
 		mNavigationDrawerFragment = (NavigationDrawerFragment) getFragmentManager()
 				.findFragmentById(R.id.navigation_drawer);
 		mTitle = getTitle();
@@ -132,6 +132,34 @@ public class MainActivity extends Activity implements
 				Bundle savedInstanceState) {
 			View rootView = inflater.inflate(R.layout.fragment_main, container,
 					false);
+			SurfaceView surface = (SurfaceView) rootView.findViewById(R.id.surface);
+			surface.setOnClickListener(new OnClickListener() {
+				
+				@Override
+				public void onClick(View v) {
+					System.out.println("setVideoPath");
+					LibZGPlayer.setVideoPath("sdafasdf");
+				}
+			});
+			surface.getHolder().addCallback(new Callback() {
+
+				@Override
+				public void surfaceCreated(SurfaceHolder holder) {
+				}
+
+				@Override
+				public void surfaceChanged(SurfaceHolder holder, int format,
+						int width, int height) {
+					System.out.println("setSurface");
+					LibZGPlayer.setSurface(holder.getSurface());
+				}
+
+				@Override
+				public void surfaceDestroyed(SurfaceHolder holder) {
+					
+				}
+				
+			});
 			return rootView;
 		}
 
