@@ -26,3 +26,6 @@ Working Directory: ${project_loc}/jni/player/include
 Arguments:-classpath "${project_classpath};${env_var:ANDROID_SDK_HOME}/platforms/android-16/android.jar" ${java_type_name}
 然后切换到Refresh标签，勾上Refresh resources upon completion。再选上The project containing the seleced resource.
 最后切换到Common标签，勾上External Tools.
+
+在Eclipse里面进行native调试，很简单，最新版的adt已经支持了，在build command那里改成ndk-build NDK_DEBUG=1，然后右键项目，Debug as->Android native application就可以了。。。
+可惜android4.3有一个bug，一直run-as不了，我没成功，然后用2.3也试成功，也没有别的手机了，就不试了。
