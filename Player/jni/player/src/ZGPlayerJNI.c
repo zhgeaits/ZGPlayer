@@ -20,5 +20,6 @@ JNIEXPORT void JNICALL Java_org_zhangge_zgplayer_lib_LibZGPlayer_setSurface
 
 JNIEXPORT void JNICALL Java_org_zhangge_zgplayer_lib_LibZGPlayer_setWindowSize
   (JNIEnv *env, jclass jclazz, jint width, jint height){
+	LOGI("Java_org_zhangge_zgplayer_lib_LibZGPlayer_setWindowSize");
 	player_setSize(env, width, height);
 }

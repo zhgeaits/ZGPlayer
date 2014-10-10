@@ -11,7 +11,7 @@
 					<folderInfo id="com.android.toolchain.gcc.628970565.1093870256" name="/" resourcePath="">
 						<toolChain id="com.android.toolchain.gcc.107843545" name="Android GCC" superClass="com.android.toolchain.gcc">
 							<targetPlatform binaryParser="" id="com.android.targetPlatform.1650001370" isAbstract="false" superClass="com.android.targetPlatform"/>
-							<builder arguments="NDK_DEBUG=1" command="ndk-build" id="com.android.builder.911727318" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Android Builder" superClass="com.android.builder">
+							<builder id="com.android.builder.911727318" keepEnvironmentInBuildfile="false" managedBuildOn="false" name="Android Builder" superClass="com.android.builder">
 								<outputEntries>
 									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="obj"/>
 									<entry flags="VALUE_WORKSPACE_PATH|RESOLVED" kind="outputPath" name="libs"/>
