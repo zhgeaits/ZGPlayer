@@ -5,7 +5,7 @@
 # modified by zhangge.
 ######################################################
 
-NDK=/home/zhangge/android-ndk-r10b
+NDK=/home/zhangge/android-ndk-r8b
 PLATFORM=$NDK/platforms/android-9/arch-arm/
 PREBUILT=$NDK/toolchains/arm-linux-androideabi-4.6/prebuilt/linux-x86
 RESULTDIR=./result
@@ -74,7 +74,7 @@ make clean
 make  -j4 install
 $PREBUILT/bin/arm-linux-androideabi-ar d libavcodec/libavcodec.a inverse.o
 
-$PREBUILT/bin/arm-linux-androideabi-ld -rpath-link=$PLATFORM/usr/lib -L$PLATFORM/usr/lib  -soname libffmpeg.so -shared -nostdlib -z noexecstack -Bsymbolic --whole-archive --no-undefined -o $PREFIX/libffmpeg.so libavcodec/libavcodec.a libavformat/libavformat.a libavutil/libavutil.a libswscale/libswscale.a libswresample/libswresample.a -lc -lm -lz -ldl -llog --dynamic-linker=/system/bin/linker $PREBUILT/lib/gcc/arm-linux-androideabi/4.6/libgcc.a
+$PREBUILT/bin/arm-linux-androideabi-ld -rpath-link=$PLATFORM/usr/lib -L$PLATFORM/usr/lib  -soname libffmpeg.so -shared -nostdlib -z noexecstack -Bsymbolic --whole-archive --no-undefined -o $PREFIX/libffmpeg.so libavcodec/libavcodec.a libavformat/libavformat.a libavutil/libavutil.a libswscale/libswscale.a libswresample/libswresample.a -lc -lm -lz -ldl -llog --dynamic-linker=/system/bin/linker $PREBUILT/lib/gcc/arm-linux-androideabi/4.6.x-google/libgcc.a
 
 }
 

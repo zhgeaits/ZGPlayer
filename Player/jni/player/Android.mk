@@ -18,8 +18,8 @@ LOCAL_CFLAGS := \
 	-I$(LOCAL_PATH)"/include" \
 	-I$(LOCAL_PATH)"/../ffmpeg/include"
 	
-LOCAL_LDLIBS := -llog -ljnigraphics -lz -landroid "C:/Users/Administrator/Documents/GitHub/ZGPlayer/Player/jni/ffmpeg/libffmpeg.so"
-#LOCAL_SHARED_LIBRARIES := libffmpeg
+LOCAL_LDLIBS := -llog -ljnigraphics -lz -landroid# "C:/Users/Administrator/Documents/GitHub/ZGPlayer/Player/jni/ffmpeg/libffmpeg.so"
+LOCAL_SHARED_LIBRARIES := libffmpeg
 	
 ifeq ($(TARGET_ARCH_ABI),armeabi-v7a)
 #C编译器的可选标记选项
