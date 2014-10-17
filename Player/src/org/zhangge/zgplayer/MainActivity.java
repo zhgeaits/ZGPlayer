@@ -1,12 +1,21 @@
 package org.zhangge.zgplayer;
 
+import java.io.IOException;
+
 import org.zhangge.zgplayer.lib.LibZGPlayer;
+import org.zhangge.zgplayer.test.CodecOutputSurface;
+import org.zhangge.zgplayer.test.ExtractMpegFramesTest;
+import org.zhangge.zgplayer.test.MediaPlayerActivity;
 
 import android.app.ActionBar;
 import android.app.Activity;
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
 import android.os.Bundle;
+import android.os.Environment;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -137,8 +146,38 @@ public class MainActivity extends Activity implements
 				
 				@Override
 				public void onClick(View v) {
-					System.out.println("setVideoPath");
-					LibZGPlayer.setVideoPath("sdafasdf");
+//					System.out.println("setVideoPath");
+//					LibZGPlayer.setVideoPath("sdafasdf");
+					Intent intent = new Intent(getActivity(), MediaPlayerActivity.class);
+					startActivity(intent);
+					
+//					new Thread(new Runnable() {
+//
+//						@Override
+//						public void run() {
+//							try {
+//								MediaPlayer player = new MediaPlayer();
+//								player.reset();
+//								player.setAudioStreamType(AudioManager.STREAM_MUSIC);
+//								player.setDataSource(Environment.getExternalStorageDirectory() + "/Tongli3D-II/videores/Dark Horse-1080p.mp4");
+//								CodecOutputSurface ouputSurface = new CodecOutputSurface(500, 500, null);
+//								player.setSurface(ouputSurface.getSurface());
+//								player.prepare();
+//								player.start();
+//							} catch (IllegalArgumentException | SecurityException | IllegalStateException | IOException e) {
+//								e.printStackTrace();
+//							}
+							
+//						}
+//						
+//					}).start();
+					
+					
+//					try {
+//						new ExtractMpegFramesTest().extractMpegFrames();
+//					} catch (IOException e) {
+//						e.printStackTrace();
+//					}
 				}
 			});
 			surface.getHolder().addCallback(new Callback() {

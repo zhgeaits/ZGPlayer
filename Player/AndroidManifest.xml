@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="9"
+        android:minSdkVersion="17"
         android:targetSdkVersion="19" />
 
     <application
@@ -22,6 +22,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        
+        <activity android:name="org.zhangge.zgplayer.test.MediaPlayerActivity" android:screenOrientation="landscape"></activity>
     </application>
 
 </manifest>
