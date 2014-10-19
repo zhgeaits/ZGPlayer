@@ -28,6 +28,9 @@
             android:name="org.zhangge.rbplayer.ui.MediaPlayerActivity"
             android:screenOrientation="landscape" >
         </activity>
+        <activity
+            android:name="org.zhangge.rbplayer.ui.VideoListActivity">
+        </activity>
     </application>
 
 </manifest>
