@@ -4,9 +4,11 @@
     android:versionCode="1"
     android:versionName="1.0" >
 
-    <uses-sdk
-        android:minSdkVersion="16"
-        android:targetSdkVersion="19" />
+    <uses-sdk android:minSdkVersion="15" />
+    
+    <uses-feature
+        android:glEsVersion="0x00020000"
+        android:required="true" />
 
     <application
         android:allowBackup="true"
@@ -21,6 +23,10 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name="org.zhangge.rbplayer.ui.MediaPlayerActivity"
+            android:screenOrientation="landscape" >
         </activity>
     </application>
 
