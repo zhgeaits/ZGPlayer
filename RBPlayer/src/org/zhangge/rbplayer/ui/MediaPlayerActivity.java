@@ -2,7 +2,6 @@ package org.zhangge.rbplayer.ui;
 
 import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.lib.RBVideoRender;
-import org.zhangge.rbplayer.lib.RBVideoSurfaceView;
 
 import android.app.Activity;
 import android.content.pm.ActivityInfo;
