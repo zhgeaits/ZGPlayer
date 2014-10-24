@@ -49,7 +49,9 @@ public class RBTextureRender {
             "precision highp float;\n" +
             "varying vec2 vTextureCoord;\n" +
             "uniform samplerExternalOES sTexture;\n" +
-            "uniform float mode;\n" +
+            "uniform int mode;\n" +
+            "uniform float offset;\n" +
+            "uniform float width;\n" +
             "void doModeOne(){\n" +
             "  float origx = vTextureCoord.x;\n" +
             "  if(origx < 0.5) {\n" +
@@ -58,7 +60,7 @@ public class RBTextureRender {
             "	vTexL.y = vTextureCoord.y;\n" +
             "	vTexR.y = vTextureCoord.y;\n" +
             "	vTexL.x = vTextureCoord.x;\n" +
-            "	vTexR.x = vTextureCoord.x + 0.5;\n" +
+            "	vTexR.x = vTextureCoord.x + 0.5 + offset / width;\n" +
             "  	gl_FragColor.r = texture2D(sTexture, vTexL).r;\n" +
             "  	gl_FragColor.gba = texture2D(sTexture, vTexR).gba;\n" +
             "  } else {\n" +
@@ -66,7 +68,7 @@ public class RBTextureRender {
             "  }\n" +
             "}\n" +
             "void main() {\n" +
-            "   if(mode == 1.0) {\n" +
+            "   if(mode == 1) {\n" +
             "       doModeOne();\n" +
             "   } else {\n" +
             "       gl_FragColor = texture2D(sTexture, vTextureCoord);\n" +
@@ -83,11 +85,16 @@ public class RBTextureRender {
     private int maPositionHandle;
     private int maTextureHandle;
     private int mModeHandle;
+    private int mWidthHandle;
+    private int mOffsetHandle;
 
-    private float mode;
-    public static float MODE_NORMAL = 0;
-    public static float MODE_ONE = 1.0f;
-    public static float MODE_TWO = 2.0f;
+    private float offset = 0.0f;
+    private float mWidth;
+    private int mHeight;
+    private int mode;
+    public static int MODE_NORMAL = 0;
+    public static int MODE_ONE = 1;
+    public static int MODE_TWO = 2;
 
     public RBTextureRender() {
         mTriangleVertices = ByteBuffer.allocateDirect(
@@ -101,6 +108,15 @@ public class RBTextureRender {
 
     public int getTextureId() {
         return mTextureID;
+    }
+    
+    public void setSize(int width, int height) {
+    	mWidth = width;
+    	mHeight = height;
+    }
+    
+    public void setOffset(int offset) {
+    	this.offset = offset;
     }
 
     public void drawFrame(SurfaceTexture st) {
@@ -139,7 +155,9 @@ public class RBTextureRender {
         GLES20.glUniformMatrix4fv(muSTMatrixHandle, 1, false, mSTMatrix, 0);
 
         //传送模式下去
-        GLES20.glUniform1f(mModeHandle, mode);
+        GLES20.glUniform1i(mModeHandle, mode);
+        GLES20.glUniform1f(mOffsetHandle, offset);
+        GLES20.glUniform1f(mWidthHandle, mWidth);
 
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
         ShaderUtils.checkGlError("glDrawArrays");
@@ -177,7 +195,19 @@ public class RBTextureRender {
         mModeHandle = GLES20.glGetUniformLocation(mProgram, "mode");
         ShaderUtils.checkGlError("glGetUniformLocation mode");
         if(mModeHandle == -1) {
-            throw new RuntimeException("Could not get attrib location for mode");
+        	throw new RuntimeException("Could not get attrib location for mode");
+        }
+        
+        mWidthHandle = GLES20.glGetUniformLocation(mProgram, "width");
+        ShaderUtils.checkGlError("glGetUniformLocation width");
+        if(mWidthHandle == -1) {
+        	throw new RuntimeException("Could not get attrib location for width");
+        }
+        
+        mOffsetHandle = GLES20.glGetUniformLocation(mProgram, "offset");
+        ShaderUtils.checkGlError("glGetUniformLocation offset");
+        if(mOffsetHandle == -1) {
+            throw new RuntimeException("Could not get attrib location for offset");
         }
 
         int[] textures = new int[1];
@@ -200,7 +230,7 @@ public class RBTextureRender {
         ShaderUtils.checkGlError("glTexParameter");
     }
 
-    public synchronized void setMode(float mode) {
+    public synchronized void setMode(int mode) {
         this.mode = mode;
     }
 

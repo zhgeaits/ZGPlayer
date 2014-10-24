@@ -21,9 +21,10 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
 
 	private MediaPlayer mMediaPlayer;
 	private OnPlayGoing playGoing;
+	private int gWidth;
+	private int gHeight;
 
 	public RBVideoRender(Context context) {
-		mTextureRender = new RBTextureRender();
 	}
 
 	public void setMediaPlayer(MediaPlayer player) {
@@ -46,11 +47,9 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
 	}
 
 	public void onSurfaceChanged(GL10 glUnused, int width, int height) {
-	}
-
-	public void onSurfaceCreated(GL10 glUnused, EGLConfig config) {
-		mTextureRender.surfaceCreated();
-
+		gWidth = width;
+		gHeight = height;
+		mTextureRender.setSize(width, height);
 		mSurfaceTexture = new SurfaceTexture(mTextureRender.getTextureId());
 		mSurfaceTexture.setOnFrameAvailableListener(this);
 
@@ -73,7 +72,12 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
         }
 	}
 
-    public void setMode(float mode) {
+	public void onSurfaceCreated(GL10 glUnused, EGLConfig config) {
+		mTextureRender = new RBTextureRender();
+		mTextureRender.surfaceCreated();
+	}
+
+    public void setMode(int mode) {
         mTextureRender.setMode(mode);
     }
 
