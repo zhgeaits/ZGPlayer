@@ -29,29 +29,25 @@ public class MediaPlayerActivity extends Activity {
 				WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		setContentView(R.layout.activity_video_player);
-		String url = null;
 		if(getIntent().getExtras() != null) {
-			url = getIntent().getExtras().getString(KEY_VIDEO_URL);
-		}
-		try {
-			player = new MediaPlayer();
-			player.reset();
-			player.setAudioStreamType(AudioManager.STREAM_MUSIC);
-			if(url != null) {
-				player.setDataSource(url);
-			}
-			GLSurfaceView videoview = (GLSurfaceView) findViewById(R.id.videoview);
-			videoview.setEGLContextClientVersion(2);
-			RBVideoRender mRenderer = new RBVideoRender(this);
-			videoview.setRenderer(mRenderer);
-			mRenderer.setMediaPlayer(player);
-			
-//			RBVideoSurfaceView vsv = new RBVideoSurfaceView(this, player);
-			
-//			setContentView(vsv);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
+			String url = getIntent().getExtras().getString(KEY_VIDEO_URL);
+            try {
+                player = new MediaPlayer();
+                player.reset();
+                player.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                if(url != null) {
+                    player.setDataSource(url);
+                }
+                GLSurfaceView videoview = (GLSurfaceView) findViewById(R.id.videoview);
+                videoview.setEGLContextClientVersion(2);
+                RBVideoRender mRenderer = new RBVideoRender(this);
+                mRenderer.setMediaPlayer(player);
+                videoview.setRenderer(mRenderer);
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
 	}
 
 	@Override
@@ -69,6 +65,7 @@ public class MediaPlayerActivity extends Activity {
 	protected void onDestroy() {
 		super.onDestroy();
 		player.stop();
+        player.release();
 	}
 	
 }

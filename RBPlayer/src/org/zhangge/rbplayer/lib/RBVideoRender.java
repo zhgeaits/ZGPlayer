@@ -56,7 +56,7 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
 		try {
 			mMediaPlayer.prepare();
 		} catch (IOException t) {
-			Log.e(TAG, "media player prepare failed");
+			Log.e(TAG, "media player prepare failed:" + t);
 		}
 
 		synchronized (this) {

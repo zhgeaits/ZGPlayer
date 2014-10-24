@@ -178,6 +178,4 @@ public class RBTextureRender {
             throw new RuntimeException("failed creating program");
         }
     }
-
-    
 }
