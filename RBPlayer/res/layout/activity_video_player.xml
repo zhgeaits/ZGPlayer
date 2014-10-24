@@ -13,15 +13,16 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:layout_marginBottom="10dp"
+            android:background="@drawable/seekbar_bg"
+            android:id="@+id/playControl"
             >
 
-        <ImageView android:layout_width="40dp"
-                   android:layout_height="40dp"
-                   android:layout_alignParentLeft="true"
-                   android:background="@drawable/btn_pause_selecter"
-                   android:id="@+id/play_btn"
-                   android:layout_centerVertical="true"
+        <Button android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_alignParentLeft="true"
+                android:background="@drawable/btn_pause_selecter"
+                android:id="@+id/play_btn"
+                android:layout_centerVertical="true"
                 />
 
         <SeekBar
@@ -32,14 +33,16 @@
                  android:layout_centerVertical="true"
                  android:layout_height="wrap_content"
                  android:layout_width="match_parent"
-                 android:id="@+id/progressbar"
+                 android:id="@+id/seekbar"
+                 android:minHeight="20dip"
+                 android:maxHeight="20dip"
                  android:layout_toRightOf="@+id/play_btn"
                  android:layout_toLeftOf="@+id/playtime"
                  android:thumb="@drawable/progress_thumb"/>
 
         <TextView android:id="@+id/playtime"
                   android:layout_centerVertical="true"
-                  android:textSize="15sp"
+                  android:textSize="17sp"
                   android:textColor="#CCCCCC"
                   android:text="00:00/00:00"
                   android:layout_width="wrap_content"
@@ -47,13 +50,12 @@
                   android:layout_toLeftOf="@+id/mode"
                   />
 
-        <ImageView android:layout_width="40dp"
-                   android:layout_height="40dp"
-                   android:background="@drawable/mode_0"
-                   android:layout_alignParentRight="true"
-                   android:layout_centerVertical="true"
-                   android:id="@+id/mode"
-                />
+        <Button android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/mode_0"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:id="@+id/mode"/>
 
     </RelativeLayout>
 </RelativeLayout>

@@ -62,7 +62,8 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
 		synchronized (this) {
 			updateSurface = false;
 		}
-		mMediaPlayer.start();
+
+        mMediaPlayer.start();
 	}
 
 	synchronized public void onFrameAvailable(SurfaceTexture surface) {
