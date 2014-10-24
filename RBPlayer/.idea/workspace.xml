@@ -217,9 +217,13 @@
       <file leaf-file-name="RBTextureRender.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/org/zhangge/rbplayer/lib/RBTextureRender.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="3.1549609" vertical-offset="888" max-vertical-offset="3872">
-              <caret line="180" column="0" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
-              <folding />
+            <state vertical-scroll-proportion="0.40691194" vertical-offset="3661" max-vertical-offset="4664">
+              <caret line="183" column="91" selection-start-line="183" selection-start-column="91" selection-end-line="183" selection-end-column="91" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#3040#3041#0" expanded="true" />
+                <element signature="e#3073#3074#0" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
@@ -227,8 +231,8 @@
       <file leaf-file-name="RBVideoRender.java" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/org/zhangge/rbplayer/lib/RBVideoRender.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0" vertical-offset="132" max-vertical-offset="1342">
-              <caret line="58" column="50" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.0" vertical-offset="66" max-vertical-offset="1342">
+              <caret line="24" column="40" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
               <folding />
             </state>
           </provider>
@@ -547,6 +551,28 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="rbplayer" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RBPlayer" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="RBPlayer" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rbplayer" />
+              <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="utils" />
               <option name="myItemType" value="com.android.tools.idea.gradle.projectView.AndroidPsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -1135,17 +1161,21 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/zhangge/rbplayer/lib/RBVideoRender.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0" vertical-offset="445" max-vertical-offset="1342">
-          <caret line="58" column="50" selection-start-line="58" selection-start-column="50" selection-end-line="58" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.0" vertical-offset="66" max-vertical-offset="1342">
+          <caret line="24" column="40" selection-start-line="24" selection-start-column="40" selection-end-line="24" selection-end-column="40" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/org/zhangge/rbplayer/lib/RBTextureRender.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="3.1549609" vertical-offset="888" max-vertical-offset="3872">
-          <caret line="180" column="0" selection-start-line="180" selection-start-column="0" selection-end-line="180" selection-end-column="0" />
-          <folding />
+        <state vertical-scroll-proportion="0.40691194" vertical-offset="3661" max-vertical-offset="4664">
+          <caret line="183" column="91" selection-start-line="183" selection-start-column="91" selection-end-line="183" selection-end-column="91" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#3040#3041#0" expanded="true" />
+            <element signature="e#3073#3074#0" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

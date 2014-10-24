@@ -1,9 +1,13 @@
 package org.zhangge.rbplayer.lib;
 
+import java.io.BufferedOutputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
+import android.graphics.Bitmap;
 import org.zhangge.rbplayer.utils.ShaderUtils;
 
 import android.graphics.SurfaceTexture;
@@ -78,6 +82,7 @@ public class RBTextureRender {
         mTriangleVertices.put(mTriangleVerticesData).position(0);
 
         Matrix.setIdentityM(mSTMatrix, 0);
+
     }
 
     public int getTextureId() {
@@ -169,6 +174,26 @@ public class RBTextureRender {
         GLES20.glTexParameteri(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, GLES20.GL_TEXTURE_WRAP_T,
                 GLES20.GL_CLAMP_TO_EDGE);
         ShaderUtils.checkGlError("glTexParameter");
+    }
+
+    public void saveFrame(String filename, int mWidth, int mHeight) throws IOException {
+
+        ByteBuffer mPixelBuf = ByteBuffer.allocateDirect(mWidth * mHeight * 4);
+        mPixelBuf.order(ByteOrder.LITTLE_ENDIAN);
+        mPixelBuf.rewind();
+        GLES20.glReadPixels(0, 0, mWidth, mHeight, GLES20.GL_RGBA, GLES20.GL_UNSIGNED_BYTE, mPixelBuf);
+
+        BufferedOutputStream bos = null;
+        try {
+            bos = new BufferedOutputStream(new FileOutputStream(filename));
+            Bitmap bmp = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
+            mPixelBuf.rewind();
+            bmp.copyPixelsFromBuffer(mPixelBuf);
+            bmp.compress(Bitmap.CompressFormat.PNG, 90, bos);
+            bmp.recycle();
+        } finally {
+            if (bos != null) bos.close();
+        }
     }
 
     public void changeFragmentShader(String fragmentShader) {
