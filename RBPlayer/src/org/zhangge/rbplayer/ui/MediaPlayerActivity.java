@@ -5,6 +5,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import org.zhangge.rbplayer.R;
+import org.zhangge.rbplayer.lib.RBTextureRender;
 import org.zhangge.rbplayer.lib.RBVideoRender;
 
 import android.app.Activity;
@@ -31,6 +32,7 @@ public class MediaPlayerActivity extends BaseActivity {
     private String totalTime = null;
     private View playControl;
     private GLSurfaceView videoview;
+    private RBVideoRender mRenderer;
 
     @Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,6 +104,16 @@ public class MediaPlayerActivity extends BaseActivity {
                 }
             }
         });
+        gModeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(mRenderer.getMode() == RBTextureRender.MODE_NORMAL) {
+                    mRenderer.setMode(RBTextureRender.MODE_ONE);
+                } else {
+                    mRenderer.setMode(RBTextureRender.MODE_NORMAL);
+                }
+            }
+        });
     }
 
     private Runnable updateSeekbar = new Runnable() {
@@ -139,7 +151,7 @@ public class MediaPlayerActivity extends BaseActivity {
                 player.setDataSource(url);
             }
             videoview.setEGLContextClientVersion(2);
-            RBVideoRender mRenderer = new RBVideoRender(this);
+            mRenderer = new RBVideoRender(this);
             mRenderer.setMediaPlayer(player);
             videoview.setRenderer(mRenderer);
         } catch (Exception e) {

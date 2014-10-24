@@ -49,7 +49,8 @@ public class RBTextureRender {
             "precision highp float;\n" +
             "varying vec2 vTextureCoord;\n" +
             "uniform samplerExternalOES sTexture;\n" +
-            "void main() {\n" +
+            "uniform float mode;\n" +
+            "void doModeOne(){\n" +
             "  float origx = vTextureCoord.x;\n" +
             "  if(origx < 0.5) {\n" +
             "	vec2 vTexL;\n" +
@@ -63,6 +64,13 @@ public class RBTextureRender {
             "  } else {\n" +
             "   discard;\n"+
             "  }\n" +
+            "}\n" +
+            "void main() {\n" +
+            "   if(mode == 1.0) {\n" +
+            "       doModeOne();\n" +
+            "   } else {\n" +
+            "       gl_FragColor = texture2D(sTexture, vTextureCoord);\n" +
+            "   }\n" +
             "}\n";
 
     private float[] mMVPMatrix = new float[16];
@@ -74,6 +82,12 @@ public class RBTextureRender {
     private int muSTMatrixHandle;
     private int maPositionHandle;
     private int maTextureHandle;
+    private int mModeHandle;
+
+    private float mode;
+    public static float MODE_NORMAL = 0;
+    public static float MODE_ONE = 1.0f;
+    public static float MODE_TWO = 2.0f;
 
     public RBTextureRender() {
         mTriangleVertices = ByteBuffer.allocateDirect(
@@ -122,6 +136,9 @@ public class RBTextureRender {
         GLES20.glUniformMatrix4fv(muMVPMatrixHandle, 1, false, mMVPMatrix, 0);
         GLES20.glUniformMatrix4fv(muSTMatrixHandle, 1, false, mSTMatrix, 0);
 
+        //传送模式下去
+        GLES20.glUniform1f(mModeHandle, mode);
+
         GLES20.glDrawArrays(GLES20.GL_TRIANGLE_STRIP, 0, 4);
         ShaderUtils.checkGlError("glDrawArrays");
         GLES20.glFinish();
@@ -155,6 +172,11 @@ public class RBTextureRender {
             throw new RuntimeException("Could not get attrib location for uSTMatrix");
         }
 
+        mModeHandle = GLES20.glGetUniformLocation(mProgram, "mode");
+        ShaderUtils.checkGlError("glGetUniformLocation mode");
+        if(mModeHandle == -1) {
+            throw new RuntimeException("Could not get attrib location for mode");
+        }
 
         int[] textures = new int[1];
         GLES20.glGenTextures(1, textures, 0);
@@ -174,6 +196,14 @@ public class RBTextureRender {
         GLES20.glTexParameteri(GLES11Ext.GL_TEXTURE_EXTERNAL_OES, GLES20.GL_TEXTURE_WRAP_T,
                 GLES20.GL_CLAMP_TO_EDGE);
         ShaderUtils.checkGlError("glTexParameter");
+    }
+
+    public synchronized void setMode(float mode) {
+        this.mode = mode;
+    }
+
+    public float getMode() {
+        return this.mode;
     }
 
     public void saveFrame(String filename, int mWidth, int mHeight) throws IOException {

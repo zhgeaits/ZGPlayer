@@ -66,6 +66,14 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
         mMediaPlayer.start();
 	}
 
+    public void setMode(float mode) {
+        mTextureRender.setMode(mode);
+    }
+
+    public float getMode() {
+        return mTextureRender.getMode();
+    }
+
 	synchronized public void onFrameAvailable(SurfaceTexture surface) {
 		updateSurface = true;
 	}
