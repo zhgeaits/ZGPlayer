@@ -39,8 +39,6 @@ public class MediaPlayerActivity extends Activity {
 			player.setAudioStreamType(AudioManager.STREAM_MUSIC);
 			if(url != null) {
 				player.setDataSource(url);
-			} else {
-				player.setDataSource(Environment.getExternalStorageDirectory() + "/Tongli3D-II/videores/Ì«Æ½Ñó(00h32m49s-01h05m38s).mp4");
 			}
 			GLSurfaceView videoview = (GLSurfaceView) findViewById(R.id.videoview);
 			videoview.setEGLContextClientVersion(2);
