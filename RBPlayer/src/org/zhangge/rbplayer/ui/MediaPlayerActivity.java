@@ -1,23 +1,22 @@
 package org.zhangge.rbplayer.ui;
 
-import android.view.View;
-import android.widget.Button;
-import android.widget.SeekBar;
-import android.widget.TextView;
 import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.lib.RBTextureRender;
 import org.zhangge.rbplayer.lib.RBVideoRender;
+import org.zhangge.rbplayer.lib.RBVideoRender.OnPlayGoing;
+import org.zhangge.rbplayer.utils.UtilBox;
 
-import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.opengl.GLSurfaceView;
 import android.os.Bundle;
-import android.os.Environment;
+import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
-import org.zhangge.rbplayer.utils.UtilBox;
+import android.widget.Button;
+import android.widget.SeekBar;
+import android.widget.TextView;
 
 public class MediaPlayerActivity extends BaseActivity {
 
@@ -28,7 +27,7 @@ public class MediaPlayerActivity extends BaseActivity {
     private Button gModeBtn;
     private TextView gPlayTime;
     private SeekBar gSeekbar;
-    private boolean isPlaying = true;
+    private boolean shouldPlaying = false;
     private String totalTime = null;
     private View playControl;
     private GLSurfaceView videoview;
@@ -46,7 +45,6 @@ public class MediaPlayerActivity extends BaseActivity {
 		if(getIntent().getExtras() != null) {
 			String url = getIntent().getExtras().getString(KEY_VIDEO_URL);
             initView();
-            seekBarHandler();
             play(url);
         }
 	}
@@ -63,11 +61,9 @@ public class MediaPlayerActivity extends BaseActivity {
             @Override
             public void onClick(View v) {
                 if(player.isPlaying()) {
-                    isPlaying = false;
                     player.pause();
                     gPlayBtn.setBackgroundResource(R.drawable.btn_play_selecter);
                 } else {
-                    isPlaying = true;
                     player.start();
                     seekBarHandler();
                     gPlayBtn.setBackgroundResource(R.drawable.btn_pause_selecter);
@@ -125,6 +121,17 @@ public class MediaPlayerActivity extends BaseActivity {
             }
         }
     };
+    
+    private OnPlayGoing playGoing = new OnPlayGoing() {
+
+		@Override
+		public void doPlayStuff() {
+			shouldPlaying = true;
+			player.start();
+			seekBarHandler();
+		}
+    	
+    };
 
     private void setPlayTime() {
         if(totalTime == null) {
@@ -153,6 +160,7 @@ public class MediaPlayerActivity extends BaseActivity {
             videoview.setEGLContextClientVersion(2);
             mRenderer = new RBVideoRender(this);
             mRenderer.setMediaPlayer(player);
+            mRenderer.setOnPlayGoing(playGoing);
             videoview.setRenderer(mRenderer);
         } catch (Exception e) {
         }
@@ -167,6 +175,8 @@ public class MediaPlayerActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
+		if(!player.isPlaying() && shouldPlaying)
+			player.start();
 	}
 
 	@Override

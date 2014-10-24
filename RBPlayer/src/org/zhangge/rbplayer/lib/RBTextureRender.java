@@ -131,8 +131,10 @@ public class RBTextureRender {
         ShaderUtils.checkGlError("glEnableVertexAttribArray maTextureHandle");
 
         Matrix.setIdentityM(mMVPMatrix, 0);
-        Matrix.scaleM(mMVPMatrix, 0, 2f, 1f, 1f);
-        Matrix.translateM(mMVPMatrix, 0, 0.5f, 0, 0);
+        if(mode == MODE_ONE) {
+        	Matrix.scaleM(mMVPMatrix, 0, 2f, 1f, 1f);
+        	Matrix.translateM(mMVPMatrix, 0, 0.5f, 0, 0);
+        }
         GLES20.glUniformMatrix4fv(muMVPMatrixHandle, 1, false, mMVPMatrix, 0);
         GLES20.glUniformMatrix4fv(muSTMatrixHandle, 1, false, mSTMatrix, 0);
 

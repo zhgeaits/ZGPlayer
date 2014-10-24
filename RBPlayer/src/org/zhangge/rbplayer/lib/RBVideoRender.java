@@ -20,6 +20,7 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
 	private boolean updateSurface = false;
 
 	private MediaPlayer mMediaPlayer;
+	private OnPlayGoing playGoing;
 
 	public RBVideoRender(Context context) {
 		mTextureRender = new RBTextureRender();
@@ -27,6 +28,10 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
 
 	public void setMediaPlayer(MediaPlayer player) {
 		mMediaPlayer = player;
+	}
+	
+	public void setOnPlayGoing(OnPlayGoing playGoing) {
+		this.playGoing = playGoing;
 	}
 
 	public void onDrawFrame(GL10 glUnused) {
@@ -63,7 +68,9 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
 			updateSurface = false;
 		}
 
-        mMediaPlayer.start();
+        if(playGoing != null) {
+        	playGoing.doPlayStuff();
+        }
 	}
 
     public void setMode(float mode) {
@@ -74,7 +81,11 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
         return mTextureRender.getMode();
     }
 
-	synchronized public void onFrameAvailable(SurfaceTexture surface) {
+	public synchronized void onFrameAvailable(SurfaceTexture surface) {
 		updateSurface = true;
+	}
+	
+	public interface OnPlayGoing {
+		public void doPlayStuff();
 	}
 }
