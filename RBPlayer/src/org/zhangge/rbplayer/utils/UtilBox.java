@@ -1,9 +1,21 @@
 package org.zhangge.rbplayer.utils;
 
+import android.app.Activity;
+import android.util.DisplayMetrics;
+
 /**
  * Created by zhangge on 2014/10/24.
  */
 public class UtilBox {
+	
+	public static int[] getScreenSize(Activity context) {
+		int[] sizes = new int[2];
+		DisplayMetrics dm = new DisplayMetrics();
+		context.getWindowManager().getDefaultDisplay().getMetrics(dm);
+		sizes[0] = (int) dm.widthPixels;
+		sizes[1] = (int) dm.heightPixels;
+		return sizes;
+	}
 
     public static String formatTime(long millis) {
         String output = "";

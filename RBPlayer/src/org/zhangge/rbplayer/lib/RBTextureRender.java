@@ -7,9 +7,9 @@ import java.nio.ByteBuffer;
 import java.nio.ByteOrder;
 import java.nio.FloatBuffer;
 
-import android.graphics.Bitmap;
 import org.zhangge.rbplayer.utils.ShaderUtils;
 
+import android.graphics.Bitmap;
 import android.graphics.SurfaceTexture;
 import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
@@ -17,7 +17,6 @@ import android.opengl.Matrix;
  
 
 public class RBTextureRender {
-    private static final String TAG = "RBTextureRender";
 
     private static final int FLOAT_SIZE_BYTES = 4;
     private static final int TRIANGLE_VERTICES_DATA_STRIDE_BYTES = 5 * FLOAT_SIZE_BYTES;
@@ -113,6 +112,7 @@ public class RBTextureRender {
     public void setSize(int width, int height) {
     	mWidth = width;
     	mHeight = height;
+    	GLES20.glViewport(0, 0, width, height);
     }
     
     public void setOffset(int offset) {
@@ -251,7 +251,7 @@ public class RBTextureRender {
             Bitmap bmp = Bitmap.createBitmap(mWidth, mHeight, Bitmap.Config.ARGB_8888);
             mPixelBuf.rewind();
             bmp.copyPixelsFromBuffer(mPixelBuf);
-            bmp.compress(Bitmap.CompressFormat.PNG, 90, bos);
+            bmp.compress(Bitmap.CompressFormat.PNG, 100, bos);
             bmp.recycle();
         } finally {
             if (bos != null) bos.close();

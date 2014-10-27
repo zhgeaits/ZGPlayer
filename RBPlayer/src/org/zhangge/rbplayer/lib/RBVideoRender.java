@@ -8,6 +8,7 @@ import javax.microedition.khronos.opengles.GL10;
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
+import android.opengl.GLES20;
 import android.opengl.GLSurfaceView;
 import android.util.Log;
 import android.view.Surface;
@@ -21,8 +22,7 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
 
 	private MediaPlayer mMediaPlayer;
 	private OnPlayGoing playGoing;
-	private int gWidth;
-	private int gHeight;
+	
 
 	public RBVideoRender(Context context) {
 	}
@@ -47,9 +47,13 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
 	}
 
 	public void onSurfaceChanged(GL10 glUnused, int width, int height) {
-		gWidth = width;
-		gHeight = height;
 		mTextureRender.setSize(width, height);
+	}
+
+	public void onSurfaceCreated(GL10 glUnused, EGLConfig config) {
+		mTextureRender = new RBTextureRender();
+		mTextureRender.surfaceCreated();
+		
 		mSurfaceTexture = new SurfaceTexture(mTextureRender.getTextureId());
 		mSurfaceTexture.setOnFrameAvailableListener(this);
 
@@ -70,11 +74,6 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
         if(playGoing != null) {
         	playGoing.doPlayStuff();
         }
-	}
-
-	public void onSurfaceCreated(GL10 glUnused, EGLConfig config) {
-		mTextureRender = new RBTextureRender();
-		mTextureRender.surfaceCreated();
 	}
 
     public void setMode(int mode) {

@@ -1,12 +1,14 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:background="@android:color/background_dark"
         >
 
     <android.opengl.GLSurfaceView
             android:id="@+id/videoview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:layout_centerInParent="true"
             />
 
     <RelativeLayout
