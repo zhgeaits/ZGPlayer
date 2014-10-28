@@ -119,6 +119,18 @@ public class RBTextureRender {
     	this.offset = offset;
     }
 
+    public void addOffset() {
+        this.offset += 1;
+    }
+
+    public void subOffset() {
+        this.offset -= 1;
+    }
+
+    public void resetOffset() {
+        this.offset = 0;
+    }
+
     public void drawFrame(SurfaceTexture st) {
     	ShaderUtils.checkGlError("onDrawFrame start");
         st.getTransformMatrix(mSTMatrix);

@@ -1,5 +1,6 @@
 package org.zhangge.rbplayer.ui;
 
+import android.opengl.GLES20;
 import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.lib.RBTextureRender;
 import org.zhangge.rbplayer.lib.RBVideoRender;
@@ -31,6 +32,7 @@ public class MediaPlayerActivity extends BaseActivity {
     private TextView gPlayTime;
     private SeekBar gSeekbar;
     private boolean shouldPlaying = false;
+    private boolean sizeAdjust = false;
     private String totalTime = null;
     private View playControl;
     private GLSurfaceView videoview;
@@ -58,14 +60,6 @@ public class MediaPlayerActivity extends BaseActivity {
     @Override
 	public void onConfigurationChanged(Configuration newConfig) {
     	setScreenMode(screenMode);
-//    	if(Configuration.ORIENTATION_LANDSCAPE == newConfig.orientation) {
-//    		System.out.println("ORIENTATION_LANDSCAPE");
-//    	} else if(Configuration.ORIENTATION_PORTRAIT == newConfig.orientation) {
-//    		System.out.println("ORIENTATION_PORTRAIT");
-//    		videoview.getLayoutParams().height = 700;
-//    	} else {
-//    		System.out.println("nothing");
-//    	}
 		super.onConfigurationChanged(newConfig);
 	}
 
@@ -132,27 +126,6 @@ public class MediaPlayerActivity extends BaseActivity {
         });
     }
 
-    private Runnable updateSeekbar = new Runnable() {
-        @Override
-        public void run() {
-            if(player.isPlaying()) {
-                setPlayTime();
-                gHandler.postDelayed(updateSeekbar, 500);
-            }
-        }
-    };
-    
-    private OnPlayGoing playGoing = new OnPlayGoing() {
-
-		@Override
-		public void doPlayStuff() {
-			shouldPlaying = true;
-			player.start();
-			seekBarHandler();
-		}
-    	
-    };
-
     private void setPlayTime() {
         if(totalTime == null) {
             int total = player.getDuration();
@@ -175,20 +148,21 @@ public class MediaPlayerActivity extends BaseActivity {
             player.reset();
             player.setAudioStreamType(AudioManager.STREAM_MUSIC);
             player.setDataSource(url);
-            player.setOnVideoSizeChangedListener(new OnVideoSizeChangedListener() {
-				@Override
-				public void onVideoSizeChanged(MediaPlayer mp, int width, int height) {
-					if(width > 0 && height > 0) {
-						setScreenMode(screenMode);
-					}
-				}
-			});
             videoview.setEGLContextClientVersion(2);
             mRenderer = new RBVideoRender(this);
             mRenderer.setMediaPlayer(player);
             mRenderer.setOnPlayGoing(playGoing);
             videoview.setRenderer(mRenderer);
         } catch (Exception e) {
+        }
+    }
+
+    private void setVideoViewSize(int width, int height) {
+        try {
+            videoview.getLayoutParams().width = width;
+            videoview.getLayoutParams().height = height;
+        } catch (NullPointerException e) {
+            Log.e("", "");
         }
     }
     
@@ -211,16 +185,28 @@ public class MediaPlayerActivity extends BaseActivity {
     	}
     	setVideoViewSize(dstWidth, dstHeight);
     }
-    
-    private void setVideoViewSize(int width, int height) {
-    	try {
-			videoview.getLayoutParams().width = width;
-			videoview.getLayoutParams().height = height;
-		} catch (NullPointerException e) {
-			Log.e("", "");
-		}
-    }
 
+    private Runnable updateSeekbar = new Runnable() {
+        @Override
+        public void run() {
+            if(player.isPlaying()) {
+                setPlayTime();
+                gHandler.postDelayed(updateSeekbar, 500);
+            }
+        }
+    };
+
+    private OnPlayGoing playGoing = new OnPlayGoing() {
+
+        @Override
+        public void doPlayStuff() {
+            shouldPlaying = true;
+            player.start();
+            seekBarHandler();
+        }
+
+    };
+    
 	@Override
 	protected void onPause() {
 		super.onPause();

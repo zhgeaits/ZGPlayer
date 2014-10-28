@@ -67,12 +67,12 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
 			Log.e(TAG, "media player prepare failed:" + t);
 		}
 
-		synchronized (this) {
-			updateSurface = false;
-		}
+        synchronized (this) {
+            updateSurface = false;
+        }
 
         if(playGoing != null) {
-        	playGoing.doPlayStuff();
+            playGoing.doPlayStuff();
         }
 	}
 
