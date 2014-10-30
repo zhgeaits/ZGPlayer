@@ -51,18 +51,6 @@ public class RBTextureRender {
             "uniform int mode;\n" +
             "uniform float offset;\n" +
             "uniform float width;\n" +
-            "int almostSame(vec3 texL, vec3 texR) {\n" +
-            "   float disR = texL.r - texR.r;\n" +
-            "   float disG = texL.g - texR.g;\n" +
-            "   float disB = texL.b - texR.b;\n" +
-            "   disR = disR * 255.0;\n" +
-            "   disG = disG * 255.0;\n" +
-            "   disB = disB * 255.0;\n" +
-            "   float s = disR + disG + disB;" +
-            "   if(s < 2.0)\n" +
-            "       return 1;\n" +
-            "   return 0;\n" +
-            "}\n" +
             "void doModeOne(){\n" +
             "  float origx = vTextureCoord.x;\n" +
             "  if(origx < 0.5) {\n" +
@@ -72,17 +60,8 @@ public class RBTextureRender {
             "	vTexR.y = vTextureCoord.y;\n" +
             "	vTexL.x = vTextureCoord.x;\n" +
             "	vTexR.x = vTextureCoord.x + 0.5 + offset / width;\n" +
-            "	vec3 texL;\n" +
-            "	vec3 texR;\n" +
-            "	texL.rgb = texture2D(sTexture, vTexL).rgb;\n" +
-            "	texR.rgb = texture2D(sTexture, vTexR).rgb;\n" +
-            "  	if(almostSame(texL, texR) == 1) {\n" +
-            "       gl_FragColor.r = texture2D(sTexture, vTexL).r;\n" +
-            "  	    gl_FragColor.gba = texture2D(sTexture, vTexR).gba;\n" +
-            "   } else {\n" +
-            "  	    gl_FragColor.r = texture2D(sTexture, vTexL).r;\n" +
-            "  	    gl_FragColor.gba = texture2D(sTexture, vTexR).gba;\n" +
-            "   }\n" +
+            "	gl_FragColor.r = texture2D(sTexture, vTexL).r;\n" +
+            "  	gl_FragColor.gba = texture2D(sTexture, vTexR).gba;\n" +
             "  } else {\n" +
             "   discard;\n"+
             "  }\n" +
@@ -108,7 +87,7 @@ public class RBTextureRender {
     private int mWidthHandle;
     private int mOffsetHandle;
 
-    private float offset = 0.0f;
+    private float offset = 10.0f;
     private float mWidth;
     private int mHeight;
     private int mode;
