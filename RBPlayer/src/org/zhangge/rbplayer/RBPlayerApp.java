@@ -1,5 +1,7 @@
 package org.zhangge.rbplayer;
 
+import org.zhangge.almightyzgbox_android.log.ZGLog;
+
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
@@ -17,6 +19,7 @@ public class RBPlayerApp extends Application {
     public void onCreate() {
         super.onCreate();
         gContext = this;
+        ZGLog.info(this, "RBPlayerApp onCreate");
         if(isMainProcess()) {
             //以后可以在这里写初始化整个应用的代码
         } else {
