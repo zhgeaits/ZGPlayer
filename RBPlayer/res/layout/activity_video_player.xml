@@ -11,71 +11,31 @@
             android:layout_centerInParent="true"
             />
 
-    <RelativeLayout android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_alignParentTop="true"
-                    android:background="@drawable/seekbar_bg_up"
-            >
-
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="分辨率:1920x1080"
-                  android:id="@+id/info"
-                  android:layout_margin="10dp"
-                  android:textSize="18sp"
-                  android:textColor="@android:color/white"
-                />
-
-        <TextView android:layout_width="wrap_content"
-                  android:layout_height="wrap_content"
-                  android:text="filename"
-                  android:id="@+id/filename"
-                  android:layout_margin="10dp"
-                  android:textSize="18sp"
-                  android:textColor="@android:color/white"
-                  android:layout_toRightOf="@+id/info"
-                />
-
-        <Button android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/mode_0"
-                android:layout_alignParentRight="true"
-                android:id="@+id/autorotate"/>
-
-    </RelativeLayout>
-
     <RelativeLayout android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentRight="true"
-                    android:layout_centerVertical="true"
+                    android:layout_above="@+id/playControl"
+                    android:id="@+id/modeControl"
             >
-        <Button android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/mode_0"
-                android:layout_alignParentRight="true"
-                android:id="@+id/floatwindow"/>
-
-        <Button android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/mode_1"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/floatwindow"
-                android:id="@+id/screenshot"/>
-
-        <Button android:layout_width="50dp"
-                android:layout_height="50dp"
-                android:background="@drawable/mode_0"
-                android:layout_alignParentRight="true"
-                android:layout_below="@+id/screenshot"
-                android:id="@+id/changesize"/>
-
         <Button android:layout_width="50dp"
                 android:layout_height="50dp"
                 android:background="@drawable/convert"
                 android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_below="@+id/changesize"
                 android:id="@+id/mode"/>
+
+        <Button android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/adjust_add"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/mode"
+                android:id="@+id/adjust_add"/>
+
+        <Button android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:background="@drawable/adjust_sub"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/adjust_add"
+                android:id="@+id/changesize"/>
 
     </RelativeLayout>
 
@@ -117,32 +77,7 @@
                   android:text="00:00/00:00"
                   android:layout_width="wrap_content"
                   android:layout_height="wrap_content"
-                  android:layout_toLeftOf="@+id/adjustcontainer"
+                  android:layout_alignParentRight="true"
                   />
-
-        <RelativeLayout android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_alignParentRight="true"
-                        android:id="@+id/adjustcontainer"
-                >
-
-            <Button android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/mode_0"
-                    android:id="@+id/adjust_reset"/>
-
-            <Button android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/adjust_sub"
-                    android:layout_toRightOf="@+id/adjust_reset"
-                    android:id="@+id/adjust_sub"/>
-
-            <Button android:layout_width="50dp"
-                    android:layout_height="50dp"
-                    android:background="@drawable/adjust_add"
-                    android:layout_toRightOf="@+id/adjust_sub"
-                    android:id="@+id/adjust_add"/>
-        </RelativeLayout>
-
     </RelativeLayout>
 </RelativeLayout>

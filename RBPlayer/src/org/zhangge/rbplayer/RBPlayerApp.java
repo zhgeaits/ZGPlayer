@@ -1,10 +1,5 @@
 package org.zhangge.rbplayer;
 
-import java.io.File;
-
-import org.zhangge.almightyzgbox_android.log.ZGLog;
-import org.zhangge.almightyzgbox_android.utils.ZGConstant;
-
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
@@ -22,10 +17,9 @@ public class RBPlayerApp extends Application {
     public void onCreate() {
         super.onCreate();
         gContext = this;
-        ZGLog.verbose(this, "RBPlayerApp onCreate");
         if(isMainProcess()) {
             //以后可以在这里写初始化整个应用的代码
-        	initLog();
+//        	initLog();
         } else {
             Log.i(TAG, "return");
             return;
@@ -42,15 +36,5 @@ public class RBPlayerApp extends Application {
             }
         }
         return false;
-    }
-    
-    private void initLog() {
-    	ZGLog.LogOptions options = new ZGLog.LogOptions();
-    	options.logLevel = ZGLog.LogOptions.LEVEL_INFO;
-    	options.honorVerbose = false;
-        options.logFileName = "rblogs.txt";
-        String logDir = ZGConstant.SDCARD_ROOT + "rbplayer" + File.separator + "logs";
-        ZGLog.initialize(logDir, options);
-        ZGLog.info(this, "initLog logdir=%s, logFilename=%s", logDir, options.logFileName);
     }
 }
