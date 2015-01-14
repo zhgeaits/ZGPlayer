@@ -147,7 +147,6 @@ public class MediaPlayerActivity extends BaseActivity {
 			public void onProgressChanged(SeekBar seekBar, int progress,
 					boolean fromUser) {
 				gRenderer.setOffset(progress - OFFSET_MAX);
-				System.out.println(progress - OFFSET_MAX + " fromUser="+fromUser);
 			}
 		});
     }

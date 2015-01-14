@@ -15,6 +15,7 @@ import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.view.LayoutInflater;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -105,6 +106,14 @@ public class MainActivity extends BaseActivity {
         setTitle(gMenuTitles[position]);
         gDrawerLayout.closeDrawer(gDrawerList);
     }
+    
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		if (gDrawerToggle.onOptionsItemSelected(item)) {
+			return true;
+		}
+		return super.onOptionsItemSelected(item);
+	}
 
     @Override
     public void setTitle(CharSequence title) {
