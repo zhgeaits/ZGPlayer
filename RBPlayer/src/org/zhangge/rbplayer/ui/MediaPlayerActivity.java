@@ -122,8 +122,10 @@ public class MediaPlayerActivity extends BaseActivity {
             public void onClick(View v) {
                 if(mRenderer.getMode() == RBTextureRender.MODE_NORMAL) {
                     mRenderer.setMode(RBTextureRender.MODE_ONE);
+                    gModeBtn.setBackgroundResource(R.drawable.btn_3d);
                 } else {
                     mRenderer.setMode(RBTextureRender.MODE_NORMAL);
+                    gModeBtn.setBackgroundResource(R.drawable.btn_2d);
                 }
             }
         });
