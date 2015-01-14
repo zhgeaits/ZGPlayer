@@ -15,7 +15,7 @@ import android.opengl.GLES11Ext;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
  
-
+@SuppressWarnings("unused")
 public class RBTextureRender {
 
     private static final int FLOAT_SIZE_BYTES = 4;
@@ -89,7 +89,7 @@ public class RBTextureRender {
 
     private float offset = 10.0f;
     private float mWidth;
-    private int mHeight;
+	private int mHeight;
     private int mode;
     public static int MODE_NORMAL = 0;
     public static int MODE_ONE = 1;

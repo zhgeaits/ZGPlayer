@@ -33,7 +33,6 @@ public class MediaPlayerActivity extends BaseActivity {
     private boolean shouldPlaying = false;
     private String totalTime = null;
     private View playControl;
-    private View modeControl;
     private GLSurfaceView videoview;
     private RBVideoRender mRenderer;
     private int screenMode;
@@ -74,7 +73,6 @@ public class MediaPlayerActivity extends BaseActivity {
         gPlayTime = (TextView) findViewById(R.id.playtime);
         playControl = findViewById(R.id.playControl);
         videoview = (GLSurfaceView) findViewById(R.id.videoview);
-        modeControl = findViewById(R.id.modeControl);
 
         gPlayBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -114,10 +112,8 @@ public class MediaPlayerActivity extends BaseActivity {
             public void onClick(View v) {
                 if(playControl.getVisibility() == View.VISIBLE) {
                 	playControl.setVisibility(View.GONE);
-                	modeControl.setVisibility(View.GONE);
                 } else {
                 	playControl.setVisibility(View.VISIBLE);
-                	modeControl.setVisibility(View.VISIBLE);
                 }
             }
         });
