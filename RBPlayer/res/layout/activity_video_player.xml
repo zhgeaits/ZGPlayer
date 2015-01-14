@@ -54,7 +54,7 @@
         
         <Button android:layout_width="40dp"
                 android:layout_height="40dp"
-                android:background="@drawable/convert"
+                android:background="@drawable/btn_2d"
                 android:layout_alignParentRight="true"
                 android:id="@+id/mode"/>
     </RelativeLayout>
