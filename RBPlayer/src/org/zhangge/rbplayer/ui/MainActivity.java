@@ -79,7 +79,8 @@ public class MainActivity extends BaseActivity {
 
     }
 
-    @Override
+    @SuppressWarnings("unused")
+	@Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         //当我们调用invalidateOptionsMenu()方法时候会调到这里
         //在这里可以根据drawerOpen是否打开了来隐藏右上角的按钮菜单

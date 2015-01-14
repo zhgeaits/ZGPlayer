@@ -7,8 +7,9 @@
     <string name="drawer_close">Close navigation drawer</string>
 
     <string-array name="menu_array">
-        <item>本地视频</item>
-        <item>网络视频</item>
+        <item>Local Videos</item>
+        <item>Youtube</item>
+        <item>Sample Pictures</item>
     </string-array>
 
 </resources>
