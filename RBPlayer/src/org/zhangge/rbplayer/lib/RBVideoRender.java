@@ -74,6 +74,15 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
             playGoing.doPlayStuff();
         }
 	}
+	
+	public void resetOffset() {
+		mTextureRender.resetOffset();
+	}
+	
+	public void setOffset(int offset) {
+		float f = Float.valueOf(offset);
+		mTextureRender.setOffset(f);
+	}
 
     public void setMode(int mode) {
         mTextureRender.setMode(mode);

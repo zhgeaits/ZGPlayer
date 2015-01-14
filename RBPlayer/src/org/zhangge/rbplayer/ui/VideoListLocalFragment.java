@@ -1,18 +1,22 @@
 package org.zhangge.rbplayer.ui;
 
-import android.app.Fragment;
-import android.content.Context;
-import android.os.Bundle;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.*;
+import java.util.List;
+
 import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.utils.MediaBox;
 import org.zhangge.rbplayer.utils.MediaData;
 import org.zhangge.rbplayer.utils.Navigation;
 
-import java.util.List;
+import android.content.Context;
+import android.os.Bundle;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
 
 /**

@@ -87,7 +87,7 @@ public class RBTextureRender {
     private int mWidthHandle;
     private int mOffsetHandle;
 
-    private float offset = 10.0f;
+    private float offset = 0.0f;
     private float mWidth;
 	private int mHeight;
     private int mode;
@@ -115,8 +115,8 @@ public class RBTextureRender {
     	GLES20.glViewport(0, 0, width, height);
     }
     
-    public void setOffset(int offset) {
-    	this.offset = offset;
+    public void setOffset(float f) {
+    	this.offset = f;
     }
 
     public void addOffset() {
