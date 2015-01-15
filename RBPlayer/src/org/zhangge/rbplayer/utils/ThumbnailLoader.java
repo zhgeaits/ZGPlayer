@@ -1,7 +1,5 @@
 package org.zhangge.rbplayer.utils;
 
-import java.util.HashMap;
-
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -9,11 +7,13 @@ import android.media.ThumbnailUtils;
 import android.os.Handler;
 import android.os.Message;
 import android.provider.MediaStore.Images;
+import android.support.v4.util.LruCache;
 import android.widget.ImageView;
 
 public class ThumbnailLoader {
 
-	private HashMap<String, Bitmap> imageCache = new HashMap<String, Bitmap>();
+	private LruCache<String, Bitmap> imageCache;  
+	  
 	private static ThumbnailLoader INSTANCE = null;
 	
 	private ThumbnailLoader() {}
@@ -21,6 +21,13 @@ public class ThumbnailLoader {
 	public synchronized static ThumbnailLoader getInstance() {
 		if(INSTANCE == null) {
 			INSTANCE = new ThumbnailLoader();
+			int maxSize = 32 * 1024 * 1024;  
+			INSTANCE.imageCache = new LruCache<String, Bitmap>(maxSize) {  
+	            @Override  
+	            protected int sizeOf(String key, Bitmap bitmap) {  
+	                return bitmap.getRowBytes() * bitmap.getHeight();  
+	            }  
+	        };
 		}
 		return INSTANCE;
 	}
@@ -28,11 +35,11 @@ public class ThumbnailLoader {
 	@SuppressWarnings("deprecation")
 	public void loadThumbnail(final String path, final ImageView imageView, int defaultImg) {
 		imageView.setTag(path);
-		if(imageCache.containsKey(path)) {
-			Bitmap bitmap = imageCache.get(path);
-			if(bitmap != null) {
+		if(imageCache.get(path) != null) {
+			Drawable drawable = new BitmapDrawable(imageCache.get(path));
+			if(drawable != null) {
 				if(path.equals(imageView.getTag())) {
-					imageView.setBackground(new BitmapDrawable(bitmap));
+					imageView.setBackground(drawable);
 				}
 				return;
 			}
@@ -52,9 +59,11 @@ public class ThumbnailLoader {
 			@Override
 			public void run() {
 				Bitmap bitmap = ThumbnailUtils.createVideoThumbnail(path, Images.Thumbnails.MINI_KIND);
-				imageCache.put(path, bitmap);
-				Message message = handler.obtainMessage(0, bitmap);
-                handler.sendMessage(message);
+				if(bitmap != null) {
+					imageCache.put(path, bitmap);
+					Message message = handler.obtainMessage(0, bitmap);
+					handler.sendMessage(message);
+				}
 			}
 		}).start();
 	}
