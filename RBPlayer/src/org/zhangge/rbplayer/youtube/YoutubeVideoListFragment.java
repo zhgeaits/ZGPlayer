@@ -16,11 +16,15 @@ import org.zhangge.rbplayer.ui.BaseFragment;
 import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.text.Spannable;
+import android.text.SpannableString;
+import android.text.style.ForegroundColorSpan;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -87,7 +91,7 @@ public class YoutubeVideoListFragment extends BaseFragment {
 		return false;
 	}
 
-	private void defaultSearch(String keyword) {
+	private void defaultSearch(final String keyword) {
 		new AsyncTask<String, Void, Void>() {
 
 			private List<VideoEntity> videos;
@@ -105,7 +109,7 @@ public class YoutubeVideoListFragment extends BaseFragment {
 
 			@Override
 			protected void onPostExecute(Void result) {
-				onQueryVideoResult(videos, false);
+				onQueryVideoResult(videos, false, keyword);
 			}
 
 		}.execute(keyword);
@@ -163,10 +167,11 @@ public class YoutubeVideoListFragment extends BaseFragment {
 		});
 	}
 
-	public void onQueryVideoResult(List<VideoEntity> videos, boolean isFlush) {
+	public void onQueryVideoResult(List<VideoEntity> videos, boolean isFlush, String keyWord) {
 		if (videos == null) {
 			return;
 		}
+		adapter.setKeyWord(keyWord);
 		ZGLog.info(this, "onQueryVideoResult isFlush=" + isFlush + ",videos=" + videos);
 		if (isFlush) {
 			adapter.setData(videos);
@@ -185,12 +190,17 @@ public class YoutubeVideoListFragment extends BaseFragment {
 	private class YoutubeListAdapter extends ArrayAdapter<VideoEntity> {
 
 		private List<VideoEntity> datas;
+		private String searchKey;
 
 		public YoutubeListAdapter(Context context, int resource, List<VideoEntity> objects) {
 			super(context, resource, objects);
 			datas = objects;
 		}
 
+		public void setKeyWord(String keyword) {
+			this.searchKey = keyword;
+		}
+		
 		public void setData(List<VideoEntity> objects) {
 			datas.clear();
 			datas.addAll(objects);
@@ -216,7 +226,26 @@ public class YoutubeVideoListFragment extends BaseFragment {
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			holder.title.setText(getItem(position).getTitle());
+			
+			SpannableString span = new SpannableString(getItem(position).getTitle());
+            for(int j = 0; j < getItem(position).getTitle().length() - searchKey.length() + 1; j++) {
+                int start = j, end = start + searchKey.length();
+                String temp = "";
+                if(end <= (getItem(position).getTitle().length() - 1)) {
+                    temp = getItem(position).getTitle().substring(start, end);
+                } else {
+                    temp = getItem(position).getTitle().substring(start);
+                }
+                if(temp.equalsIgnoreCase(searchKey)) {
+                    span.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFF8900")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+                    j += searchKey.length() - 1;
+                }
+            }
+            if(getItem(position).getTitle().length() == searchKey.length() && getItem(position).getTitle().equalsIgnoreCase(searchKey)) {
+                span.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFF8900")), 0, getItem(position).getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+            holder.title.setText(span);
+            
 			String webUrl = getItem(position).getPlayUrl();
 			TITLE_WEBURL.put(getItem(position).getTitle(), webUrl);
 			getDownloadUrl(webUrl, getItem(position).getTitle(), getItem(position).getVideoId());

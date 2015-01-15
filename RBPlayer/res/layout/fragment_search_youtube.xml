@@ -52,6 +52,7 @@
                 android:textColor="#242424"
                 android:textColorHint="#999999"
                 android:textSize="14sp"
+                android:hint="search yt3d or SBS3D"
                 app:tipsIcon="@drawable/btn_clear" />
 
             <TextView

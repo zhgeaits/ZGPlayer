@@ -124,7 +124,7 @@ public class MySearchFragment extends Fragment {
 			protected void onPostExecute(Void result) {
 				hideMe();
 				if(youtubeFragment != null && !isStop) {
-					youtubeFragment.onQueryVideoResult(videos, true);
+					youtubeFragment.onQueryVideoResult(videos, true, keyword);
 				}
 				super.onPostExecute(result);
 			}
