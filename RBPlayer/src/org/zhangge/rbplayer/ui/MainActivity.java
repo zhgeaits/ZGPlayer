@@ -173,6 +173,13 @@ public class MainActivity extends BaseActivity {
     
 	@Override
 	public void onBackPressed() {
+		if(currentItem == 1) {
+			YoutubeVideoListFragment youtubeFragment = (YoutubeVideoListFragment) currentFragment;
+			if(youtubeFragment.isShowingSearch()) {
+				youtubeFragment.hideSearchFragment();
+				return;
+			}
+		}
 		if(currentItem != 0) {
 			selectItem(0);
 			return;

@@ -28,6 +28,7 @@ public class MySearchFragment extends Fragment {
 	private EasyClearEditText mSearchInput;
 	private TextView mSearchcancel;
 	private View mSearchView;
+	private View mContentView;
 	private ProgressBar mLoading;
 	private boolean isShowing = false;
 
@@ -60,12 +61,12 @@ public class MySearchFragment extends Fragment {
 		mSearchInput = (EasyClearEditText) view.findViewById(R.id.search_input);
 		mSearchView = view.findViewById(R.id.search_fragment);
 		mLoading = (ProgressBar) view.findViewById(R.id.loading);
+		mContentView = view.findViewById(R.id.content_area);
 
 		mLoading.setVisibility(View.GONE);
 		mSearchInput.setFocusable(true);
 		mSearchInput.setFocusableInTouchMode(true);
 		mSearchInput.requestFocus();
-		showMe();
 		initListener();
 		return view;
 	}
@@ -135,6 +136,7 @@ public class MySearchFragment extends Fragment {
 		isShowing = true;
 		if (mSearchView != null) {
 			mSearchView.setVisibility(View.VISIBLE);
+			mContentView.setVisibility(View.VISIBLE);
 			CommonUtils.showIMEDelay(getActivity(), mSearchInput, 500);
 		}
 	}
