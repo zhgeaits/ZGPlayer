@@ -34,7 +34,6 @@ import android.widget.TextView;
 
 public class YoutubeVideoListFragment extends BaseFragment {
 
-	private static String SEARCH_TAG = "SEARCH_LISTIM_FRAGMENT_TAG";
 	private static int SUB_ID = R.id.search_fragment_container_content;
 	public static Map<String, List<VideoStream>> WEBURL_URLS = new HashMap<String, List<VideoStream>>();
 	public static Map<String, List<VideoStream>> VIDEOID_URLS = new HashMap<String, List<VideoStream>>();
@@ -118,6 +117,7 @@ public class YoutubeVideoListFragment extends BaseFragment {
 			@Override
 			public void onClick(View v) {
 				searchFragment = creatSearchFragment(context);
+				searchFragment.setYoutubeFragment(YoutubeVideoListFragment.this);
 				searchFragment.showMe();
 			}
 		});
@@ -177,16 +177,8 @@ public class YoutubeVideoListFragment extends BaseFragment {
 
 	public MySearchFragment creatSearchFragment(Activity context) {
 		FragmentManager fm = ((FragmentActivity) context).getSupportFragmentManager();
-		Fragment creatFragment = fm.findFragmentByTag(SEARCH_TAG);
-//		if (f != null) {
-//			return (MySearchFragment) f;
-//		}
-		if(creatFragment == null) {
-			creatFragment = MySearchFragment.getInstance();
-		}
-
-		fm.beginTransaction().replace(SUB_ID, creatFragment, SEARCH_TAG).commit();
-
+		Fragment creatFragment = MySearchFragment.getInstance();
+		fm.beginTransaction().replace(SUB_ID, creatFragment).commit();
 		return (MySearchFragment) creatFragment;
 	}
 

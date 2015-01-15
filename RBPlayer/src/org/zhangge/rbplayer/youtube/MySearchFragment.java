@@ -31,6 +31,8 @@ public class MySearchFragment extends Fragment {
 	private View mContentView;
 	private ProgressBar mLoading;
 	private boolean isShowing = false;
+	private YoutubeVideoListFragment youtubeFragment;
+	private boolean isStop = false;
 
 	public static MySearchFragment getInstance() {
 		return new MySearchFragment();
@@ -40,14 +42,16 @@ public class MySearchFragment extends Fragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 	}
-
+	
 	@Override
-	public void onDestroy() {
-		super.onDestroy();
+	public void onPause() {
+		isStop = true;
+		super.onPause();
 	}
 
 	@Override
 	public void onStop() {
+		isStop = true;
 		super.onStop();
 	}
 
@@ -111,7 +115,6 @@ public class MySearchFragment extends Fragment {
 				try {
 					videos = YoutubeBox.queryYoutubeVideo(keyword);
 				} catch (Exception e) {
-					hideMe();
 					ZGLog.error(this, e);
 				}
 				return null;
@@ -120,12 +123,17 @@ public class MySearchFragment extends Fragment {
 			@Override
 			protected void onPostExecute(Void result) {
 				hideMe();
-//				YoutubeVideoListActivity videoList = (YoutubeVideoListActivity) getActivity();
-//				videoList.onQueryVideoResult(videos, true);
+				if(youtubeFragment != null && !isStop) {
+					youtubeFragment.onQueryVideoResult(videos, true);
+				}
 				super.onPostExecute(result);
 			}
 
 		}.execute(keyword);
+	}
+	
+	public void setYoutubeFragment(YoutubeVideoListFragment fragment) {
+		youtubeFragment = fragment;
 	}
 
 	public boolean isShowing() {
