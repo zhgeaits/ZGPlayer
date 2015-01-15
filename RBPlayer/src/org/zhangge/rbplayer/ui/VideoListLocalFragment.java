@@ -6,6 +6,8 @@ import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.utils.MediaBox;
 import org.zhangge.rbplayer.utils.MediaData;
 import org.zhangge.rbplayer.utils.Navigation;
+import org.zhangge.rbplayer.utils.ThumbnailLoader;
+import org.zhangge.rbplayer.utils.UtilBox;
 
 import android.content.Context;
 import android.os.Bundle;
@@ -14,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -113,25 +116,34 @@ public class VideoListLocalFragment extends BaseFragment {
 
         @Override
         public View getView(int position, View convertView, ViewGroup parent) {
-            MediaData media = medias.get(position);
-            VideoListItemHolder holder;
+            final MediaData media = medias.get(position);
+            final VideoListItemHolder holder;
             if(convertView == null) {
                 holder = new VideoListItemHolder();
                 convertView = LayoutInflater.from(context).inflate(R.layout.activity_video_list_item, null);
                 holder.title = (TextView) convertView.findViewById(R.id.video_title);
                 holder.url = (TextView) convertView.findViewById(R.id.video_url);
+                holder.thumb = (ImageView) convertView.findViewById(R.id.video_thumb);
+                holder.resolution = (TextView) convertView.findViewById(R.id.video_resolution);
+                holder.time = (TextView) convertView.findViewById(R.id.video_time);
                 convertView.setTag(holder);
             } else {
                 holder = (VideoListItemHolder) convertView.getTag();
             }
             holder.title.setText(media.title);
             holder.url.setText(media.url);
+            holder.resolution.setText(media.resolution);
+            holder.time.setText(UtilBox.formatTime(media.duration));
+            ThumbnailLoader.getInstance().loadThumbnail(media.url, holder.thumb, R.drawable.ic_video_default);
             return convertView;
         }
 
         private class VideoListItemHolder {
             public TextView title;
             public TextView url;
+            public ImageView thumb;
+            public TextView resolution;
+            public TextView time;
         }
 
     }

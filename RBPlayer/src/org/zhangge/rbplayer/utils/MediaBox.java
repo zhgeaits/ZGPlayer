@@ -21,9 +21,13 @@ public class MediaBox {
 		while(hasMore) {
 			String title = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.TITLE));
 			String path = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA));
+			String resolution = cursor.getString(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.RESOLUTION));
+			long duration = cursor.getInt(cursor.getColumnIndexOrThrow(MediaStore.Video.Media.DURATION));
 			MediaData media = new MediaData();
 			media.title = title;
 			media.url = path;
+			media.resolution = resolution;
+			media.duration = duration;
 			medias.add(media);
 			hasMore = cursor.moveToNext();
 		}
