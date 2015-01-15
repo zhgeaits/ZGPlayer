@@ -1,13 +1,13 @@
 package org.zhangge.rbplayer.ui;
 
-import android.app.Activity;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v4.app.FragmentActivity;
 
 /**
  * Created by zhangge on 2014/10/24.
  */
-public class BaseActivity extends Activity {
+public class BaseActivity extends FragmentActivity {
     protected Handler gHandler;
 
     @Override

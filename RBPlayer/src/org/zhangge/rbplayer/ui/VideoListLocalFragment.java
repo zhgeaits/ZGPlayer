@@ -32,7 +32,7 @@ public class VideoListLocalFragment extends BaseFragment {
     private Context gContext;
     private VideoListAdapter gAdapter;
 
-    public static VideoListLocalFragment getInstance() {
+    public static VideoListLocalFragment newInstance() {
         return new VideoListLocalFragment();
     }
 

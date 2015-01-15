@@ -4,6 +4,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.zhangge.rbplayer.R;
+import org.zhangge.rbplayer.youtube.YoutubeVideoListFragment;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -25,6 +26,10 @@ import android.widget.TextView;
 
 public class MainActivity extends BaseActivity {
 
+	public static final String LOCAL_VIDEO_TAG = "local_video_tag";
+	public static final String YOUTUBE_VIDEO_TAG = "youtube_video_tag";
+	public static final String SAMPLE_PIC_TAG = "sample_pic_tag";
+	
     private Context gContext;
     private DrawerLayout gDrawerLayout;
     private ListView gDrawerList;
@@ -33,6 +38,9 @@ public class MainActivity extends BaseActivity {
     private CharSequence gDrawerTitle;
     private CharSequence gTitle;
     private String[] gMenuTitles;
+    
+    private int currentItem;
+    private Fragment currentFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,18 +98,45 @@ public class MainActivity extends BaseActivity {
     }
 
     private void selectItem(int position) {
-        Fragment fragment = null;
+        FragmentManager fragmentManager = getFragmentManager();
+        String tag = null;
+        if(currentItem == 1 && position != 1) {
+        	YoutubeVideoListFragment youtubeFragment = (YoutubeVideoListFragment) currentFragment;
+        	youtubeFragment.hideSearchFragment();
+        }
+        currentItem = position;
         switch (position) {
             case 0:
-                fragment = VideoListLocalFragment.getInstance();
+            	tag = LOCAL_VIDEO_TAG;
+            	currentFragment = fragmentManager.findFragmentByTag(tag);
+            	if(currentFragment == null) {
+            		currentFragment = VideoListLocalFragment.newInstance();
+            	}
                 break;
+            case 1:
+            	tag = YOUTUBE_VIDEO_TAG;
+            	currentFragment = fragmentManager.findFragmentByTag(tag);
+            	if(currentFragment == null) {
+            		currentFragment = YoutubeVideoListFragment.newInstance();
+            	}
+            	break;
+            /*case 2:
+            	tag = SAMPLE_PIC_TAG;
+            	fragment = fragmentManager.findFragmentByTag(tag);
+            	if(fragment == null) {
+            		fragment = VideoListLocalFragment.newInstance();
+            	}
+            	break;*/
             default:
-                fragment = VideoListLocalFragment.getInstance();
+            	tag = LOCAL_VIDEO_TAG;
+            	currentFragment = fragmentManager.findFragmentByTag(tag);
+            	if(currentFragment == null) {
+            		currentFragment = VideoListLocalFragment.newInstance();
+            	}
                 break;
         }
 
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction().replace(R.id.content_frame, fragment).commit();
+        fragmentManager.beginTransaction().replace(R.id.content_frame, currentFragment, tag).commit();
 
         gDrawerList.setItemChecked(position, true);
         setTitle(gMenuTitles[position]);
@@ -135,6 +170,15 @@ public class MainActivity extends BaseActivity {
         //使用ActionBarDrawerToggle就必须在这里调用这个
         gDrawerToggle.onConfigurationChanged(newConfig);
     }
+    
+	@Override
+	public void onBackPressed() {
+		if(currentItem != 0) {
+			selectItem(0);
+			return;
+		}
+		super.onBackPressed();
+	}
 
     private class DrawerItemClickListener implements ListView.OnItemClickListener {
         @Override
