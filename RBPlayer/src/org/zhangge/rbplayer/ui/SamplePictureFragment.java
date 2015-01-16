@@ -4,6 +4,8 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.zhangge.almightyzgbox_android.utils.CommonUtils;
+import org.zhangge.almightyzgbox_android.utils.ZGConstant;
 import org.zhangge.rbplayer.R;
 
 import android.annotation.SuppressLint;
@@ -21,21 +23,21 @@ import android.widget.TextView;
 
 public class SamplePictureFragment extends BaseFragment {
 
-	public static final String SAMPLE_PATH = "samplepics";
 	private ListView gListView;
 	private SamplePicAdapter gAdapter;
 	private List<File> gSamplePics;
 	
+	public static SamplePictureFragment newInstance() {
+		return new SamplePictureFragment();
+	}
+	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		try {
-			String fileNames[] = getActivity().getAssets().list(SAMPLE_PATH);
-			gSamplePics = new ArrayList<File>();
-			for (String path : fileNames) {
-				File file = new File(path);
-				gSamplePics.add(file);
-			}
-		} catch (Exception e) {
+		String destDir = ZGConstant.SDCARD_ROOT + CommonUtils.getApplicationName(getActivity()) + File.separator + MainActivity.SAMPLE_PATH;
+		File dirs = new File(destDir);
+		String[] files = dirs.list();
+		for (String path : files) {
+			gSamplePics.add(new File(path));
 		}
 		super.onCreate(savedInstanceState);
 	}
@@ -65,7 +67,7 @@ public class SamplePictureFragment extends BaseFragment {
 			this.notifyDataSetChanged();
 		}
 
-		@SuppressLint({"InflateParams", "deprecation"})
+		@SuppressLint("InflateParams")
 		@Override
 		public View getView(int position, View convertView, ViewGroup parent) {
 			final ViewHolder holder;
@@ -95,28 +97,35 @@ public class SamplePictureFragment extends BaseFragment {
 			
 			if(index < datas.size()) {
 				final int pos = index;
+				Drawable drawable = Drawable.createFromPath(datas.get(pos).getAbsolutePath());
+				holder.leftIcon.setBackgroundDrawable(drawable);
 				holder.leftContainer.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						Drawable drawable = Drawable.createFromPath(datas.get(pos).getAbsolutePath());
-						holder.leftIcon.setBackgroundDrawable(drawable);
+						
 					}
 				});
 			}
 			index ++;
 			if(index < datas.size()) {
 				final int pos = index;
+				Drawable drawable = Drawable.createFromPath(datas.get(pos).getAbsolutePath());
+				holder.midIcon.setBackgroundDrawable(drawable);
 				holder.midContainer.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						
 					}
 				});
 			}
 			if(index < datas.size()) {
 				final int pos = index;
+				Drawable drawable = Drawable.createFromPath(datas.get(pos).getAbsolutePath());
+				holder.rightIcon.setBackgroundDrawable(drawable);
 				holder.rightContainer.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						
 					}
 				});
 			}
