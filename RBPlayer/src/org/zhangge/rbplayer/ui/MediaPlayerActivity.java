@@ -1,5 +1,6 @@
 package org.zhangge.rbplayer.ui;
 
+import org.zhangge.almightyzgbox_android.log.ZGLog;
 import org.zhangge.almightyzgbox_android.ui.bar.VerticalSeekBar;
 import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.lib.RBTextureRender;
@@ -27,211 +28,215 @@ public class MediaPlayerActivity extends BaseActivity {
 	public static String KEY_VIDEO_URL = "key_video_url";
 	public static int SCREEN_MODE_NORMAL = 0;
 	private static final int OFFSET_MAX = 30;
-	
-	private MediaPlayer gPlayer;
-    private Button gPlayBtn;
-    private Button gModeBtn;
-    private TextView gPlayTime;
-    private SeekBar gSeekbar;
-    private boolean gShouldPlaying = false;
-    private String gTotalTime = null;
-    private View gPlayControl;
-    private VerticalSeekBar gOffsetSeekbar;
-    private GLSurfaceView gVideoview;
-    private RBVideoRender gRenderer;
-    private int gScreenMode;
 
-    @Override
+	private MediaPlayer gPlayer;
+	private Button gPlayBtn;
+	private Button gModeBtn;
+	private TextView gPlayTime;
+	private SeekBar gSeekbar;
+	private boolean gShouldPlaying = false;
+	private String gTotalTime = null;
+	private View gPlayControl;
+	private VerticalSeekBar gOffsetSeekbar;
+	private GLSurfaceView gVideoview;
+	private RBVideoRender gRenderer;
+	private int gScreenMode;
+
+	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
-		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
-				WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		setContentView(R.layout.activity_video_player);
 		gScreenMode = SCREEN_MODE_NORMAL;
-		if(getIntent().getExtras() != null) {
+		if (getIntent().getExtras() != null) {
 			String url = getIntent().getExtras().getString(KEY_VIDEO_URL);
-            initView();
-            play(url);
-        }
+			initView();
+			play(url);
+		}
 	}
-    
 
-    @Override
+	@Override
 	public void onConfigurationChanged(Configuration newConfig) {
-    	setScreenMode(gScreenMode);
+		setScreenMode(gScreenMode);
 		super.onConfigurationChanged(newConfig);
 	}
 
 	private void initView() {
-        gPlayBtn = (Button) findViewById(R.id.play_btn);
-        gModeBtn = (Button) findViewById(R.id.mode);
-        gSeekbar = (SeekBar) findViewById(R.id.seekbar);
-        gPlayTime = (TextView) findViewById(R.id.playtime);
-        gPlayControl = findViewById(R.id.playControl);
-        gVideoview = (GLSurfaceView) findViewById(R.id.videoview);
-        gOffsetSeekbar = (VerticalSeekBar) findViewById(R.id.offset_seekbar);
-        gOffsetSeekbar.setMax(OFFSET_MAX * 2);
-        gOffsetSeekbar.setProgress(OFFSET_MAX);
+		gPlayBtn = (Button) findViewById(R.id.play_btn);
+		gModeBtn = (Button) findViewById(R.id.mode);
+		gSeekbar = (SeekBar) findViewById(R.id.seekbar);
+		gPlayTime = (TextView) findViewById(R.id.playtime);
+		gPlayControl = findViewById(R.id.playControl);
+		gVideoview = (GLSurfaceView) findViewById(R.id.videoview);
+		gOffsetSeekbar = (VerticalSeekBar) findViewById(R.id.offset_seekbar);
+		gOffsetSeekbar.setMax(OFFSET_MAX * 2);
+		gOffsetSeekbar.setProgress(OFFSET_MAX);
 
-        gPlayBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(gPlayer.isPlaying()) {
-                    gPlayer.pause();
-                    gPlayBtn.setBackgroundResource(R.drawable.btn_play_selecter);
-                } else {
-                    gPlayer.start();
-                    seekBarHandler();
-                    gPlayBtn.setBackgroundResource(R.drawable.btn_pause_selecter);
-                }
-            }
-        });
-        gSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
-            @Override
-            public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                if(fromUser) {
-                    gPlayer.seekTo(progress);
-                    setPlayTime();
-                }
-                if(progress == seekBar.getMax()) {
-                    gPlayer.seekTo(0);
-                }
-            }
-
-            @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-            }
-
-            @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-            }
-        });
-        gVideoview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(gPlayControl.getVisibility() == View.VISIBLE) {
-                	gPlayControl.setVisibility(View.GONE);
-                } else {
-                	gPlayControl.setVisibility(View.VISIBLE);
-                }
-            }
-        });
-        gModeBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if(gRenderer.getMode() == RBTextureRender.MODE_NORMAL) {
-                    gRenderer.setMode(RBTextureRender.MODE_ONE);
-                    gModeBtn.setBackgroundResource(R.drawable.btn_3d);
-                    gOffsetSeekbar.setVisibility(View.VISIBLE);
-                } else {
-                    gRenderer.setMode(RBTextureRender.MODE_NORMAL);
-                    gModeBtn.setBackgroundResource(R.drawable.btn_2d);
-                    gOffsetSeekbar.setVisibility(View.GONE);
-                }
-            }
-        });
-        gOffsetSeekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
-			
+		gPlayBtn.setOnClickListener(new View.OnClickListener() {
 			@Override
-			public void onStopTrackingTouch(SeekBar seekBar) {
+			public void onClick(View v) {
+				if (gPlayer.isPlaying()) {
+					gPlayer.pause();
+					gPlayBtn.setBackgroundResource(R.drawable.btn_play_selecter);
+				} else {
+					gPlayer.start();
+					seekBarHandler();
+					gPlayBtn.setBackgroundResource(R.drawable.btn_pause_selecter);
+				}
 			}
-			
+		});
+		gSeekbar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
+				if (fromUser) {
+					gPlayer.seekTo(progress);
+					setPlayTime();
+				}
+				if (progress == seekBar.getMax()) {
+					gPlayer.seekTo(0);
+				}
+			}
+
 			@Override
 			public void onStartTrackingTouch(SeekBar seekBar) {
 			}
-			
+
 			@Override
-			public void onProgressChanged(SeekBar seekBar, int progress,
-					boolean fromUser) {
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+		});
+		gVideoview.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (gPlayControl.getVisibility() == View.VISIBLE) {
+					gPlayControl.setVisibility(View.GONE);
+				} else {
+					gPlayControl.setVisibility(View.VISIBLE);
+				}
+			}
+		});
+		gModeBtn.setOnClickListener(new View.OnClickListener() {
+			@Override
+			public void onClick(View v) {
+				if (gRenderer.getMode() == RBTextureRender.MODE_NORMAL) {
+					gRenderer.setMode(RBTextureRender.MODE_ONE);
+					gModeBtn.setBackgroundResource(R.drawable.btn_3d);
+					gOffsetSeekbar.setVisibility(View.VISIBLE);
+				} else {
+					gRenderer.setMode(RBTextureRender.MODE_NORMAL);
+					gModeBtn.setBackgroundResource(R.drawable.btn_2d);
+					gOffsetSeekbar.setVisibility(View.GONE);
+				}
+			}
+		});
+		gOffsetSeekbar.setOnSeekBarChangeListener(new OnSeekBarChangeListener() {
+
+			@Override
+			public void onStopTrackingTouch(SeekBar seekBar) {
+			}
+
+			@Override
+			public void onStartTrackingTouch(SeekBar seekBar) {
+			}
+
+			@Override
+			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 				gRenderer.setOffset(progress - OFFSET_MAX);
 			}
 		});
-    }
+	}
 
-    private void setPlayTime() {
-        if(gTotalTime == null) {
-            int total = gPlayer.getDuration();
-            gTotalTime = UtilBox.formatTime(total);
-            gSeekbar.setMax(total);
-        }
-        int current = gPlayer.getCurrentPosition();
-        String curTime = UtilBox.formatTime(current);
-        gSeekbar.setProgress(current);
-        gPlayTime.setText(curTime + "/" + gTotalTime);
-    }
+	private void setPlayTime() {
+		if (gTotalTime == null) {
+			int total = gPlayer.getDuration();
+			gTotalTime = UtilBox.formatTime(total);
+			gSeekbar.setMax(total);
+		}
+		int current = gPlayer.getCurrentPosition();
+		String curTime = UtilBox.formatTime(current);
+		gSeekbar.setProgress(current);
+		gPlayTime.setText(curTime + "/" + gTotalTime);
+	}
 
-    private void seekBarHandler() {
-        gHandler.postDelayed(updateSeekbar, 500);
-    }
+	private void seekBarHandler() {
+		gHandler.postDelayed(updateSeekbar, 500);
+	}
 
-    private void play(String url) {
-        try {
-            gPlayer = new MediaPlayer();
-            gPlayer.reset();
-            gPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            gPlayer.setDataSource(url);
-            gVideoview.setEGLContextClientVersion(2);
-            gRenderer = new RBVideoRender(this);
-            gRenderer.setMediaPlayer(gPlayer);
-            gRenderer.setOnPlayGoing(playGoing);
-            gVideoview.setRenderer(gRenderer);
-        } catch (Exception e) {
-        }
-    }
+	private void play(String url) {
+		try {
+			gPlayer = new MediaPlayer();
+			gPlayer.reset();
+			gPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+			gPlayer.setDataSource(url);
+			gVideoview.setEGLContextClientVersion(2);
+			gRenderer = new RBVideoRender(this);
+//			gVideoview.queueEvent(new Runnable() {
+//				public void run() {
+//					
+//				}
+//			});
 
-    private void setVideoViewSize(int width, int height) {
-        try {
-            gVideoview.getLayoutParams().width = width;
-            gVideoview.getLayoutParams().height = height;
-        } catch (NullPointerException e) {
-            Log.e("", "");
-        }
-    }
-    
-    private void setScreenMode(int mode) {
-    	int[] screenSizes = UtilBox.getScreenSize(this);
-    	int videoWidth = gPlayer.getVideoWidth();
-    	int videoHeight = gPlayer.getVideoHeight();
-    	double screenAspect = screenSizes[0] / (double) screenSizes[1];
-    	double videoAspect = videoWidth / (double) videoHeight;
-    	int dstWidth = 0;
-    	int dstHeight = 0;
-    	if(mode == SCREEN_MODE_NORMAL) {
-    		if(videoAspect - screenAspect > 0) {
-    			dstWidth = screenSizes[0];
-    			dstHeight = (int) (videoHeight * (dstWidth / (double)videoWidth));
-    		} else {
-    			dstHeight = screenSizes[1];
-    			dstWidth = (int) (videoWidth * (dstHeight / (double)videoHeight));
-    		}
-    	}
-    	setVideoViewSize(dstWidth, dstHeight);
-    }
+			gRenderer.setMediaPlayer(gPlayer);
+			gRenderer.setOnPlayGoing(playGoing);
+			gVideoview.setRenderer(gRenderer);
+		} catch (Exception e) {
+			ZGLog.error(this, e);
+		}
+	}
 
-    private Runnable updateSeekbar = new Runnable() {
-        @Override
-        public void run() {
-            if(gPlayer.isPlaying()) {
-                setPlayTime();
-                gHandler.postDelayed(updateSeekbar, 500);
-            }
-        }
-    };
+	private void setVideoViewSize(int width, int height) {
+		try {
+			gVideoview.getLayoutParams().width = width;
+			gVideoview.getLayoutParams().height = height;
+		} catch (NullPointerException e) {
+			Log.e("", "");
+		}
+	}
 
-    private OnPlayGoing playGoing = new OnPlayGoing() {
+	private void setScreenMode(int mode) {
+		int[] screenSizes = UtilBox.getScreenSize(this);
+		int videoWidth = gPlayer.getVideoWidth();
+		int videoHeight = gPlayer.getVideoHeight();
+		double screenAspect = screenSizes[0] / (double) screenSizes[1];
+		double videoAspect = videoWidth / (double) videoHeight;
+		int dstWidth = 0;
+		int dstHeight = 0;
+		if (mode == SCREEN_MODE_NORMAL) {
+			if (videoAspect - screenAspect > 0) {
+				dstWidth = screenSizes[0];
+				dstHeight = (int) (videoHeight * (dstWidth / (double) videoWidth));
+			} else {
+				dstHeight = screenSizes[1];
+				dstWidth = (int) (videoWidth * (dstHeight / (double) videoHeight));
+			}
+		}
+		setVideoViewSize(dstWidth, dstHeight);
+	}
 
-        @Override
-        public void doPlayStuff() {
-            gShouldPlaying = true;
-            gPlayer.start();
-            seekBarHandler();
-        }
+	private Runnable updateSeekbar = new Runnable() {
+		@Override
+		public void run() {
+			if (gPlayer.isPlaying()) {
+				setPlayTime();
+				gHandler.postDelayed(updateSeekbar, 500);
+			}
+		}
+	};
 
-    };
-    
+	private OnPlayGoing playGoing = new OnPlayGoing() {
+
+		@Override
+		public void doPlayStuff() {
+			gShouldPlaying = true;
+			gPlayer.start();
+			seekBarHandler();
+		}
+
+	};
+
 	@Override
 	protected void onPause() {
 		super.onPause();
@@ -241,7 +246,7 @@ public class MediaPlayerActivity extends BaseActivity {
 	@Override
 	protected void onResume() {
 		super.onResume();
-		if(!gPlayer.isPlaying() && gShouldPlaying)
+		if (!gPlayer.isPlaying() && gShouldPlaying)
 			gPlayer.start();
 	}
 
@@ -249,7 +254,7 @@ public class MediaPlayerActivity extends BaseActivity {
 	protected void onDestroy() {
 		super.onDestroy();
 		gPlayer.stop();
-        gPlayer.release();
+		gPlayer.release();
 	}
-	
+
 }

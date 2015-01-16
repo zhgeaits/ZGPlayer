@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.zhangge.almightyzgbox_android.log.ZGLog;
+import org.zhangge.almightyzgbox_android.net.http.VolleyManager;
 import org.zhangge.almightyzgbox_android.net.video.YoutubeBox;
 import org.zhangge.almightyzgbox_android.net.video.YoutubeBox.VideoEntity;
 import org.zhangge.almightyzgbox_android.net.video.YoutubeBox.VideoStream;
-import org.zhangge.almightyzgbox_android.utils.ZGTask;
 import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.ui.BaseFragment;
 
@@ -31,7 +31,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
-import android.widget.ArrayAdapter;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -133,33 +133,33 @@ public class YoutubeVideoListFragment extends BaseFragment {
 			}
 
 			private void clickToPlay(final View view) {
-				final ViewHolder holder = (ViewHolder) view.getTag();
-				final String videoId = TITLE_VIDEOID.get(holder.title.getText().toString());
-				final String webUrl = TITLE_WEBURL.get(holder.title.getText().toString());
-				final List<VideoStream> urls = WEBURL_URLS.get(webUrl);
-				gCurrentId = videoId;
-				gCurrentWebUrl = webUrl;
-				if (urls == null || urls.size() == 0) {
-					ZGLog.info(this, "no url start a new task to get url videoId=%s", videoId);
-					ZGTask.getInstance().postDelayed(new CalUrlTask(webUrl, videoId, new CalUrlTaskListener() {
-						@Override
-						public void onOK() {
-							// List<VideoStream> urls = WEBURL_URLS.get(webUrl);
-							List<VideoStream> urls = VIDEOID_URLS.get(videoId);
-							play(null, holder.title.getText().toString(), urls);
-							ZGLog.info(this, "play Url=" + urls);
-						}
-
-						@Override
-						public void onError(String msg) {
-							ZGLog.info(this, "error:" + msg + ", try again");
-							clickToPlay(view);
-						}
-					}), 0);
-				} else {
-					play(null, holder.title.getText().toString(), urls);
-					ZGLog.info(this, "play Url=" + urls);
-				}
+//				final ViewHolder holder = (ViewHolder) view.getTag();
+//				final String videoId = TITLE_VIDEOID.get(holder.title.getText().toString());
+//				final String webUrl = TITLE_WEBURL.get(holder.title.getText().toString());
+//				final List<VideoStream> urls = WEBURL_URLS.get(webUrl);
+//				gCurrentId = videoId;
+//				gCurrentWebUrl = webUrl;
+//				if (urls == null || urls.size() == 0) {
+//					ZGLog.info(this, "no url start a new task to get url videoId=%s", videoId);
+//					ZGTask.getInstance().postDelayed(new CalUrlTask(webUrl, videoId, new CalUrlTaskListener() {
+//						@Override
+//						public void onOK() {
+//							// List<VideoStream> urls = WEBURL_URLS.get(webUrl);
+//							List<VideoStream> urls = VIDEOID_URLS.get(videoId);
+//							play(null, holder.title.getText().toString(), urls);
+//							ZGLog.info(this, "play Url=" + urls);
+//						}
+//
+//						@Override
+//						public void onError(String msg) {
+//							ZGLog.info(this, "error:" + msg + ", try again");
+//							clickToPlay(view);
+//						}
+//					}), 0);
+//				} else {
+//					play(null, holder.title.getText().toString(), urls);
+//					ZGLog.info(this, "play Url=" + urls);
+//				}
 			}
 
 			private void play(final String url, final String title, final List<VideoStream> urls) {
@@ -187,13 +187,12 @@ public class YoutubeVideoListFragment extends BaseFragment {
 		return (MySearchFragment) creatFragment;
 	}
 
-	private class YoutubeListAdapter extends ArrayAdapter<VideoEntity> {
+	private class YoutubeListAdapter extends BaseAdapter {
 
 		private List<VideoEntity> datas;
 		private String searchKey;
 
 		public YoutubeListAdapter(Context context, int resource, List<VideoEntity> objects) {
-			super(context, resource, objects);
 			datas = objects;
 		}
 
@@ -218,47 +217,101 @@ public class YoutubeVideoListFragment extends BaseFragment {
 			ViewHolder holder;
 			if (convertView == null) {
 				holder = new ViewHolder();
-				LayoutInflater inflater = ((Activity) getContext()).getLayoutInflater();
+				LayoutInflater inflater = getActivity().getLayoutInflater();
 				convertView = inflater.inflate(R.layout.youtube_list_item, null);
-				holder.icon = (ImageView) convertView.findViewById(R.id.image);
-				holder.title = (TextView) convertView.findViewById(R.id.title);
+				holder.leftIcon = (ImageView) convertView.findViewById(R.id.image_left);
+				holder.leftTitle = (TextView) convertView.findViewById(R.id.title_left);
+				holder.midIcon = (ImageView) convertView.findViewById(R.id.image_mid);
+				holder.midTitle = (TextView) convertView.findViewById(R.id.title_mid);
+				holder.rightIcon = (ImageView) convertView.findViewById(R.id.image_right);
+				holder.rightTitle = (TextView) convertView.findViewById(R.id.title_right);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
 			
-			SpannableString span = new SpannableString(getItem(position).getTitle());
-            for(int j = 0; j < getItem(position).getTitle().length() - searchKey.length() + 1; j++) {
+			int index = position * 3;
+			
+			if(index < datas.size()) {
+				SpannableString leftSpan = parseString(datas.get(index).getTitle());
+				holder.leftTitle.setText(leftSpan);
+				String webUrl = datas.get(index).getPlayUrl();
+				TITLE_WEBURL.put(datas.get(index).getTitle(), webUrl);
+				VolleyManager.getInstance().loadImage(datas.get(index).getSqThumbnail(),
+						 holder.leftIcon, R.drawable.ic_video_default, R.drawable.ic_video_default);
+			}
+			index ++;
+			if(index < datas.size()) {
+				SpannableString midSpan = parseString(datas.get(index).getTitle());
+				holder.midTitle.setText(midSpan);
+				String webUrl = datas.get(index).getPlayUrl();
+				TITLE_WEBURL.put(datas.get(index).getTitle(), webUrl);
+				VolleyManager.getInstance().loadImage(datas.get(index).getSqThumbnail(),
+						 holder.midIcon, R.drawable.ic_video_default, R.drawable.ic_video_default);
+			}
+			index ++;
+			if(index < datas.size()) {
+				SpannableString rightSpan = parseString(datas.get(index).getTitle());
+				holder.rightTitle.setText(rightSpan);
+				String webUrl = datas.get(index).getPlayUrl();
+				TITLE_WEBURL.put(datas.get(index).getTitle(), webUrl);
+				VolleyManager.getInstance().loadImage(datas.get(index).getSqThumbnail(),
+						 holder.rightIcon, R.drawable.ic_video_default, R.drawable.ic_video_default);
+			}
+            
+			return convertView;
+		}
+		
+		private SpannableString parseString(String title) {
+			SpannableString span = new SpannableString(title);
+            for(int j = 0; j < title.length() - searchKey.length() + 1; j++) {
                 int start = j, end = start + searchKey.length();
                 String temp = "";
-                if(end <= (getItem(position).getTitle().length() - 1)) {
-                    temp = getItem(position).getTitle().substring(start, end);
+                if(end <= (title.length() - 1)) {
+                    temp = title.substring(start, end);
                 } else {
-                    temp = getItem(position).getTitle().substring(start);
+                    temp = title.substring(start);
                 }
                 if(temp.equalsIgnoreCase(searchKey)) {
                     span.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFF8900")), start, end, Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
                     j += searchKey.length() - 1;
                 }
             }
-            if(getItem(position).getTitle().length() == searchKey.length() && getItem(position).getTitle().equalsIgnoreCase(searchKey)) {
-                span.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFF8900")), 0, getItem(position).getTitle().length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
+            if(title.length() == searchKey.length() && title.equalsIgnoreCase(searchKey)) {
+                span.setSpan(new ForegroundColorSpan(Color.parseColor("#FFFF8900")), 0, title.length(), Spannable.SPAN_EXCLUSIVE_EXCLUSIVE);
             }
-            holder.title.setText(span);
-            
-			String webUrl = getItem(position).getPlayUrl();
-			TITLE_WEBURL.put(getItem(position).getTitle(), webUrl);
-			getDownloadUrl(webUrl, getItem(position).getTitle(), getItem(position).getVideoId());
-			// VolleyManager.getInstance().loadImage(getItem(position).getSqThumbnail(),
-			// holder.icon, defaultImage, failedImage);
-			return convertView;
+            return span;
 		}
 
-		private void getDownloadUrl(String origUrl, String title, String videoId) {
-			if (TITLE_VIDEOID.get(title) == null) {
-				TITLE_VIDEOID.put(title, videoId);
+		@Override
+		public int getCount() {
+			int size = datas.size();
+			int count = size / 3;
+			if(size % 3 != 0) {
+				count += 1;
 			}
+			return count;
 		}
+
+		@Override
+		public Object getItem(int position) {
+			return datas.get(position);
+		}
+
+		@Override
+		public long getItemId(int position) {
+			return position;
+		}
+		
+		private class ViewHolder {
+			ImageView leftIcon;
+			TextView leftTitle;
+			ImageView midIcon;
+			TextView midTitle;
+			ImageView rightIcon;
+			TextView rightTitle;
+		}
+		
 	}
 
 	private class CalUrlTask implements Runnable {
@@ -312,10 +365,5 @@ public class YoutubeVideoListFragment extends BaseFragment {
 
 		public void onError(String msg);
 	}
-
-	private class ViewHolder {
-		ImageView icon;
-		TextView title;
-	}
-
+	
 }
