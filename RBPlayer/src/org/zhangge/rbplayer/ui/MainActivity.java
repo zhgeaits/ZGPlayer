@@ -10,12 +10,14 @@ import java.util.List;
 import org.zhangge.almightyzgbox_android.log.ZGLog;
 import org.zhangge.almightyzgbox_android.utils.CommonUtils;
 import org.zhangge.almightyzgbox_android.utils.ZGConstant;
+import org.zhangge.almightyzgbox_android.utils.ZGPreference;
 import org.zhangge.almightyzgbox_android.utils.ZGTask;
 import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.youtube.YoutubeVideoListFragment;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -88,42 +90,47 @@ public class MainActivity extends BaseActivity {
 			selectItem(0);
 		}
 
-		ZGTask.getInstance().postDelayed(new Runnable() {
-			@Override
-			public void run() {
-				try {
-					String fileNames[] = getAssets().list(SAMPLE_PATH);
-					String destDir = ZGConstant.SDCARD_ROOT + CommonUtils.getApplicationName(gContext) + File.separator + SAMPLE_PATH;
-					File fileDir = new File(destDir);
-					if(!fileDir.exists()) {
-						fileDir.mkdirs();
+		boolean firstUse = ZGPreference.getInstance().getBoolean("firstUse", true);
+		if(firstUse) {
+			ZGPreference.getInstance().putBoolean("firstUse", false);
+			ZGTask.getInstance().postDelayed(new Runnable() {
+				@Override
+				public void run() {
+					try {
+						String fileNames[] = getAssets().list(SAMPLE_PATH);
+						String destDir = ZGConstant.SDCARD_ROOT + CommonUtils.getApplicationName(gContext) + File.separator + SAMPLE_PATH;
+						File fileDir = new File(destDir);
+						if(!fileDir.exists()) {
+							fileDir.mkdirs();
+						}
+						for (String path : fileNames) {
+							ZGLog.info(this, "copy sample pictures:" + path);
+							copy(gContext, SAMPLE_PATH + File.separator + path, destDir + File.separator + path);
+						}
+					} catch (Exception e) {
+						ZGLog.error(this, e);
 					}
-					for (String path : fileNames) {
-						copy(gContext, SAMPLE_PATH + File.separator + path, destDir + File.separator + path);
-					}
-				} catch (Exception e) {
-					ZGLog.error(this, e);
 				}
-			}
-
-			private void copy(Context context, String oldPath, String newPath) {
-				InputStream is;
-				try {
-					is = context.getAssets().open(oldPath);
-					FileOutputStream fos = new FileOutputStream(new File(newPath));
-					byte[] buffer = new byte[1024];
-					int byteCount = 0;
-					while ((byteCount = is.read(buffer)) != -1) {
-						fos.write(buffer, 0, byteCount);
+				
+				private void copy(Context context, String oldPath, String newPath) {
+					InputStream is;
+					try {
+						is = context.getAssets().open(oldPath);
+						FileOutputStream fos = new FileOutputStream(new File(newPath));
+						byte[] buffer = new byte[1024];
+						int byteCount = 0;
+						while ((byteCount = is.read(buffer)) != -1) {
+							fos.write(buffer, 0, byteCount);
+						}
+						fos.flush();
+						is.close();
+						fos.close();
+					} catch (IOException e) {
+						ZGLog.error(this, e);
 					}
-					fos.flush();
-					is.close();
-					fos.close();
-				} catch (IOException e) {
-					ZGLog.error(this, e);
 				}
-			}
-		}, 0);
+			}, 0);
+		}
 	}
 
 	@SuppressWarnings("unused")
@@ -144,38 +151,56 @@ public class MainActivity extends BaseActivity {
 			youtubeFragment.hideSearchFragment();
 		}
 		currentItem = position;
+		Fragment toShow;
 		switch (position) {
 		case 0:
 			tag = LOCAL_VIDEO_TAG;
-			currentFragment = fragmentManager.findFragmentByTag(tag);
-			if (currentFragment == null) {
-				currentFragment = VideoListLocalFragment.newInstance();
+			toShow = fragmentManager.findFragmentByTag(tag);
+			if (toShow == null) {
+				toShow = VideoListLocalFragment.newInstance();
 			}
 			break;
 		case 1:
 			tag = YOUTUBE_VIDEO_TAG;
-			currentFragment = fragmentManager.findFragmentByTag(tag);
-			if (currentFragment == null) {
-				currentFragment = YoutubeVideoListFragment.newInstance();
+			toShow = fragmentManager.findFragmentByTag(tag);
+			if (toShow == null) {
+				toShow = YoutubeVideoListFragment.newInstance();
 			}
 			break;
 		case 2:
 			tag = SAMPLE_PIC_TAG;
-			currentFragment = fragmentManager.findFragmentByTag(tag);
-			if (currentFragment == null) {
-				currentFragment = SamplePictureFragment.newInstance();
+			toShow = fragmentManager.findFragmentByTag(tag);
+			if (toShow == null) {
+				toShow = SamplePictureFragment.newInstance();
 			}
 			break;
 		default:
 			tag = LOCAL_VIDEO_TAG;
-			currentFragment = fragmentManager.findFragmentByTag(tag);
-			if (currentFragment == null) {
-				currentFragment = VideoListLocalFragment.newInstance();
+			toShow = fragmentManager.findFragmentByTag(tag);
+			if (toShow == null) {
+				toShow = VideoListLocalFragment.newInstance();
 			}
 			break;
 		}
-
-		fragmentManager.beginTransaction().replace(R.id.content_frame, currentFragment, tag).commit();
+		
+		FragmentTransaction ft = getFragmentManager().beginTransaction();
+		
+		if(toShow != currentFragment && currentFragment != null) {
+			ft.hide(currentFragment);
+		}
+		currentFragment = toShow;
+		if (toShow.isDetached()) {
+			ft.attach(toShow);
+        } else if (!toShow.isAdded()) {
+        	ft.add(R.id.content_frame, toShow, tag);
+        } else if (toShow.isHidden()) {
+        	ft.show(toShow);
+        }
+		
+		int result = ft.commitAllowingStateLoss();
+        if (result < 0) {
+            getSupportFragmentManager().executePendingTransactions();
+        }
 
 		gDrawerList.setItemChecked(position, true);
 		setTitle(gMenuTitles[position]);

@@ -33,11 +33,12 @@ public class SamplePictureFragment extends BaseFragment {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+		gSamplePics = new ArrayList<File>();
 		String destDir = ZGConstant.SDCARD_ROOT + CommonUtils.getApplicationName(getActivity()) + File.separator + MainActivity.SAMPLE_PATH;
 		File dirs = new File(destDir);
-		String[] files = dirs.list();
-		for (String path : files) {
-			gSamplePics.add(new File(path));
+		File[] files = dirs.listFiles();
+		for (File file : files) {
+			gSamplePics.add(file);
 		}
 		super.onCreate(savedInstanceState);
 	}
@@ -118,6 +119,7 @@ public class SamplePictureFragment extends BaseFragment {
 					}
 				});
 			}
+			index ++;
 			if(index < datas.size()) {
 				final int pos = index;
 				Drawable drawable = Drawable.createFromPath(datas.get(pos).getAbsolutePath());
