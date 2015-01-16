@@ -1,6 +1,9 @@
 package org.zhangge.rbplayer.utils;
 
+import org.zhangge.almightyzgbox_android.utils.CommonUtils;
+
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.media.ThumbnailUtils;
@@ -13,7 +16,6 @@ import android.widget.ImageView;
 public class ImageLoader {
 
 	private LruCache<String, Bitmap> imageCache;
-	private LruCache<String, Drawable> drawableCache;
 	  
 	private static ImageLoader INSTANCE = null;
 	
@@ -29,7 +31,6 @@ public class ImageLoader {
 	                return bitmap.getRowBytes() * bitmap.getHeight();  
 	            }  
 	        };
-	        INSTANCE.drawableCache = new LruCache<String, Drawable>(maxSize);
 		}
 		return INSTANCE;
 	}
@@ -37,8 +38,8 @@ public class ImageLoader {
 	@SuppressWarnings("deprecation")
 	public void loadImage(final String path, final ImageView imageView, int defaultImg) {
 		imageView.setTag(path);
-		if(drawableCache.get(path) != null) {
-			Drawable drawable = drawableCache.get(path);
+		if(imageCache.get(path) != null) {
+			Drawable drawable = new BitmapDrawable(imageCache.get(path));
 			if(drawable != null) {
 				if(path.equals(imageView.getTag())) {
 					imageView.setBackground(drawable);
@@ -50,7 +51,7 @@ public class ImageLoader {
 		final Handler handler = new Handler() {
             public void handleMessage(Message message) {
             	if(message.obj != null) {
-            		Drawable drawable = (Drawable) message.obj;
+            		Drawable drawable = new BitmapDrawable((Bitmap) message.obj);
             		if(path.equals(imageView.getTag())) {
             			imageView.setBackgroundDrawable(drawable);
             		}
@@ -60,10 +61,18 @@ public class ImageLoader {
 		new Thread(new Runnable() {
 			@Override
 			public void run() {
-				Drawable drawable = Drawable.createFromPath(path);
-				if(drawable != null) {
-					drawableCache.put(path, drawable);
-					Message message = handler.obtainMessage(0, drawable);
+				BitmapFactory.Options options = new BitmapFactory.Options();
+				options.inJustDecodeBounds = true;
+				BitmapFactory.decodeFile(path, options);
+				int reqWidth = 240;
+				int reqHeight = 220;
+				options.inSampleSize = CommonUtils.calculateInSampleSize(options, reqWidth, reqHeight);
+				options.inJustDecodeBounds = false;
+				Bitmap bitmap = BitmapFactory.decodeFile(path, options);
+				
+				if(bitmap != null) {
+					imageCache.put(path, bitmap);
+					Message message = handler.obtainMessage(0, bitmap);
 					handler.sendMessage(message);
 				}
 			}

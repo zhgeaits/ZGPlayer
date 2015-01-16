@@ -7,11 +7,12 @@ import java.util.List;
 import org.zhangge.almightyzgbox_android.utils.CommonUtils;
 import org.zhangge.almightyzgbox_android.utils.ZGConstant;
 import org.zhangge.rbplayer.R;
+import org.zhangge.rbplayer.utils.ImageLoader;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -19,13 +20,13 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
 public class SamplePictureFragment extends BaseFragment {
 
 	private ListView gListView;
 	private SamplePicAdapter gAdapter;
 	private List<File> gSamplePics;
+	private Handler gHandler;
 	
 	public static SamplePictureFragment newInstance() {
 		return new SamplePictureFragment();
@@ -33,14 +34,8 @@ public class SamplePictureFragment extends BaseFragment {
 	
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-		gSamplePics = new ArrayList<File>();
-		String destDir = ZGConstant.SDCARD_ROOT + CommonUtils.getApplicationName(getActivity()) + File.separator + MainActivity.SAMPLE_PATH;
-		File dirs = new File(destDir);
-		File[] files = dirs.listFiles();
-		for (File file : files) {
-			gSamplePics.add(file);
-		}
 		super.onCreate(savedInstanceState);
+		gHandler = new Handler();
 	}
 
 	@Override
@@ -50,7 +45,19 @@ public class SamplePictureFragment extends BaseFragment {
 		view.findViewById(R.id.search_text_container).setVisibility(View.GONE);;
 		gListView = (ListView) view.findViewById(R.id.youtubelist);
 		gAdapter = new SamplePicAdapter(getActivity(), 0, new ArrayList<File>());
-		gAdapter.addAll(gSamplePics);
+		gHandler.postDelayed(new Runnable() {
+			@Override
+			public void run() {
+				gSamplePics = new ArrayList<File>();
+				String destDir = ZGConstant.SDCARD_ROOT + CommonUtils.getApplicationName(getActivity()) + File.separator + MainActivity.SAMPLE_PATH;
+				File dirs = new File(destDir);
+				File[] files = dirs.listFiles();
+				for (File file : files) {
+					gSamplePics.add(file);
+				}
+				gAdapter.addAll(gSamplePics);
+			}
+		}, 1000);
 		gListView.setAdapter(gAdapter);
 		return view;
 	}
@@ -75,31 +82,21 @@ public class SamplePictureFragment extends BaseFragment {
 			if (convertView == null) {
 				holder = new ViewHolder();
 				LayoutInflater inflater = getActivity().getLayoutInflater();
-				convertView = inflater.inflate(R.layout.youtube_list_item, null);
+				convertView = inflater.inflate(R.layout.samplepic_list_item, null);
 				holder.leftContainer = convertView.findViewById(R.id.youtube_left_container);
 				holder.leftIcon = (ImageView) convertView.findViewById(R.id.image_left);
-				holder.leftTitle = (TextView) convertView.findViewById(R.id.title_left);
-				holder.midContainer = convertView.findViewById(R.id.youtube_mid_container);
-				holder.midIcon = (ImageView) convertView.findViewById(R.id.image_mid);
-				holder.midTitle = (TextView) convertView.findViewById(R.id.title_mid);
 				holder.rightContainer = convertView.findViewById(R.id.youtube_right_container);
 				holder.rightIcon = (ImageView) convertView.findViewById(R.id.image_right);
-				holder.rightTitle = (TextView) convertView.findViewById(R.id.title_right);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
 			
-			holder.leftTitle.setVisibility(View.GONE);
-			holder.midTitle.setVisibility(View.GONE);
-			holder.rightTitle.setVisibility(View.GONE);
-			
-			int index = position * 3;
+			int index = position * 2;
 			
 			if(index < datas.size()) {
 				final int pos = index;
-				Drawable drawable = Drawable.createFromPath(datas.get(pos).getAbsolutePath());
-				holder.leftIcon.setBackgroundDrawable(drawable);
+				ImageLoader.getInstance().loadImage(datas.get(pos).getAbsolutePath(), holder.leftIcon, R.drawable.ic_video_default);
 				holder.leftContainer.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -110,20 +107,7 @@ public class SamplePictureFragment extends BaseFragment {
 			index ++;
 			if(index < datas.size()) {
 				final int pos = index;
-				Drawable drawable = Drawable.createFromPath(datas.get(pos).getAbsolutePath());
-				holder.midIcon.setBackgroundDrawable(drawable);
-				holder.midContainer.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						
-					}
-				});
-			}
-			index ++;
-			if(index < datas.size()) {
-				final int pos = index;
-				Drawable drawable = Drawable.createFromPath(datas.get(pos).getAbsolutePath());
-				holder.rightIcon.setBackgroundDrawable(drawable);
+				ImageLoader.getInstance().loadImage(datas.get(pos).getAbsolutePath(), holder.rightIcon, R.drawable.ic_video_default);
 				holder.rightContainer.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
@@ -138,8 +122,8 @@ public class SamplePictureFragment extends BaseFragment {
 		@Override
 		public int getCount() {
 			int size = datas.size();
-			int count = size / 3;
-			if(size % 3 != 0) {
+			int count = size / 2;
+			if(size % 2 != 0) {
 				count += 1;
 			}
 			return count;
@@ -158,13 +142,8 @@ public class SamplePictureFragment extends BaseFragment {
 		private class ViewHolder {
 			View leftContainer;
 			ImageView leftIcon;
-			TextView leftTitle;
-			View midContainer;
-			ImageView midIcon;
-			TextView midTitle;
 			View rightContainer;
 			ImageView rightIcon;
-			TextView rightTitle;
 		}
 		
 	}
