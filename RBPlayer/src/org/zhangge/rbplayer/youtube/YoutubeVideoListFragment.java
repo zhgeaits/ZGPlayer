@@ -10,11 +10,15 @@ import org.zhangge.almightyzgbox_android.net.http.VolleyManager;
 import org.zhangge.almightyzgbox_android.net.video.YoutubeBox;
 import org.zhangge.almightyzgbox_android.net.video.YoutubeBox.VideoEntity;
 import org.zhangge.almightyzgbox_android.net.video.YoutubeBox.VideoStream;
+import org.zhangge.almightyzgbox_android.utils.ZGTask;
 import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.ui.BaseFragment;
+import org.zhangge.rbplayer.utils.Navigation;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
 import android.os.AsyncTask;
@@ -29,29 +33,24 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.AdapterView.OnItemClickListener;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class YoutubeVideoListFragment extends BaseFragment {
 
 	private static int SUB_ID = R.id.search_fragment_container_content;
-	public static Map<String, List<VideoStream>> WEBURL_URLS = new HashMap<String, List<VideoStream>>();
 	public static Map<String, List<VideoStream>> VIDEOID_URLS = new HashMap<String, List<VideoStream>>();
-	public static String gCurrentId;
-	public static String gCurrentWebUrl;
-	private static Map<String, String> TITLE_VIDEOID = new HashMap<String, String>();
-	private static Map<String, String> TITLE_WEBURL = new HashMap<String, String>();
 
 	private Activity context;
 	private View search;
 	private MySearchFragment searchFragment;
 	private ListView youtubeList;
 	private YoutubeListAdapter adapter;
-	private View mList;
+	private AlertDialog.Builder builder;
+	private Dialog dialog;
 
 	public static YoutubeVideoListFragment newInstance() {
 		return new YoutubeVideoListFragment();
@@ -61,8 +60,9 @@ public class YoutubeVideoListFragment extends BaseFragment {
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		context = getActivity();
-		// defaultSearch("yt3d");
-		// defaultSearch("SBS3D");
+		builder = new AlertDialog.Builder(context);
+		dialog = builder.create();
+		defaultSearch("yt3d SBS3D");
 	}
 
 	@Override
@@ -70,7 +70,6 @@ public class YoutubeVideoListFragment extends BaseFragment {
 		View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_youtube_video_list, container, false);
 		search = view.findViewById(R.id.search_text_container);
 		youtubeList = (ListView) view.findViewById(R.id.youtubelist);
-		mList = view.findViewById(R.id.ytlistview);
 		adapter = new YoutubeListAdapter(getActivity(), 0, new ArrayList<VideoEntity>());
 		youtubeList.setAdapter(adapter);
 		initListener();
@@ -117,52 +116,11 @@ public class YoutubeVideoListFragment extends BaseFragment {
 
 	private void initListener() {
 		search.setOnClickListener(new OnClickListener() {
-
 			@Override
 			public void onClick(View v) {
 				searchFragment = creatSearchFragment(context);
 				searchFragment.setYoutubeFragment(YoutubeVideoListFragment.this);
 				searchFragment.showMe();
-			}
-		});
-		youtubeList.setOnItemClickListener(new OnItemClickListener() {
-
-			@Override
-			public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-				clickToPlay(view);
-			}
-
-			private void clickToPlay(final View view) {
-//				final ViewHolder holder = (ViewHolder) view.getTag();
-//				final String videoId = TITLE_VIDEOID.get(holder.title.getText().toString());
-//				final String webUrl = TITLE_WEBURL.get(holder.title.getText().toString());
-//				final List<VideoStream> urls = WEBURL_URLS.get(webUrl);
-//				gCurrentId = videoId;
-//				gCurrentWebUrl = webUrl;
-//				if (urls == null || urls.size() == 0) {
-//					ZGLog.info(this, "no url start a new task to get url videoId=%s", videoId);
-//					ZGTask.getInstance().postDelayed(new CalUrlTask(webUrl, videoId, new CalUrlTaskListener() {
-//						@Override
-//						public void onOK() {
-//							// List<VideoStream> urls = WEBURL_URLS.get(webUrl);
-//							List<VideoStream> urls = VIDEOID_URLS.get(videoId);
-//							play(null, holder.title.getText().toString(), urls);
-//							ZGLog.info(this, "play Url=" + urls);
-//						}
-//
-//						@Override
-//						public void onError(String msg) {
-//							ZGLog.info(this, "error:" + msg + ", try again");
-//							clickToPlay(view);
-//						}
-//					}), 0);
-//				} else {
-//					play(null, holder.title.getText().toString(), urls);
-//					ZGLog.info(this, "play Url=" + urls);
-//				}
-			}
-
-			private void play(final String url, final String title, final List<VideoStream> urls) {
 			}
 		});
 	}
@@ -219,10 +177,13 @@ public class YoutubeVideoListFragment extends BaseFragment {
 				holder = new ViewHolder();
 				LayoutInflater inflater = getActivity().getLayoutInflater();
 				convertView = inflater.inflate(R.layout.youtube_list_item, null);
+				holder.leftContainer = convertView.findViewById(R.id.youtube_left_container);
 				holder.leftIcon = (ImageView) convertView.findViewById(R.id.image_left);
 				holder.leftTitle = (TextView) convertView.findViewById(R.id.title_left);
+				holder.midContainer = convertView.findViewById(R.id.youtube_mid_container);
 				holder.midIcon = (ImageView) convertView.findViewById(R.id.image_mid);
 				holder.midTitle = (TextView) convertView.findViewById(R.id.title_mid);
+				holder.rightContainer = convertView.findViewById(R.id.youtube_right_container);
 				holder.rightIcon = (ImageView) convertView.findViewById(R.id.image_right);
 				holder.rightTitle = (TextView) convertView.findViewById(R.id.title_right);
 				convertView.setTag(holder);
@@ -235,31 +196,68 @@ public class YoutubeVideoListFragment extends BaseFragment {
 			if(index < datas.size()) {
 				SpannableString leftSpan = parseString(datas.get(index).getTitle());
 				holder.leftTitle.setText(leftSpan);
-				String webUrl = datas.get(index).getPlayUrl();
-				TITLE_WEBURL.put(datas.get(index).getTitle(), webUrl);
 				VolleyManager.getInstance().loadImage(datas.get(index).getSqThumbnail(),
 						 holder.leftIcon, R.drawable.ic_video_default, R.drawable.ic_video_default);
+				final int pos = index;
+				holder.leftContainer.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						loadYoutube(datas.get(pos).getVideoId());
+					}
+				});
 			}
 			index ++;
 			if(index < datas.size()) {
 				SpannableString midSpan = parseString(datas.get(index).getTitle());
 				holder.midTitle.setText(midSpan);
-				String webUrl = datas.get(index).getPlayUrl();
-				TITLE_WEBURL.put(datas.get(index).getTitle(), webUrl);
 				VolleyManager.getInstance().loadImage(datas.get(index).getSqThumbnail(),
 						 holder.midIcon, R.drawable.ic_video_default, R.drawable.ic_video_default);
+				final int pos = index;
+				holder.midContainer.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						loadYoutube(datas.get(pos).getVideoId());
+					}
+				});
 			}
 			index ++;
 			if(index < datas.size()) {
 				SpannableString rightSpan = parseString(datas.get(index).getTitle());
 				holder.rightTitle.setText(rightSpan);
-				String webUrl = datas.get(index).getPlayUrl();
-				TITLE_WEBURL.put(datas.get(index).getTitle(), webUrl);
 				VolleyManager.getInstance().loadImage(datas.get(index).getSqThumbnail(),
 						 holder.rightIcon, R.drawable.ic_video_default, R.drawable.ic_video_default);
+				final int pos = index;
+				holder.rightContainer.setOnClickListener(new OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						loadYoutube(datas.get(pos).getVideoId());
+					}
+				});
 			}
             
 			return convertView;
+		}
+		
+		private void loadYoutube(final String videoId) {
+			showProgressDialog(getActivity().getString(R.string.loading));
+			ZGTask.getInstance().postDelayed(new CalUrlTask(videoId, new CalUrlTaskListener() {
+				@Override
+				public void onOK() {
+					dialog.dismiss();
+					List<VideoStream> urls = VIDEOID_URLS.get(videoId);
+					if(urls != null && urls.size() > 0) {
+						String url = urls.get(0).getUrl();
+						ZGLog.info(this, "goto play youtube url=" + url);
+						Navigation.toMediaPlayer(getActivity(), url);
+					}
+				}
+				
+				@Override
+				public void onError(String msg) {
+					dialog.dismiss();
+					Toast.makeText(context, R.string.load_error, Toast.LENGTH_LONG).show();
+				}
+			}), 0);
 		}
 		
 		private SpannableString parseString(String title) {
@@ -304,10 +302,13 @@ public class YoutubeVideoListFragment extends BaseFragment {
 		}
 		
 		private class ViewHolder {
+			View leftContainer;
 			ImageView leftIcon;
 			TextView leftTitle;
+			View midContainer;
 			ImageView midIcon;
 			TextView midTitle;
+			View rightContainer;
 			ImageView rightIcon;
 			TextView rightTitle;
 		}
@@ -317,12 +318,10 @@ public class YoutubeVideoListFragment extends BaseFragment {
 	private class CalUrlTask implements Runnable {
 		private String videoId;
 		private CalUrlTaskListener listener;
-		private String webUrl;
 
-		public CalUrlTask(String webUrl, String videoId, CalUrlTaskListener listener) {
+		public CalUrlTask(String videoId, CalUrlTaskListener listener) {
 			this.videoId = videoId;
 			this.listener = listener;
-			this.webUrl = webUrl;
 		}
 
 		@Override
@@ -336,15 +335,7 @@ public class YoutubeVideoListFragment extends BaseFragment {
 					VIDEOID_URLS.put(videoId, getUrlsFromId);
 				}
 
-				ZGLog.info(this, "begin to getYoutubeUrlFromWebUrl webUrl=" + webUrl);
-				List<VideoStream> getUrlsFromWebUrl = YoutubeBox.getYoutubeUrlFromWebUrl(webUrl);
-				if (getUrlsFromWebUrl == null || getUrlsFromWebUrl.size() == 0) {
-					ZGLog.info(this, "this weburl, I have no idea how to get the stream url. webUrl:" + webUrl);
-				} else {
-					WEBURL_URLS.put(webUrl, getUrlsFromWebUrl);
-				}
-
-				if ((getUrlsFromId == null || getUrlsFromId.size() == 0) && (getUrlsFromWebUrl == null || getUrlsFromWebUrl.size() == 0)) {
+				if (getUrlsFromId == null || getUrlsFromId.size() == 0) {
 					if (listener != null) {
 						listener.onError("can not play");
 					}
@@ -362,8 +353,16 @@ public class YoutubeVideoListFragment extends BaseFragment {
 
 	public interface CalUrlTaskListener {
 		public void onOK();
-
 		public void onError(String msg);
 	}
 	
+	public void showProgressDialog(String msg) {
+		dialog.setCancelable(true);
+		dialog.setCanceledOnTouchOutside(false);
+        if (null != context)
+        	dialog.show();
+        dialog.setContentView(R.layout.layout_progress_dialog);
+        TextView tvTip = (TextView) dialog.findViewById(R.id.tv_tip);
+        tvTip.setText(msg);
+    }
 }

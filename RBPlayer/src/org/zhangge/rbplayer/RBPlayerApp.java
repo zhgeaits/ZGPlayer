@@ -1,5 +1,7 @@
 package org.zhangge.rbplayer;
 
+import org.zhangge.almightyzgbox_android.AlmightAndroidBox;
+
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
@@ -19,7 +21,7 @@ public class RBPlayerApp extends Application {
         gContext = this;
         if(isMainProcess()) {
             //以后可以在这里写初始化整个应用的代码
-//        	initLog();
+        	AlmightAndroidBox.init(this);
         } else {
             Log.i(TAG, "return");
             return;
