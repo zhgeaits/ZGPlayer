@@ -8,7 +8,6 @@ import org.zhangge.rbplayer.lib.RBVideoRender;
 import org.zhangge.rbplayer.lib.RBVideoRender.OnPlayGoing;
 import org.zhangge.rbplayer.utils.UtilBox;
 
-import android.content.pm.ActivityInfo;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
@@ -20,8 +19,8 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.SeekBar;
-import android.widget.TextView;
 import android.widget.SeekBar.OnSeekBarChangeListener;
+import android.widget.TextView;
 
 public class MediaPlayerActivity extends BaseActivity {
 
@@ -48,7 +47,6 @@ public class MediaPlayerActivity extends BaseActivity {
 		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
-		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
 		setContentView(R.layout.activity_video_player);
 		gScreenMode = SCREEN_MODE_NORMAL;
 		if (getIntent().getExtras() != null) {
@@ -173,12 +171,6 @@ public class MediaPlayerActivity extends BaseActivity {
 			gPlayer.setDataSource(url);
 			gVideoview.setEGLContextClientVersion(2);
 			gRenderer = new RBVideoRender(this);
-//			gVideoview.queueEvent(new Runnable() {
-//				public void run() {
-//					
-//				}
-//			});
-
 			gRenderer.setMediaPlayer(gPlayer);
 			gRenderer.setOnPlayGoing(playGoing);
 			gVideoview.setRenderer(gRenderer);
