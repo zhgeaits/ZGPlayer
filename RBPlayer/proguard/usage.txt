@@ -1,0 +1,741 @@
+a.This:
+    73:75:public This()
+android.support.annotation.AnimRes
+android.support.annotation.AnimatorRes
+android.support.annotation.AnyRes
+android.support.annotation.ArrayRes
+android.support.annotation.AttrRes
+android.support.annotation.BoolRes
+android.support.annotation.ColorRes
+android.support.annotation.DimenRes
+android.support.annotation.DrawableRes
+android.support.annotation.FractionRes
+android.support.annotation.IdRes
+android.support.annotation.IntDef
+android.support.annotation.IntegerRes
+android.support.annotation.InterpolatorRes
+android.support.annotation.LayoutRes
+android.support.annotation.MenuRes
+android.support.annotation.NonNull
+android.support.annotation.Nullable
+android.support.annotation.PluralsRes
+android.support.annotation.RawRes
+android.support.annotation.StringDef
+android.support.annotation.StringRes
+android.support.annotation.StyleRes
+android.support.annotation.StyleableRes
+android.support.annotation.XmlRes
+cn.bmob.push.BmobPush
+cn.bmob.push.BmobPush$1
+cn.bmob.push.BmobPush$2
+cn.bmob.push.PushConstants
+cn.bmob.push.PushReceiver
+cn.bmob.push.PushSDK
+cn.bmob.push.PushSDK$1
+cn.bmob.push.PushSDK$2
+cn.bmob.push.PushSDK$PushObservable
+cn.bmob.push.autobahn.ByteBufferInputStream
+cn.bmob.push.autobahn.ByteBufferOutputStream
+cn.bmob.push.autobahn.NoCopyByteArrayOutputStream
+cn.bmob.push.autobahn.Utf8Validator
+cn.bmob.push.autobahn.WebSocket
+cn.bmob.push.autobahn.WebSocket$ConnectionHandler
+cn.bmob.push.autobahn.WebSocketConnection
+cn.bmob.push.autobahn.WebSocketConnection$1
+cn.bmob.push.autobahn.WebSocketConnection$2
+cn.bmob.push.autobahn.WebSocketConnection$WebSocketConnector
+cn.bmob.push.autobahn.WebSocketConnectionHandler
+cn.bmob.push.autobahn.WebSocketException
+cn.bmob.push.autobahn.WebSocketMessage
+cn.bmob.push.autobahn.WebSocketMessage$BinaryMessage
+cn.bmob.push.autobahn.WebSocketMessage$ClientHandshake
+cn.bmob.push.autobahn.WebSocketMessage$Close
+cn.bmob.push.autobahn.WebSocketMessage$ConnectionLost
+cn.bmob.push.autobahn.WebSocketMessage$Error
+cn.bmob.push.autobahn.WebSocketMessage$Message
+cn.bmob.push.autobahn.WebSocketMessage$Ping
+cn.bmob.push.autobahn.WebSocketMessage$Pong
+cn.bmob.push.autobahn.WebSocketMessage$ProtocolViolation
+cn.bmob.push.autobahn.WebSocketMessage$Quit
+cn.bmob.push.autobahn.WebSocketMessage$RawTextMessage
+cn.bmob.push.autobahn.WebSocketMessage$ServerError
+cn.bmob.push.autobahn.WebSocketMessage$ServerHandshake
+cn.bmob.push.autobahn.WebSocketMessage$TextMessage
+cn.bmob.push.autobahn.WebSocketOptions
+cn.bmob.push.autobahn.WebSocketReader
+cn.bmob.push.autobahn.WebSocketReader$FrameHeader
+cn.bmob.push.autobahn.WebSocketWriter
+cn.bmob.push.lib.service.Client
+cn.bmob.push.lib.service.Client$1
+cn.bmob.push.lib.service.Client$MyBroadcastReceiver
+cn.bmob.push.lib.service.ClientPacket
+cn.bmob.push.lib.service.ISocketResponse
+cn.bmob.push.lib.service.ISocketService
+cn.bmob.push.lib.service.ISocketService$Stub
+cn.bmob.push.lib.service.ISocketService$Stub$Proxy
+cn.bmob.push.lib.service.ISocketServiceCallback
+cn.bmob.push.lib.service.ISocketServiceCallback$Stub
+cn.bmob.push.lib.service.ISocketServiceCallback$Stub$Proxy
+cn.bmob.push.lib.service.PushService
+cn.bmob.push.lib.service.PushService$1
+cn.bmob.push.lib.service.PushService$2
+cn.bmob.push.lib.service.PushService$3
+cn.bmob.push.lib.service.PushService$CusRemoteCallbackList
+cn.bmob.push.lib.service.PushService$MyBroadcastReceiver
+cn.bmob.push.lib.util.AtomicIntegerUtil
+cn.bmob.push.lib.util.Config
+cn.bmob.push.lib.util.LogUtil
+cn.bmob.push.lib.util.NetworkUtil
+cn.volley.AuthFailureError
+cn.volley.Cache
+cn.volley.Cache$Entry
+cn.volley.CacheDispatcher
+cn.volley.CacheDispatcher$1
+cn.volley.DefaultRetryPolicy
+cn.volley.ExecutorDelivery
+cn.volley.ExecutorDelivery$1
+cn.volley.ExecutorDelivery$ResponseDeliveryRunnable
+cn.volley.Network
+cn.volley.NetworkDispatcher
+cn.volley.NetworkError
+cn.volley.NetworkResponse
+cn.volley.NoConnectionError
+cn.volley.ParseError
+cn.volley.Request
+cn.volley.Request$1
+cn.volley.Request$Method
+cn.volley.Request$Priority
+cn.volley.RequestQueue
+cn.volley.RequestQueue$1
+cn.volley.RequestQueue$RequestFilter
+cn.volley.Response
+cn.volley.Response$ErrorListener
+cn.volley.Response$Listener
+cn.volley.ResponseDelivery
+cn.volley.RetryPolicy
+cn.volley.ServerError
+cn.volley.TimeoutError
+cn.volley.VolleyError
+cn.volley.VolleyLog
+cn.volley.VolleyLog$MarkerLog
+cn.volley.VolleyLog$MarkerLog$Marker
+cn.volley.toolbox.AndroidAuthenticator
+cn.volley.toolbox.Authenticator
+cn.volley.toolbox.BasicNetwork
+cn.volley.toolbox.ByteArrayPool
+cn.volley.toolbox.ByteArrayPool$1
+cn.volley.toolbox.ClearCacheRequest
+cn.volley.toolbox.DiskBasedCache
+cn.volley.toolbox.DiskBasedCache$CacheHeader
+cn.volley.toolbox.DiskBasedCache$CountingInputStream
+cn.volley.toolbox.HttpClientStack
+cn.volley.toolbox.HttpClientStack$HttpPatch
+cn.volley.toolbox.HttpHeaderParser
+cn.volley.toolbox.HttpStack
+cn.volley.toolbox.HurlStack
+cn.volley.toolbox.HurlStack$UrlRewriter
+cn.volley.toolbox.ImageLoader
+cn.volley.toolbox.ImageLoader$1
+cn.volley.toolbox.ImageLoader$2
+cn.volley.toolbox.ImageLoader$3
+cn.volley.toolbox.ImageLoader$4
+cn.volley.toolbox.ImageLoader$BatchedImageRequest
+cn.volley.toolbox.ImageLoader$ImageCache
+cn.volley.toolbox.ImageLoader$ImageContainer
+cn.volley.toolbox.ImageLoader$ImageListener
+cn.volley.toolbox.ImageRequest
+cn.volley.toolbox.JsonArrayRequest
+cn.volley.toolbox.JsonObjectRequest
+cn.volley.toolbox.JsonRequest
+cn.volley.toolbox.NetworkImageView
+cn.volley.toolbox.NetworkImageView$1
+cn.volley.toolbox.NetworkImageView$1$1
+cn.volley.toolbox.NoCache
+cn.volley.toolbox.PoolingByteArrayOutputStream
+cn.volley.toolbox.RequestFuture
+cn.volley.toolbox.StringRequest
+cn.volley.toolbox.Volley
+com.android.volley.AuthFailureError:
+    34:36:public AuthFailureError(android.content.Intent)
+    43:44:public AuthFailureError(java.lang.String)
+    47:48:public AuthFailureError(java.lang.String,java.lang.Exception)
+    51:51:public android.content.Intent getResolutionIntent()
+com.android.volley.Cache:
+    public abstract void invalidate(java.lang.String,boolean)
+    public abstract void remove(java.lang.String)
+    public abstract void clear()
+com.android.volley.DefaultRetryPolicy:
+    public static final int DEFAULT_TIMEOUT_MS
+    public static final int DEFAULT_MAX_RETRIES
+    public static final float DEFAULT_BACKOFF_MULT
+    83:83:public float getBackoffMultiplier()
+com.android.volley.ExecutorDelivery:
+    49:51:public ExecutorDelivery(java.util.concurrent.Executor)
+com.android.volley.NetworkResponse:
+    47:48:public NetworkResponse(int,byte[],java.util.Map,boolean)
+    51:52:public NetworkResponse(byte[])
+com.android.volley.Request:
+    private static final java.lang.String DEFAULT_PARAMS_ENCODING
+    private static final long SLOW_REQUEST_THRESHOLD_MS
+    private java.lang.Object mTag
+    122:123:public Request(java.lang.String,com.android.volley.Response$ErrorListener)
+    154:155:public com.android.volley.Request setTag(java.lang.Object)
+    163:163:public java.lang.Object getTag()
+    170:170:public com.android.volley.Response$ErrorListener getErrorListener()
+    277:280:public final int getSequence()
+    319:320:public void cancel()
+    478:479:public final com.android.volley.Request setShouldCache(boolean)
+com.android.volley.Request$Method
+com.android.volley.RequestQueue:
+    private static final int DEFAULT_NETWORK_THREAD_POOL_SIZE
+    172:172:public com.android.volley.Cache getCache()
+    188:195:public void cancelAll(com.android.volley.RequestQueue$RequestFilter)
+    202:211:public void cancelAll(java.lang.Object)
+com.android.volley.RequestQueue$1
+com.android.volley.RequestQueue$RequestFilter
+com.android.volley.VolleyError:
+    36:38:public VolleyError(java.lang.String)
+    41:43:public VolleyError(java.lang.String,java.lang.Throwable)
+    55:55:public long getNetworkTimeMs()
+com.android.volley.VolleyLog:
+    41:46:public static void setTag(java.lang.String)
+    67:68:public static varargs void wtf(java.lang.String,java.lang.Object[])
+    71:72:public static varargs void wtf(java.lang.Throwable,java.lang.String,java.lang.Object[])
+com.android.volley.VolleyLog$MarkerLog:
+    private static final long MIN_DURATION_FOR_LOGGING_MS
+com.android.volley.toolbox.AndroidAuthenticator
+com.android.volley.toolbox.Authenticator
+com.android.volley.toolbox.BasicNetwork:
+    222:224:protected void logError(java.lang.String,java.lang.String,long)
+com.android.volley.toolbox.ClearCacheRequest
+com.android.volley.toolbox.DiskBasedCache:
+    private static final int DEFAULT_DISK_USAGE_BYTES
+    private static final float HYSTERESIS_FACTOR
+    private static final int CACHE_MAGIC
+    91:100:public synchronized void clear()
+    180:189:public synchronized void invalidate(java.lang.String,boolean)
+com.android.volley.toolbox.HttpClientStack:
+    private static final java.lang.String HEADER_CONTENT_TYPE
+    67:71:private static java.util.List getPostParameterPairs(java.util.Map)
+com.android.volley.toolbox.HttpClientStack$HttpPatch:
+    public static final java.lang.String METHOD_NAME
+    176:178:public HttpClientStack$HttpPatch(java.net.URI)
+com.android.volley.toolbox.HttpHeaderParser:
+    31:31:public HttpHeaderParser()
+    122:135:public static java.lang.String parseCharset(java.util.Map)
+com.android.volley.toolbox.HurlStack:
+    private static final java.lang.String HEADER_CONTENT_TYPE
+com.android.volley.toolbox.ImageLoader:
+    153:156:public boolean isCached(java.lang.String,int,int)
+    247:248:public void setBatchedResponseDelay(int)
+    56:56:static synthetic java.util.HashMap access$0(com.android.volley.toolbox.ImageLoader)
+com.android.volley.toolbox.ImageLoader$BatchedImageRequest:
+    418:423:public boolean removeContainerAndCancelIfNecessary(com.android.volley.toolbox.ImageLoader$ImageContainer)
+com.android.volley.toolbox.ImageLoader$ImageContainer:
+    325:345:public void cancelRequest()
+    358:358:public java.lang.String getRequestUrl()
+com.android.volley.toolbox.ImageRequest:
+    private static final int IMAGE_TIMEOUT_MS
+    private static final int IMAGE_MAX_RETRIES
+    private static final float IMAGE_BACKOFF_MULT
+com.android.volley.toolbox.JsonArrayRequest
+com.android.volley.toolbox.JsonObjectRequest
+com.android.volley.toolbox.JsonRequest
+com.android.volley.toolbox.NetworkImageView
+com.android.volley.toolbox.NetworkImageView$1
+com.android.volley.toolbox.NetworkImageView$1$1
+com.android.volley.toolbox.NoCache
+com.android.volley.toolbox.PoolingByteArrayOutputStream:
+    private static final int DEFAULT_SIZE
+    40:41:public PoolingByteArrayOutputStream(com.android.volley.toolbox.ByteArrayPool)
+com.android.volley.toolbox.RequestFuture
+com.android.volley.toolbox.StringRequest
+com.android.volley.toolbox.Volley:
+    private static final java.lang.String DEFAULT_CACHE_DIR
+    30:30:public Volley()
+d.This:
+    private com.sina.weibo.sdk.auth.Oauth2AccessToken aA
+    29:29:static synthetic cn.bmob.v3.listener.OtherLoginListener Code(d.This)
+    34:34:static synthetic void Code(d.This,com.sina.weibo.sdk.auth.Oauth2AccessToken)
+    34:34:static synthetic com.sina.weibo.sdk.auth.Oauth2AccessToken V(d.This)
+    91:91:static synthetic void Code(d.This,org.json.JSONObject)
+    79:79:static synthetic void V(d.This,org.json.JSONObject)
+d.This$This:
+    113:116:public final void onCancel()
+    121:142:public final void onComplete(android.os.Bundle)
+    146:152:public final void onWeiboException(com.sina.weibo.sdk.exception.WeiboException)
+e.This:
+    25:25:static synthetic cn.bmob.v3.listener.OtherLoginListener Code(e.This)
+    71:71:static synthetic void Code(e.This,org.json.JSONObject)
+    58:58:static synthetic void V(e.This,org.json.JSONObject)
+e.This$1:
+    98:101:public final void onError(com.tencent.tauth.UiError)
+    106:123:public final void onComplete(java.lang.Object)
+    128:131:public final void onCancel()
+f.thing:
+    7:7:public thing()
+g.Tempest:
+    11:11:private Tempest()
+g.Though:
+    30:30:public Though()
+g.mine:
+    11:11:public mine()
+g.of:
+    33:33:public of()
+g.thing:
+    26:26:public thing()
+h.method:
+    35:37:public method(java.lang.String)
+j.II:
+    private static final long serialVersionUID
+j.method:
+    static final long serialVersionUID
+j.yet:
+    private static final long serialVersionUID
+k.This
+l.I:
+    76:76:private java.lang.Object writeReplace()
+l.The:
+    32:32:private The()
+l.This:
+    45:45:private This()
+l.This$This:
+    private static final long serialVersionUID
+l.This$of:
+    private static final long serialVersionUID
+l.This$thing:
+    private static final long serialVersionUID
+l.acknowledge:
+    625:625:private java.lang.Object writeReplace()
+m.is:
+    58:58:private is()
+o.I:
+    private static final long serialVersionUID
+org.zhangge.almightyzgbox_android.AlmightAndroidBox:
+    22:22:public AlmightAndroidBox()
+    65:66:private static void initDB(android.content.Context,java.lang.String,int,java.util.List)
+org.zhangge.almightyzgbox_android.R:
+    9:9:public R()
+org.zhangge.almightyzgbox_android.R$anim
+org.zhangge.almightyzgbox_android.R$attr
+org.zhangge.almightyzgbox_android.R$color
+org.zhangge.almightyzgbox_android.R$drawable
+org.zhangge.almightyzgbox_android.R$id
+org.zhangge.almightyzgbox_android.R$layout
+org.zhangge.almightyzgbox_android.R$string
+org.zhangge.almightyzgbox_android.R$styleable:
+    107:107:public R$styleable()
+org.zhangge.almightyzgbox_android.db.AbstractMapper
+org.zhangge.almightyzgbox_android.db.DBCommand
+org.zhangge.almightyzgbox_android.db.DBContext
+org.zhangge.almightyzgbox_android.db.DBResult
+org.zhangge.almightyzgbox_android.db.DBResult$ResultCode
+org.zhangge.almightyzgbox_android.db.DBThread
+org.zhangge.almightyzgbox_android.db.DBThread$1
+org.zhangge.almightyzgbox_android.db.DBThread$CommandHandler
+org.zhangge.almightyzgbox_android.db.ZGDBHelper
+org.zhangge.almightyzgbox_android.db.ZGDBManager
+org.zhangge.almightyzgbox_android.db.ZGDBManager$1
+org.zhangge.almightyzgbox_android.db.ZGDBManager$1$1
+org.zhangge.almightyzgbox_android.db.example.ExampleTest
+org.zhangge.almightyzgbox_android.db.example.ExampleUser
+org.zhangge.almightyzgbox_android.db.example.UserMapper
+org.zhangge.almightyzgbox_android.db.example.UserMapper$1
+org.zhangge.almightyzgbox_android.log.FastDateFormat:
+    private static final long serialVersionUID
+    public static final int FULL
+    public static final int LONG
+    public static final int MEDIUM
+    public static final int SHORT
+    158:158:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getInstance()
+    191:191:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getInstance(java.lang.String,java.util.TimeZone)
+    208:208:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getInstance(java.lang.String,java.util.Locale)
+    229:229:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getInstance(java.lang.String,java.util.TimeZone,java.util.Locale)
+    247:247:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getDateInstance(int)
+    266:266:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getDateInstance(int,java.util.Locale)
+    285:285:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getDateInstance(int,java.util.TimeZone)
+    306:306:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getDateInstance(int,java.util.TimeZone,java.util.Locale)
+    324:324:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getTimeInstance(int)
+    343:343:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getTimeInstance(int,java.util.Locale)
+    362:362:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getTimeInstance(int,java.util.TimeZone)
+    383:383:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getTimeInstance(int,java.util.TimeZone,java.util.Locale)
+    404:404:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getDateTimeInstance(int,int)
+    426:426:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getDateTimeInstance(int,int,java.util.Locale)
+    448:448:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getDateTimeInstance(int,int,java.util.TimeZone)
+    471:471:public static org.zhangge.almightyzgbox_android.log.FastDateFormat getDateTimeInstance(int,int,java.util.TimeZone,java.util.Locale)
+    846:846:public java.lang.String format(java.util.Calendar)
+    949:949:public java.lang.String getPattern()
+    964:964:public java.util.TimeZone getTimeZone()
+    975:975:public java.util.Locale getLocale()
+    992:992:public int getMaxLengthEstimate()
+    1057:1059:private void readObject(java.io.ObjectInputStream)
+org.zhangge.almightyzgbox_android.log.FormatCache:
+    static final int NONE
+    61:61:public java.text.Format getInstance()
+    145:179:public java.text.Format getDateTimeInstance(java.lang.Integer,java.lang.Integer,java.util.TimeZone,java.util.Locale)
+org.zhangge.almightyzgbox_android.log.LogToES:
+    private static final java.lang.String BAK_EXT
+    private static final long DAY_DELAY
+    public static final int MAX_FILE_SIZE
+    public static final int DEFAULT_BAK_FILE_NUM_LIMIT
+    public static final int DEFAULT_BUFF_SIZE
+    private static final long FLUSH_INTERVAL
+    13:13:public LogToES()
+    209:238:public static boolean getLogOutputPaths(org.zhangge.almightyzgbox_android.log.ZGLog$LogOutputPaths,java.lang.String)
+    319:329:public static void flush()
+    346:346:public static boolean isOpen()
+org.zhangge.almightyzgbox_android.log.ZGCrashHandler:
+    private static final java.lang.String TAG
+    131:131:public java.lang.String getLogPath()
+org.zhangge.almightyzgbox_android.log.ZGLog:
+    22:22:public ZGLog()
+    114:114:public static boolean initialize(java.lang.String)
+    135:140:public static org.zhangge.almightyzgbox_android.log.ZGLog$LogOutputPaths getLogOutputPaths()
+    149:149:public static boolean getLogOutputPaths(org.zhangge.almightyzgbox_android.log.ZGLog$LogOutputPaths)
+    156:159:public static void setUniformTag(java.lang.String)
+    162:162:public static java.lang.String getLogPath()
+    166:166:public static org.zhangge.almightyzgbox_android.log.ZGLog$LogOptions getOptions()
+    175:183:public static void flush()
+    190:200:public static void close()
+    203:203:public static boolean isOpen()
+    227:239:public static varargs void verbose(java.lang.Object,java.lang.String,java.lang.Object[])
+    242:252:public static varargs void verboseWithoutLineNumber(java.lang.Object,java.lang.String,java.lang.Object[])
+    276:281:public static varargs void debug(java.lang.Object,java.lang.String,java.lang.Object[])
+    284:287:public static varargs void debugWithoutLineNumber(java.lang.Object,java.lang.String,java.lang.Object[])
+    322:329:public static varargs void infoWithoutLineNumber(java.lang.Object,java.lang.String,java.lang.Object[])
+    352:361:public static varargs void warn(java.lang.Object,java.lang.String,java.lang.Object[])
+    364:371:public static varargs void warnWithoutLineNumber(java.lang.Object,java.lang.String,java.lang.Object[])
+    406:413:public static varargs void errorWithoutLineNumber(java.lang.Object,java.lang.String,java.lang.Object[])
+    438:439:public static varargs void error(java.lang.Object,java.lang.String,java.lang.Throwable,java.lang.Object[])
+    442:443:public static varargs void errorWithoutLineNumber(java.lang.Object,java.lang.String,java.lang.Throwable,java.lang.Object[])
+    465:469:public static void errorWithoutLineNumber(java.lang.Object,java.lang.Throwable)
+    474:475:public static void printThreadStacks()
+    478:480:public static void printThreadStacks(java.lang.String)
+    483:484:public static void printThreadStacks(java.lang.Throwable,java.lang.String)
+    487:488:public static void printThreadStacks(java.lang.String,java.lang.String)
+    494:496:public static void printThreadStacks(java.lang.String,java.lang.String,boolean,boolean)
+    499:501:public static void printStackTraces(java.lang.StackTraceElement[],java.lang.String)
+    611:611:private static java.lang.String getThreadStacksKeyword()
+    616:625:private static void printStackTraces(java.lang.StackTraceElement[],java.lang.String,java.lang.String,boolean,boolean)
+    628:633:private static void printLog(java.lang.String,java.lang.String,boolean)
+    643:643:private static java.lang.String tagOfStack()
+    647:647:private static boolean shouldOutputVerboseToDDMS()
+    651:651:private static boolean shouldOutputVerboseToFile()
+    655:655:private static boolean shouldWriteDebug()
+    663:663:private static boolean shouldWriteWarn()
+    672:682:private static varargs void outputVerbose(java.lang.Object,java.lang.String,boolean,boolean,java.lang.Object[])
+    687:698:private static varargs void outputVerbose(java.lang.Object,int,java.lang.String,java.lang.String,boolean,boolean,java.lang.Object[])
+    702:708:private static varargs void outputDebug(java.lang.Object,java.lang.String,java.lang.Object[])
+    713:720:private static varargs void outputDebug(java.lang.Object,java.lang.String,int,java.lang.String,java.lang.Object[])
+    724:730:private static varargs void outputInfo(java.lang.Object,java.lang.String,java.lang.Object[])
+    746:752:private static varargs void outputWarning(java.lang.Object,java.lang.String,java.lang.Object[])
+    757:764:private static varargs void outputWarning(java.lang.Object,java.lang.String,int,java.lang.String,java.lang.Object[])
+    768:781:private static varargs void outputError(java.lang.Object,java.lang.String,java.lang.Object[])
+    804:811:private static void outputError(java.lang.Object,java.lang.Throwable,java.lang.String)
+org.zhangge.almightyzgbox_android.log.ZGLog$1
+org.zhangge.almightyzgbox_android.log.ZGLog$2
+org.zhangge.almightyzgbox_android.log.ZGLog$LogOptions:
+    public static final int LEVEL_VERBOSE
+    public static final int LEVEL_DEBUG
+    public static final int LEVEL_INFO
+    public static final int LEVEL_WARN
+    public static final int LEVEL_ERROR
+    public java.lang.String stackTraceFilterKeyword
+org.zhangge.almightyzgbox_android.log.ZGLog$LogOutputPaths
+org.zhangge.almightyzgbox_android.net.http.VolleyManager:
+    55:57:public void doStringRequest(java.lang.String,com.android.volley.Response$Listener,com.android.volley.Response$ErrorListener)
+    61:68:public void doStringRequestPost(java.lang.String,com.android.volley.Response$Listener,com.android.volley.Response$ErrorListener,java.util.Map)
+    71:73:public void doJsonRequest(java.lang.String,com.android.volley.Response$Listener,com.android.volley.Response$ErrorListener)
+    77:84:public void doJsonRequestPost(java.lang.String,com.android.volley.Response$Listener,com.android.volley.Response$ErrorListener,java.util.Map)
+    88:90:public void doImageReqeust(java.lang.String,com.android.volley.Response$Listener,com.android.volley.Response$ErrorListener,int,int,android.graphics.Bitmap$Config)
+    98:130:public void loadImage(java.lang.String,android.widget.ImageView,int,int,boolean,int)
+    133:135:public void loadImage(java.lang.String,android.widget.ImageView,int,int,int,int)
+    138:139:public android.graphics.Bitmap getCacheBitmap(java.lang.String)
+    143:143:private java.lang.String getCacheKey(java.lang.String,int,int)
+org.zhangge.almightyzgbox_android.net.http.VolleyManager$1
+org.zhangge.almightyzgbox_android.net.http.VolleyManager$2
+org.zhangge.almightyzgbox_android.net.http.VolleyManager$3
+org.zhangge.almightyzgbox_android.net.http.ZGDownloadManager:
+    public static final int DOWNLOAD_SUECCESS
+    public static final int DOWNLOAD_ERROR
+    public static final int DOWNLOAD_PROGRESS
+    public static final java.lang.String DOWNLOAND_PROGRESS_KEY
+    44:48:public synchronized int downloadRequest(java.lang.String,java.lang.String,org.zhangge.almightyzgbox_android.net.http.ZGDownloadManager$ZGDownloadListener)
+    52:55:public void stopDownloadTask(int)
+org.zhangge.almightyzgbox_android.net.http.ZGDownloadManager$ZGDownloadHandler
+org.zhangge.almightyzgbox_android.net.http.ZGDownloadManager$ZGDownloadListener
+org.zhangge.almightyzgbox_android.net.http.ZGDownloadThread
+org.zhangge.almightyzgbox_android.net.image.ImageManager:
+    40:41:public void loadImage(java.lang.String,android.widget.ImageView,int,int)
+    44:47:public void loadImage(java.lang.String,android.widget.ImageView,int,int,int)
+    50:50:public static boolean isPng(java.lang.String)
+    54:54:public static boolean isJpg(java.lang.String)
+    58:58:public static boolean isGif(java.lang.String)
+org.zhangge.almightyzgbox_android.net.video.YoutubeBox:
+    46:46:public YoutubeBox()
+    115:125:public static java.lang.String getYouTubeUrlFromFmtVideoId(int,java.lang.String)
+    129:189:public static java.util.List getYoutubeUrlFromWebUrl(java.lang.String)
+org.zhangge.almightyzgbox_android.net.video.YoutubeBox$VideoEntity:
+    254:255:public void setVideoId(java.lang.String)
+    262:263:public void setTitle(java.lang.String)
+    270:271:public void setSqThumbnail(java.lang.String)
+    274:274:public java.lang.String getHqThumbnail()
+    278:279:public void setHqThumbnail(java.lang.String)
+    282:282:public java.lang.String getPlayUrl()
+    286:287:public void setPlayUrl(java.lang.String)
+org.zhangge.almightyzgbox_android.net.video.YoutubeBox$VideoStream:
+    347:347:public java.lang.String getFormat()
+    351:351:public java.lang.String getQuality()
+    355:355:public java.lang.String getSignature()
+org.zhangge.almightyzgbox_android.ui.anim.DepthPageTransformer
+org.zhangge.almightyzgbox_android.ui.anim.ZoomOutPageTransformer
+org.zhangge.almightyzgbox_android.ui.bar.SimpleTitleBar
+org.zhangge.almightyzgbox_android.ui.bar.TitleBar
+org.zhangge.almightyzgbox_android.ui.bar.VerticalProgressBar
+org.zhangge.almightyzgbox_android.ui.image.CircleImageView
+org.zhangge.almightyzgbox_android.ui.image.ZGBitmapDrawable
+org.zhangge.almightyzgbox_android.ui.image.ZGImageUtils
+org.zhangge.almightyzgbox_android.ui.image.ZGImageView
+org.zhangge.almightyzgbox_android.ui.widget.EasyClearEditText:
+    51:51:public boolean isAllowInteractive()
+org.zhangge.almightyzgbox_android.ui.widget.EndlessListScrollListener
+org.zhangge.almightyzgbox_android.ui.widget.EndlessListScrollListener$EndlessListener
+org.zhangge.almightyzgbox_android.ui.widget.FixedSpeedScroller
+org.zhangge.almightyzgbox_android.ui.widget.StatusLayout
+org.zhangge.almightyzgbox_android.ui.widget.Switch
+org.zhangge.almightyzgbox_android.ui.widget.Switch$1
+org.zhangge.almightyzgbox_android.ui.widget.method.AllCapsTransformationMethod
+org.zhangge.almightyzgbox_android.ui.widget.method.TransformationMethodCompat
+org.zhangge.almightyzgbox_android.ui.widget.method.TransformationMethodCompat2
+org.zhangge.almightyzgbox_android.utils.AbstractSharedPref:
+    private static final java.lang.String DELIMITER
+    24:25:public void putString(java.lang.String,java.lang.String)
+    28:28:public java.lang.String getString(java.lang.String)
+    32:33:public void putInt(java.lang.String,int)
+    54:58:public int getInt(java.lang.String,int)
+    63:67:private int parseInt(java.lang.String,int)
+    72:72:public int getInt(java.lang.String)
+    76:77:public void putLong(java.lang.String,long)
+    80:90:public long getLong(java.lang.String,long)
+    95:95:public long getLong(java.lang.String)
+    99:100:public void putIntArray(java.lang.String,java.lang.Integer[])
+    103:103:public int[] getIntArray(java.lang.String)
+    107:119:public int[] getIntArray(java.lang.String,int[])
+    124:130:public void putIntList(java.lang.String,java.util.List)
+    133:156:public java.util.List getIntList(java.lang.String)
+    168:169:public void remove(java.lang.String)
+    172:173:public void clear()
+    176:176:public java.util.Map getAll()
+org.zhangge.almightyzgbox_android.utils.CommonUtils:
+    private static final java.lang.String TAG
+    public static final int NET_WIFI
+    public static final int NET_2G
+    public static final int NET_3G
+    public static final int UNKNOW_NETWORK_TYPE
+    private static final java.lang.String UPPER_LETTER
+    private static final java.lang.String LOWER_LETTER
+    40:40:public CommonUtils()
+    57:57:public static java.lang.String ipIntToIpStr(long)
+    67:102:public static int getMaxTextureSize()
+    111:117:public static void toAppMarket(android.content.Context)
+    124:128:public static java.lang.String generateLetter(int)
+    136:140:public static java.lang.String generateLetter()
+    148:152:public static java.lang.String generateLowerLetter(int)
+    160:164:public static java.lang.String generateUpperLetter(int)
+    172:172:public static java.lang.String generateUpperLetter()
+    180:180:public static java.lang.String generateLowerLetter()
+    192:209:public static void adjustImageView(android.app.Activity,android.widget.ImageView,int,int,android.view.ViewGroup$LayoutParams)
+    218:226:public static android.graphics.BitmapFactory$Options getBitmapOptions(java.lang.String,byte[])
+    239:251:public static int calculateInSampleSize(android.graphics.BitmapFactory$Options,int,int)
+    261:264:public static int[] getDisplayPixels(android.app.Activity)
+    275:283:public static long getAvailableStorage()
+    294:307:public static boolean isNetworkAvailable(android.content.Context)
+    318:322:public static boolean isWifi(android.content.Context)
+    333:362:public static int getNetworkType(android.content.Context)
+    372:380:public static android.net.NetworkInfo getActiveNetwork(android.content.Context)
+    412:413:public static int sp2pixel(android.content.Context,float)
+    423:424:public static int pixel2sp(android.content.Context,float)
+    435:436:public static int dip2pixel(android.content.Context,float)
+    447:448:public static int pixel2dip(android.content.Context,float)
+    458:468:public static boolean isActivityOnTop(android.app.Activity)
+    493:496:public static java.lang.String stackTraceOf(java.lang.Throwable)
+    505:506:public static java.lang.String getStackTraceWithString()
+    541:544:public static void hideIME(android.app.Activity)
+    553:558:public static void hideIME(android.app.Activity,android.view.View)
+    587:595:public static void showIME(android.app.Activity,android.view.View,int)
+org.zhangge.almightyzgbox_android.utils.FileUtils
+org.zhangge.almightyzgbox_android.utils.ZGConstant:
+    public static final java.lang.String YOUTUBE_GET_VIDEO_INFO_URL
+    public static final java.lang.String YOUTUBE_QUERY_VIDEO_URL
+    5:5:public ZGConstant()
+org.zhangge.almightyzgbox_android.utils.ZGPreference:
+    public static final java.lang.String COMMONREF_NAME
+org.zhangge.almightyzgbox_android.utils.ZGTask:
+    29:31:public void stopThread()
+    38:39:public void removeCallback(java.lang.Runnable)
+org.zhangge.rbplayer.BuildConfig
+org.zhangge.rbplayer.R
+org.zhangge.rbplayer.R$anim
+org.zhangge.rbplayer.R$array
+org.zhangge.rbplayer.R$attr
+org.zhangge.rbplayer.R$color
+org.zhangge.rbplayer.R$dimen
+org.zhangge.rbplayer.R$drawable
+org.zhangge.rbplayer.R$id
+org.zhangge.rbplayer.R$layout
+org.zhangge.rbplayer.R$menu
+org.zhangge.rbplayer.R$string
+org.zhangge.rbplayer.R$style
+org.zhangge.rbplayer.R$styleable
+org.zhangge.rbplayer.bmob.SamplePic:
+    private static final long serialVersionUID
+    private java.lang.String url
+    16:17:public void setPic(cn.bmob.v3.datatype.BmobFile)
+    19:19:public java.lang.String getUrl()
+    22:23:public void setUrl(java.lang.String)
+org.zhangge.rbplayer.lib.RBTextureRender:
+    private static final int FLOAT_SIZE_BYTES
+    private static final int TRIANGLE_VERTICES_DATA_STRIDE_BYTES
+    private static final int TRIANGLE_VERTICES_DATA_POS_OFFSET
+    private static final int TRIANGLE_VERTICES_DATA_UV_OFFSET
+    private static final java.lang.String VERTEX_SHADER
+    private static final java.lang.String FRAGMENT_SHADER
+    123:124:public void addOffset()
+    127:128:public void subOffset()
+    131:132:public void resetOffset()
+    255:271:public void saveFrame(java.lang.String,int,int)
+    274:279:public void changeFragmentShader(java.lang.String)
+org.zhangge.rbplayer.lib.RBVideoRender:
+    79:80:public void resetOffset()
+org.zhangge.rbplayer.ui.MainActivity:
+    public static final java.lang.String LOCAL_VIDEO_TAG
+    public static final java.lang.String YOUTUBE_VIDEO_TAG
+    public static final java.lang.String SAMPLE_PIC_TAG
+    public static final java.lang.String SAMPLE_PATH
+org.zhangge.rbplayer.ui.MediaPlayerActivity:
+    private static final int OFFSET_MAX
+org.zhangge.rbplayer.utils.BaseConfig:
+    8:8:public BaseConfig()
+org.zhangge.rbplayer.utils.MediaBox:
+    11:11:public MediaBox()
+org.zhangge.rbplayer.utils.Navigation:
+    8:8:public Navigation()
+org.zhangge.rbplayer.utils.ShaderUtils:
+    6:6:public ShaderUtils()
+org.zhangge.rbplayer.utils.SimpleImageLoader:
+    40:80:public void loadImage(java.lang.String,android.widget.ImageView,int)
+org.zhangge.rbplayer.utils.SimpleImageLoader$2
+org.zhangge.rbplayer.utils.SimpleImageLoader$3
+org.zhangge.rbplayer.utils.UtilBox:
+    9:9:public UtilBox()
+q.This:
+    private static final long serialVersionUID
+uk.co.senab.photoview.Compat:
+    private static final int SIXTY_FPS_INTERVAL
+    25:25:public Compat()
+uk.co.senab.photoview.IPhotoView:
+    public static final float DEFAULT_MAX_SCALE
+    public static final float DEFAULT_MID_SCALE
+    public static final float DEFAULT_MIN_SCALE
+    public static final int DEFAULT_ZOOM_DURATION
+    public abstract boolean canZoom()
+    public abstract android.graphics.RectF getDisplayRect()
+    public abstract boolean setDisplayMatrix(android.graphics.Matrix)
+    public abstract android.graphics.Matrix getDisplayMatrix()
+    public abstract float getMinScale()
+    public abstract float getMinimumScale()
+    public abstract float getMidScale()
+    public abstract float getMediumScale()
+    public abstract float getMaxScale()
+    public abstract float getMaximumScale()
+    public abstract float getScale()
+    public abstract android.widget.ImageView$ScaleType getScaleType()
+    public abstract void setAllowParentInterceptOnEdge(boolean)
+    public abstract void setMinScale(float)
+    public abstract void setMinimumScale(float)
+    public abstract void setMidScale(float)
+    public abstract void setMediumScale(float)
+    public abstract void setMaxScale(float)
+    public abstract void setMaximumScale(float)
+    public abstract void setOnLongClickListener(android.view.View$OnLongClickListener)
+    public abstract void setOnMatrixChangeListener(uk.co.senab.photoview.PhotoViewAttacher$OnMatrixChangedListener)
+    public abstract void setOnPhotoTapListener(uk.co.senab.photoview.PhotoViewAttacher$OnPhotoTapListener)
+    public abstract uk.co.senab.photoview.PhotoViewAttacher$OnPhotoTapListener getOnPhotoTapListener()
+    public abstract void setOnViewTapListener(uk.co.senab.photoview.PhotoViewAttacher$OnViewTapListener)
+    public abstract void setRotationTo(float)
+    public abstract void setRotationBy(float)
+    public abstract uk.co.senab.photoview.PhotoViewAttacher$OnViewTapListener getOnViewTapListener()
+    public abstract void setScale(float)
+    public abstract void setScale(float,boolean)
+    public abstract void setScale(float,float,float,boolean)
+    public abstract void setScaleType(android.widget.ImageView$ScaleType)
+    public abstract void setZoomable(boolean)
+    public abstract void setPhotoViewRotation(float)
+    public abstract android.graphics.Bitmap getVisibleRectangleBitmap()
+    public abstract void setZoomTransitionDuration(int)
+    public abstract uk.co.senab.photoview.IPhotoView getIPhotoViewImplementation()
+    public abstract void setOnDoubleTapListener(android.view.GestureDetector$OnDoubleTapListener)
+uk.co.senab.photoview.PhotoView
+uk.co.senab.photoview.PhotoViewAttacher:
+    private static final java.lang.String LOG_TAG
+    static final int EDGE_NONE
+    static final int EDGE_LEFT
+    static final int EDGE_RIGHT
+    static final int EDGE_BOTH
+    74:81:private static void checkZoomLevels(float,float,float)
+    94:104:private static boolean isSupportedScaleType(android.widget.ImageView$ScaleType)
+    189:193:public void setOnDoubleTapListener(android.view.GestureDetector$OnDoubleTapListener)
+    197:197:public boolean canZoom()
+    249:263:public boolean setDisplayMatrix(android.graphics.Matrix)
+    271:273:public void setPhotoViewRotation(float)
+    277:279:public void setRotationTo(float)
+    283:285:public void setRotationBy(float)
+    307:307:public float getMinScale()
+    318:318:public float getMidScale()
+    329:329:public float getMaxScale()
+    344:344:public android.widget.ImageView$ScaleType getScaleType()
+    504:505:public void setAllowParentInterceptOnEdge(boolean)
+    510:511:public void setMinScale(float)
+    515:517:public void setMinimumScale(float)
+    522:523:public void setMidScale(float)
+    527:529:public void setMediumScale(float)
+    534:535:public void setMaxScale(float)
+    539:541:public void setMaximumScale(float)
+    545:546:public void setOnLongClickListener(android.view.View$OnLongClickListener)
+    550:551:public void setOnMatrixChangeListener(uk.co.senab.photoview.PhotoViewAttacher$OnMatrixChangedListener)
+    555:556:public void setOnPhotoTapListener(uk.co.senab.photoview.PhotoViewAttacher$OnPhotoTapListener)
+    565:566:public void setOnViewTapListener(uk.co.senab.photoview.PhotoViewAttacher$OnViewTapListener)
+    575:576:public void setScale(float)
+    580:588:public void setScale(float,boolean)
+    617:623:public void setScaleType(android.widget.ImageView$ScaleType)
+    650:650:public android.graphics.Matrix getDisplayMatrix()
+    774:775:public android.graphics.Bitmap getVisibleRectangleBitmap()
+    780:783:public void setZoomTransitionDuration(int)
+    787:787:public uk.co.senab.photoview.IPhotoView getIPhotoViewImplementation()
+uk.co.senab.photoview.gestures.CupcakeGestureDetector:
+    private static final java.lang.String LOG_TAG
+uk.co.senab.photoview.gestures.EclairGestureDetector:
+    private static final int INVALID_POINTER_ID
+uk.co.senab.photoview.gestures.VersionedGestureDetector:
+    22:22:public VersionedGestureDetector()
+uk.co.senab.photoview.log.LogManager:
+    23:23:public LogManager()
+    28:29:public static void setLogger(uk.co.senab.photoview.log.Logger)
+uk.co.senab.photoview.log.Logger:
+    public abstract int v(java.lang.String,java.lang.String)
+    public abstract int v(java.lang.String,java.lang.String,java.lang.Throwable)
+    public abstract int d(java.lang.String,java.lang.String,java.lang.Throwable)
+    public abstract int i(java.lang.String,java.lang.String,java.lang.Throwable)
+    public abstract int w(java.lang.String,java.lang.String)
+    public abstract int w(java.lang.String,java.lang.String,java.lang.Throwable)
+    public abstract int e(java.lang.String,java.lang.String)
+    public abstract int e(java.lang.String,java.lang.String,java.lang.Throwable)
+uk.co.senab.photoview.log.LoggerDefault:
+    27:27:public int v(java.lang.String,java.lang.String)
+    32:32:public int v(java.lang.String,java.lang.String,java.lang.Throwable)
+    42:42:public int d(java.lang.String,java.lang.String,java.lang.Throwable)
+    52:52:public int i(java.lang.String,java.lang.String,java.lang.Throwable)
+    57:57:public int w(java.lang.String,java.lang.String)
+    62:62:public int w(java.lang.String,java.lang.String,java.lang.Throwable)
+    67:67:public int e(java.lang.String,java.lang.String)
+    72:72:public int e(java.lang.String,java.lang.String,java.lang.Throwable)
