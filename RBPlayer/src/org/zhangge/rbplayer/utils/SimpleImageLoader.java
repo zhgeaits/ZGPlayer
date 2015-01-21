@@ -13,17 +13,17 @@ import android.provider.MediaStore.Images;
 import android.support.v4.util.LruCache;
 import android.widget.ImageView;
 
-public class ImageLoader {
+public class SimpleImageLoader {
 
 	private LruCache<String, Bitmap> imageCache;
 	  
-	private static ImageLoader INSTANCE = null;
+	private static SimpleImageLoader INSTANCE = null;
 	
-	private ImageLoader() {}
+	private SimpleImageLoader() {}
 
-	public synchronized static ImageLoader getInstance() {
+	public synchronized static SimpleImageLoader getInstance() {
 		if(INSTANCE == null) {
-			INSTANCE = new ImageLoader();
+			INSTANCE = new SimpleImageLoader();
 			int maxSize = 32 * 1024 * 1024;  
 			INSTANCE.imageCache = new LruCache<String, Bitmap>(maxSize) {  
 	            @Override  

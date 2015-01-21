@@ -6,7 +6,7 @@ import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.utils.MediaBox;
 import org.zhangge.rbplayer.utils.MediaData;
 import org.zhangge.rbplayer.utils.Navigation;
-import org.zhangge.rbplayer.utils.ImageLoader;
+import org.zhangge.rbplayer.utils.SimpleImageLoader;
 import org.zhangge.rbplayer.utils.UtilBox;
 
 import android.content.Context;
@@ -134,7 +134,7 @@ public class VideoListLocalFragment extends BaseFragment {
             holder.url.setText(media.url);
             holder.resolution.setText(media.resolution);
             holder.time.setText(UtilBox.formatTime(media.duration));
-            ImageLoader.getInstance().loadThumbnail(media.url, holder.thumb, R.drawable.ic_video_default);
+            SimpleImageLoader.getInstance().loadThumbnail(media.url, holder.thumb, R.drawable.ic_video_default);
             return convertView;
         }
 
