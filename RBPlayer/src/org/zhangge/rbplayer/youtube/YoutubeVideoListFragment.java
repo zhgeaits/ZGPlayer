@@ -120,7 +120,6 @@ public class YoutubeVideoListFragment extends BaseFragment {
 			public void onClick(View v) {
 				searchFragment = creatSearchFragment(context);
 				searchFragment.setYoutubeFragment(YoutubeVideoListFragment.this);
-				searchFragment.showMe();
 			}
 		});
 	}

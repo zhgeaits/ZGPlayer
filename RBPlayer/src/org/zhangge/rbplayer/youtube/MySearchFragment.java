@@ -72,6 +72,7 @@ public class MySearchFragment extends Fragment {
 		mSearchInput.setFocusableInTouchMode(true);
 		mSearchInput.requestFocus();
 		initListener();
+		showMe();
 		return view;
 	}
 
@@ -145,7 +146,7 @@ public class MySearchFragment extends Fragment {
 		if (mSearchView != null) {
 			mSearchView.setVisibility(View.VISIBLE);
 			mContentView.setVisibility(View.VISIBLE);
-			CommonUtils.showIMEDelay(getActivity(), mSearchInput, 500);
+			CommonUtils.showIMEDelay(getActivity(), mSearchInput, 300);
 		}
 	}
 
@@ -159,6 +160,7 @@ public class MySearchFragment extends Fragment {
 			if(getActivity().findViewById(R.id.ytlistview) != null)
 				getActivity().findViewById(R.id.ytlistview).setVisibility(View.VISIBLE);
 		}
+		getActivity().getSupportFragmentManager().popBackStack();
 	}
 
 }
