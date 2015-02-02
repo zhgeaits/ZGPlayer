@@ -5,6 +5,8 @@ import java.io.IOException;
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
 
+import org.zhangge.almightyzgbox_android.log.ZGLog;
+
 import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
@@ -63,7 +65,7 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
 		try {
 			mMediaPlayer.prepare();
 		} catch (IOException t) {
-			Log.e(TAG, "media player prepare failed:" + t);
+			ZGLog.error(TAG, "media player prepare failed:" + t);
 		}
 
         synchronized (this) {

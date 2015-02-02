@@ -1,5 +1,7 @@
 package org.zhangge.rbplayer.youtube;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -229,6 +231,13 @@ public class YoutubeVideoListFragment extends BaseFragment {
 					List<VideoStream> urls = VIDEOID_URLS.get(videoId);
 					if(urls != null && urls.size() > 0) {
 						String url = urls.get(0).getUrl();
+						if(!url.startsWith("http://") || !url.startsWith("https://")) {
+							try {
+								url = URLDecoder.decode(url, "UTF-8");
+							} catch (UnsupportedEncodingException e) {
+								ZGLog.error(this, "decode url error=" + e);
+							}
+						}
 						ZGLog.info(this, "goto play youtube url=" + url);
 						Navigation.toMediaPlayer(getActivity(), url);
 					}
