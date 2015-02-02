@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.zhangge.almightyzgbox_android.AlmightAndroidBox;
 import org.zhangge.almightyzgbox_android.log.ZGLog;
-import org.zhangge.almightyzgbox_android.utils.ZGTask;
 import org.zhangge.rbplayer.bmob.SamplePic;
 import org.zhangge.rbplayer.utils.BaseConfig;
 

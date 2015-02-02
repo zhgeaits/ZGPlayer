@@ -179,9 +179,6 @@ public class YoutubeVideoListFragment extends BaseFragment {
 				holder.leftContainer = convertView.findViewById(R.id.youtube_left_container);
 				holder.leftIcon = (ImageView) convertView.findViewById(R.id.image_left);
 				holder.leftTitle = (TextView) convertView.findViewById(R.id.title_left);
-				holder.midContainer = convertView.findViewById(R.id.youtube_mid_container);
-				holder.midIcon = (ImageView) convertView.findViewById(R.id.image_mid);
-				holder.midTitle = (TextView) convertView.findViewById(R.id.title_mid);
 				holder.rightContainer = convertView.findViewById(R.id.youtube_right_container);
 				holder.rightIcon = (ImageView) convertView.findViewById(R.id.image_right);
 				holder.rightTitle = (TextView) convertView.findViewById(R.id.title_right);
@@ -190,7 +187,7 @@ public class YoutubeVideoListFragment extends BaseFragment {
 				holder = (ViewHolder) convertView.getTag();
 			}
 			
-			int index = position * 3;
+			int index = position * 2;
 			
 			if(index < datas.size()) {
 				SpannableString leftSpan = parseString(datas.get(index).getTitle());
@@ -199,20 +196,6 @@ public class YoutubeVideoListFragment extends BaseFragment {
 						 holder.leftIcon, R.drawable.ic_video_default, R.drawable.ic_video_default);
 				final int pos = index;
 				holder.leftContainer.setOnClickListener(new OnClickListener() {
-					@Override
-					public void onClick(View v) {
-						loadYoutube(datas.get(pos).getVideoId());
-					}
-				});
-			}
-			index ++;
-			if(index < datas.size()) {
-				SpannableString midSpan = parseString(datas.get(index).getTitle());
-				holder.midTitle.setText(midSpan);
-				VolleyManager.getInstance().loadImage(datas.get(index).getSqThumbnail(),
-						 holder.midIcon, R.drawable.ic_video_default, R.drawable.ic_video_default);
-				final int pos = index;
-				holder.midContainer.setOnClickListener(new OnClickListener() {
 					@Override
 					public void onClick(View v) {
 						loadYoutube(datas.get(pos).getVideoId());
@@ -283,8 +266,8 @@ public class YoutubeVideoListFragment extends BaseFragment {
 		@Override
 		public int getCount() {
 			int size = datas.size();
-			int count = size / 3;
-			if(size % 3 != 0) {
+			int count = size / 2;
+			if(size % 2 != 0) {
 				count += 1;
 			}
 			return count;
@@ -304,9 +287,6 @@ public class YoutubeVideoListFragment extends BaseFragment {
 			View leftContainer;
 			ImageView leftIcon;
 			TextView leftTitle;
-			View midContainer;
-			ImageView midIcon;
-			TextView midTitle;
 			View rightContainer;
 			ImageView rightIcon;
 			TextView rightTitle;

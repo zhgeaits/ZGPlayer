@@ -10,12 +10,12 @@
         android:id="@+id/youtube_left_container"
         android:layout_weight="1"
         android:gravity="center"
-        android:layout_width="120dp"
-        android:layout_height="100dp" >
+        android:layout_width="180dp"
+        android:layout_height="150dp" >
         <ImageView
             android:id="@+id/image_left"
-            android:layout_width="100dip"
-            android:layout_height="80dip"
+            android:layout_width="160dip"
+            android:layout_height="120dip"
             android:layout_centerInParent="true"
             />
 
@@ -26,35 +26,9 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:textColor="@color/black"
-            android:lines="2"
-            android:ellipsize="end"
-            android:textSize="12sp" />
-    </RelativeLayout>
-    
-    <View android:layout_width="1dp"
-        android:background="@color/color_scheme_gray"
-        android:layout_height="match_parent"/>
-    
-    <RelativeLayout
-        android:id="@+id/youtube_mid_container"
-        android:layout_weight="1"
-        android:gravity="center"
-        android:layout_width="120dp"
-        android:layout_height="100dp" >
-        <ImageView
-            android:id="@+id/image_mid"
-            android:layout_width="100dip"
-            android:layout_height="80dip"
-            android:layout_centerInParent="true"
-            />
-        <TextView
-            android:id="@+id/title_mid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:textColor="@color/black"
-            android:lines="2"
+            android:lines="1"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:ellipsize="end"
             android:textSize="12sp" />
     </RelativeLayout>
@@ -67,12 +41,12 @@
         android:id="@+id/youtube_right_container"
         android:layout_weight="1"
         android:gravity="center"
-        android:layout_width="120dp"
-        android:layout_height="100dp" >
+        android:layout_width="180dp"
+        android:layout_height="150dp" >
         <ImageView
             android:id="@+id/image_right"
-            android:layout_width="100dip"
-            android:layout_height="80dip"
+            android:layout_width="160dip"
+            android:layout_height="120dip"
             android:layout_centerInParent="true"
             />
 
@@ -83,7 +57,9 @@
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
             android:textColor="@color/black"
-            android:lines="2"
+            android:lines="1"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
             android:ellipsize="end"
             android:textSize="12sp" />
     </RelativeLayout>
