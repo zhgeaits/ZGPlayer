@@ -472,21 +472,21 @@ org.zhangge.almightyzgbox_android.net.image.ImageManager:
     54:54:public static boolean isJpg(java.lang.String)
     58:58:public static boolean isGif(java.lang.String)
 org.zhangge.almightyzgbox_android.net.video.YoutubeBox:
-    46:46:public YoutubeBox()
-    115:125:public static java.lang.String getYouTubeUrlFromFmtVideoId(int,java.lang.String)
-    129:189:public static java.util.List getYoutubeUrlFromWebUrl(java.lang.String)
+    47:47:public YoutubeBox()
+    116:126:public static java.lang.String getYouTubeUrlFromFmtVideoId(int,java.lang.String)
+    130:190:public static java.util.List getYoutubeUrlFromWebUrl(java.lang.String)
 org.zhangge.almightyzgbox_android.net.video.YoutubeBox$VideoEntity:
-    254:255:public void setVideoId(java.lang.String)
-    262:263:public void setTitle(java.lang.String)
-    270:271:public void setSqThumbnail(java.lang.String)
-    274:274:public java.lang.String getHqThumbnail()
-    278:279:public void setHqThumbnail(java.lang.String)
-    282:282:public java.lang.String getPlayUrl()
-    286:287:public void setPlayUrl(java.lang.String)
+    257:258:public void setVideoId(java.lang.String)
+    265:266:public void setTitle(java.lang.String)
+    273:274:public void setSqThumbnail(java.lang.String)
+    277:277:public java.lang.String getHqThumbnail()
+    281:282:public void setHqThumbnail(java.lang.String)
+    285:285:public java.lang.String getPlayUrl()
+    289:290:public void setPlayUrl(java.lang.String)
 org.zhangge.almightyzgbox_android.net.video.YoutubeBox$VideoStream:
-    347:347:public java.lang.String getFormat()
-    351:351:public java.lang.String getQuality()
-    355:355:public java.lang.String getSignature()
+    350:350:public java.lang.String getFormat()
+    354:354:public java.lang.String getQuality()
+    358:358:public java.lang.String getSignature()
 org.zhangge.almightyzgbox_android.ui.anim.DepthPageTransformer
 org.zhangge.almightyzgbox_android.ui.anim.ZoomOutPageTransformer
 org.zhangge.almightyzgbox_android.ui.bar.SimpleTitleBar
@@ -587,12 +587,6 @@ org.zhangge.rbplayer.R$menu
 org.zhangge.rbplayer.R$string
 org.zhangge.rbplayer.R$style
 org.zhangge.rbplayer.R$styleable
-org.zhangge.rbplayer.bmob.SamplePic:
-    private static final long serialVersionUID
-    private java.lang.String url
-    16:17:public void setPic(cn.bmob.v3.datatype.BmobFile)
-    19:19:public java.lang.String getUrl()
-    22:23:public void setUrl(java.lang.String)
 org.zhangge.rbplayer.lib.RBTextureRender:
     private static final int FLOAT_SIZE_BYTES
     private static final int TRIANGLE_VERTICES_DATA_STRIDE_BYTES
@@ -606,7 +600,7 @@ org.zhangge.rbplayer.lib.RBTextureRender:
     255:271:public void saveFrame(java.lang.String,int,int)
     274:279:public void changeFragmentShader(java.lang.String)
 org.zhangge.rbplayer.lib.RBVideoRender:
-    79:80:public void resetOffset()
+    81:82:public void resetOffset()
 org.zhangge.rbplayer.ui.MainActivity:
     public static final java.lang.String LOCAL_VIDEO_TAG
     public static final java.lang.String YOUTUBE_VIDEO_TAG

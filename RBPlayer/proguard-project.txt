@@ -22,9 +22,9 @@
 -ignorewarnings
 
 -libraryjars C:\Users\Administrator\Documents\GitHub\AlmightyZGBox-android\libs\universal-image-loader-1.9.3-with-sources.jar
--libraryjars C:\Users\Administrator\Documents\GitHub\RBPlayer\libs\umeng-analytics-v5.4.1.jar
--libraryjars C:\Users\Administrator\Documents\GitHub\RBPlayer\libs\BmobSDK_V3.2.7_1209.jar
--libraryjars C:\Users\Administrator\Documents\GitHub\RBPlayer\libs\BmobPush_V0.5beta_1027.jar
+-libraryjars C:\Users\Administrator\Documents\GitHub\ZGPlayer\RBPlayer\libs\umeng-analytics-v5.4.1.jar
+-libraryjars C:\Users\Administrator\Documents\GitHub\ZGPlayer\RBPlayer\libs\BmobSDK_V3.2.7_1209.jar
+-libraryjars C:\Users\Administrator\Documents\GitHub\ZGPlayer\RBPlayer\libs\BmobPush_V0.5beta_1027.jar
 -libraryjars C:\Users\Administrator\Documents\GitHub\AlmightyZGBox-android\libs\ormlite-core-4.48.jar
 -libraryjars C:\Users\Administrator\Documents\GitHub\AlmightyZGBox-android\libs\ormlite-android-4.48.jar
 -libraryjars C:\Users\Administrator\Documents\GitHub\AlmightyZGBox-android\libs\android-support-v4.jar
@@ -47,7 +47,7 @@
 #bmob
 -keepattributes Signature
 -keep class cn.bmob.v3.** {*;}
--keep class org.zgmlt.ttkmz.bmob.** {*;}
+-keep class org.zhangge.rbplayer.bmob.** {*;}
 
 #imageloader
 -dontwarn com.nostra13.universalimageloader.**

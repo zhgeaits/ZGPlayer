@@ -28,6 +28,7 @@ import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.text.Spannable;
 import android.text.SpannableString;
 import android.text.style.ForegroundColorSpan;
@@ -142,7 +143,13 @@ public class YoutubeVideoListFragment extends BaseFragment {
 	public MySearchFragment creatSearchFragment(Activity context) {
 		FragmentManager fm = ((FragmentActivity) context).getSupportFragmentManager();
 		Fragment creatFragment = MySearchFragment.getInstance();
-		fm.beginTransaction().replace(SUB_ID, creatFragment).commit();
+		FragmentTransaction transaction = fm.beginTransaction();
+		transaction.replace(SUB_ID, creatFragment);
+		transaction.addToBackStack(null);
+		int result = transaction.commit();
+        if (result < 0) {
+            fm.executePendingTransactions();
+        }
 		return (MySearchFragment) creatFragment;
 	}
 

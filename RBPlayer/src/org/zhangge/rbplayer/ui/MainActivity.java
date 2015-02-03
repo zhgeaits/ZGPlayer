@@ -87,6 +87,7 @@ public class MainActivity extends BaseActivity {
 		gDrawerLayout.setDrawerListener(gDrawerToggle);
 
 		if (savedInstanceState == null) {
+			selectItem(1);
 			selectItem(0);
 		}
 
