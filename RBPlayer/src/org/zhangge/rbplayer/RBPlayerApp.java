@@ -7,6 +7,8 @@ import org.zhangge.almightyzgbox_android.log.ZGLog;
 import org.zhangge.rbplayer.bmob.SamplePic;
 import org.zhangge.rbplayer.utils.BaseConfig;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.app.ActivityManager;
 import android.app.Application;
 import android.content.Context;
@@ -31,6 +33,7 @@ public class RBPlayerApp extends Application {
 			AlmightAndroidBox.init(this);
 			Bmob.initialize(this, "63f7159ca32b64ab96dec8eee0e7c39c");
 			getSamplePicList();
+			MobclickAgent.updateOnlineConfig(this);
 		} else {
 			Log.i(TAG, "return");
 			return;

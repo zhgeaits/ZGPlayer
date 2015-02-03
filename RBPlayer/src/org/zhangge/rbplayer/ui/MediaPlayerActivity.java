@@ -230,13 +230,13 @@ public class MediaPlayerActivity extends BaseActivity {
 	};
 
 	@Override
-	protected void onPause() {
+	public void onPause() {
 		super.onPause();
 		gPlayer.pause();
 	}
 
 	@Override
-	protected void onResume() {
+	public void onResume() {
 		super.onResume();
 		if (!gPlayer.isPlaying() && gShouldPlaying)
 			gPlayer.start();

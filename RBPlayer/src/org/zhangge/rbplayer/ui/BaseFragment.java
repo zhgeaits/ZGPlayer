@@ -1,5 +1,7 @@
 package org.zhangge.rbplayer.ui;
 
+import com.umeng.analytics.MobclickAgent;
+
 import android.app.Fragment;
 import android.os.Bundle;
 import android.os.Handler;
@@ -24,4 +26,16 @@ public class BaseFragment extends Fragment {
             gHandler.removeCallbacksAndMessages(null);
         }
     }
+    
+    @Override
+	public void onPause() {
+		super.onPause();
+		MobclickAgent.onPageStart(this.getClass().getName());
+	}
+
+	@Override
+	public void onResume() {
+		super.onResume();
+		MobclickAgent.onPageEnd(this.getClass().getName()); 
+	}
 }
