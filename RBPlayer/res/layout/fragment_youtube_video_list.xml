@@ -36,7 +36,7 @@
                 android:drawableLeft="@drawable/icon_search_small"
                 android:drawablePadding="4dp"
                 android:gravity="center"
-                android:text="搜索视频"
+                android:text="@string/click_search"
                 android:textColor="#999999"
                 android:textSize="14sp" />
         </RelativeLayout>
