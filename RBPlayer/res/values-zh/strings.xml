@@ -12,7 +12,7 @@
 
     <string-array name="menu_array">
         <item>本机视频</item>
-        <item>Youtube视频</item>
+        <item>网络视频</item>
         <item>示例图片</item>
     </string-array>
 

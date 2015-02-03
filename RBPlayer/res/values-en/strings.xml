@@ -12,7 +12,7 @@
 
     <string-array name="menu_array">
         <item>Local Videos</item>
-        <item>Youtube</item>
+        <item>Network Videos</item>
         <item>Sample Pictures</item>
     </string-array>
 
