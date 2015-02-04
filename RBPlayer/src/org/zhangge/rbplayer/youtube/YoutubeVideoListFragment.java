@@ -15,6 +15,7 @@ import org.zhangge.almightyzgbox_android.net.video.YoutubeBox.VideoStream;
 import org.zhangge.almightyzgbox_android.utils.ZGTask;
 import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.ui.BaseFragment;
+import org.zhangge.rbplayer.utils.AdUtils;
 import org.zhangge.rbplayer.utils.Navigation;
 
 import android.annotation.SuppressLint;
@@ -76,7 +77,26 @@ public class YoutubeVideoListFragment extends BaseFragment {
 		adapter = new YoutubeListAdapter(getActivity(), 0, new ArrayList<VideoEntity>());
 		youtubeList.setAdapter(adapter);
 		initListener();
+		AdUtils.addAdModBanner(getActivity(), view);
 		return view;
+	}
+	
+	@Override
+	public void onResume() {
+		super.onResume();
+		AdUtils.onResume();
+	}
+
+	@Override
+	public void onPause() {
+		AdUtils.onPause();
+		super.onPause();
+	}
+
+	@Override
+	public void onDestroy() {
+		AdUtils.onDestory();
+		super.onDestroy();
 	}
 
 	public void hideSearchFragment() {

@@ -6,6 +6,7 @@ import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.lib.RBTextureRender;
 import org.zhangge.rbplayer.lib.RBVideoRender;
 import org.zhangge.rbplayer.lib.RBVideoRender.OnPlayGoing;
+import org.zhangge.rbplayer.utils.AdUtils;
 import org.zhangge.rbplayer.utils.UtilBox;
 
 import android.content.res.Configuration;
@@ -40,6 +41,7 @@ public class MediaPlayerActivity extends BaseActivity {
 	private GLSurfaceView gVideoview;
 	private RBVideoRender gRenderer;
 	private int gScreenMode;
+	
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +50,7 @@ public class MediaPlayerActivity extends BaseActivity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 		setContentView(R.layout.activity_video_player);
+		
 		gScreenMode = SCREEN_MODE_NORMAL;
 		if (getIntent().getExtras() != null) {
 			String url = getIntent().getExtras().getString(KEY_VIDEO_URL);
@@ -79,6 +82,7 @@ public class MediaPlayerActivity extends BaseActivity {
 				if (gPlayer.isPlaying()) {
 					gPlayer.pause();
 					gPlayBtn.setBackgroundResource(R.drawable.btn_play_selecter);
+					AdUtils.displayInterstitial();
 				} else {
 					gPlayer.start();
 					seekBarHandler();
@@ -238,8 +242,11 @@ public class MediaPlayerActivity extends BaseActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
-		if (!gPlayer.isPlaying() && gShouldPlaying)
+		AdUtils.addInterstitialAd(this);
+		if (!gPlayer.isPlaying() && gShouldPlaying) {
+			gPlayBtn.setBackgroundResource(R.drawable.btn_pause_selecter);
 			gPlayer.start();
+		}
 	}
 
 	@Override
