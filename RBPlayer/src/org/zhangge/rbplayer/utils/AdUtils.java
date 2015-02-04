@@ -44,8 +44,8 @@ public class AdUtils {
 		int count = ZGPreference.getInstance().getInt(ADMOD_INTER_COUNT, 0);
 		if (interstitial.isLoaded() && count % 2 == 0) {
 			interstitial.show();
-			ZGPreference.getInstance().putInt(ADMOD_INTER_COUNT, count+1);
 		}
+		ZGPreference.getInstance().putInt(ADMOD_INTER_COUNT, count+1);
 	}
 
 	public static void onResume() {
