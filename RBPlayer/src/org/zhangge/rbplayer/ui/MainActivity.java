@@ -87,7 +87,7 @@ public class MainActivity extends BaseActivity {
 		gDrawerLayout.setDrawerListener(gDrawerToggle);
 
 		if (savedInstanceState == null) {
-			//selectItem(1);
+			selectItem(1);
 			selectItem(0);
 		}
 
@@ -147,11 +147,11 @@ public class MainActivity extends BaseActivity {
 	private void selectItem(int position) {
 		FragmentManager fragmentManager = getFragmentManager();
 		String tag = null;
-		/*if (currentItem == 1 && position != 1) {
+		if (currentItem == 1 && position != 1) {
 			YoutubeVideoListFragment youtubeFragment = (YoutubeVideoListFragment) currentFragment;
 			youtubeFragment.hideSearchFragment();
 		}
-		currentItem = position;*/
+		currentItem = position;
 		Fragment toShow;
 		switch (position) {
 		case 0:
@@ -162,13 +162,13 @@ public class MainActivity extends BaseActivity {
 			}
 			break;
 		case 1:
-			/*tag = YOUTUBE_VIDEO_TAG;
+			tag = YOUTUBE_VIDEO_TAG;
 			toShow = fragmentManager.findFragmentByTag(tag);
 			if (toShow == null) {
 				toShow = YoutubeVideoListFragment.newInstance();
 			}
 			break;
-		case 2:*/
+		case 2:
 			tag = SAMPLE_PIC_TAG;
 			toShow = fragmentManager.findFragmentByTag(tag);
 			if (toShow == null) {
