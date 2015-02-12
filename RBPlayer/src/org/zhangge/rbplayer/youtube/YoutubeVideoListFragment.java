@@ -13,10 +13,10 @@ import org.zhangge.almightyzgbox_android.net.video.YoutubeBox;
 import org.zhangge.almightyzgbox_android.net.video.YoutubeBox.VideoEntity;
 import org.zhangge.almightyzgbox_android.net.video.YoutubeBox.VideoStream;
 import org.zhangge.almightyzgbox_android.utils.ZGTask;
-import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.ui.BaseFragment;
 import org.zhangge.rbplayer.utils.AdUtils;
 import org.zhangge.rbplayer.utils.Navigation;
+import org.zhangge.rbplayerpro.R;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;

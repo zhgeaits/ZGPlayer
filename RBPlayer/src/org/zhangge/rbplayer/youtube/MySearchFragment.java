@@ -7,7 +7,7 @@ import org.zhangge.almightyzgbox_android.net.video.YoutubeBox;
 import org.zhangge.almightyzgbox_android.net.video.YoutubeBox.VideoEntity;
 import org.zhangge.almightyzgbox_android.ui.widget.EasyClearEditText;
 import org.zhangge.almightyzgbox_android.utils.CommonUtils;
-import org.zhangge.rbplayer.R;
+import org.zhangge.rbplayerpro.R;
 
 import android.content.Context;
 import android.os.AsyncTask;

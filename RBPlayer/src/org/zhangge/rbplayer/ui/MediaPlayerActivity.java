@@ -2,13 +2,13 @@ package org.zhangge.rbplayer.ui;
 
 import org.zhangge.almightyzgbox_android.log.ZGLog;
 import org.zhangge.almightyzgbox_android.ui.bar.VerticalSeekBar;
-import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.lib.RBTextureRender;
 import org.zhangge.rbplayer.lib.RBVideoRender;
 import org.zhangge.rbplayer.lib.RBVideoRender.OnPlayGoing;
 import org.zhangge.rbplayer.utils.AdUtils;
 import org.zhangge.rbplayer.utils.UtilBox;
 
+import org.zhangge.rbplayerpro.R;
 import android.content.res.Configuration;
 import android.media.AudioManager;
 import android.media.MediaPlayer;

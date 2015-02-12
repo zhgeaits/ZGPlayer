@@ -1,9 +1,9 @@
 package org.zhangge.rbplayer.ui;
 
 import org.zhangge.almightyzgbox_android.net.http.VolleyManager;
-import org.zhangge.rbplayer.R;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
+import org.zhangge.rbplayerpro.R;
 import android.os.Bundle;
 import android.widget.ImageView;
 

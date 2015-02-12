@@ -2,7 +2,6 @@ package org.zhangge.rbplayer.ui;
 
 import java.util.List;
 
-import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.utils.AdUtils;
 import org.zhangge.rbplayer.utils.MediaBox;
 import org.zhangge.rbplayer.utils.MediaData;
@@ -10,6 +9,7 @@ import org.zhangge.rbplayer.utils.Navigation;
 import org.zhangge.rbplayer.utils.SimpleImageLoader;
 import org.zhangge.rbplayer.utils.UtilBox;
 
+import org.zhangge.rbplayerpro.R;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;

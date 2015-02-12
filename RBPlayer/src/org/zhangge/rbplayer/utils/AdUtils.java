@@ -1,8 +1,8 @@
 package org.zhangge.rbplayer.utils;
 
 import org.zhangge.almightyzgbox_android.utils.ZGPreference;
-import org.zhangge.rbplayer.R;
 
+import org.zhangge.rbplayerpro.R;
 import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;

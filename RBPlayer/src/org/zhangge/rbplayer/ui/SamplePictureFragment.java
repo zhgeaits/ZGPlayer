@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.zhangge.almightyzgbox_android.net.http.VolleyManager;
-import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.bmob.SamplePic;
 import org.zhangge.rbplayer.utils.AdUtils;
 import org.zhangge.rbplayer.utils.BaseConfig;
 
+import org.zhangge.rbplayerpro.R;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;

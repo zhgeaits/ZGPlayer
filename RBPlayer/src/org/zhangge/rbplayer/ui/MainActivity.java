@@ -12,8 +12,8 @@ import org.zhangge.almightyzgbox_android.utils.CommonUtils;
 import org.zhangge.almightyzgbox_android.utils.ZGConstant;
 import org.zhangge.almightyzgbox_android.utils.ZGPreference;
 import org.zhangge.almightyzgbox_android.utils.ZGTask;
-import org.zhangge.rbplayer.R;
 import org.zhangge.rbplayer.youtube.YoutubeVideoListFragment;
+import org.zhangge.rbplayerpro.R;
 
 import android.app.Fragment;
 import android.app.FragmentManager;
@@ -29,6 +29,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
 import android.widget.AdapterView;
 import android.widget.BaseAdapter;
 import android.widget.ListView;
@@ -57,8 +58,8 @@ public class MainActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		gContext = this;
+		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
 		setContentView(R.layout.activity_main);
-
 		gTitle = gDrawerTitle = getTitle();
 		gMenuTitles = getResources().getStringArray(R.array.menu_array);
 		gDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -69,25 +70,33 @@ public class MainActivity extends BaseActivity {
 
 		gDrawerList.setAdapter(new LeftDrawerAdapter(gContext, Arrays.asList(gMenuTitles)));
 		gDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-
-		getActionBar().setDisplayHomeAsUpEnabled(true);
-		getActionBar().setHomeButtonEnabled(true);
+if(getWindow().hasFeature(Window.FEATURE_ACTION_BAR)){
+	System.out.println("asd");
+}
+		if(getActionBar() != null) {
+			getActionBar().setDisplayHomeAsUpEnabled(true);
+			getActionBar().setHomeButtonEnabled(true);
+		}
 
 		gDrawerToggle = new ActionBarDrawerToggle(this, gDrawerLayout, R.drawable.ic_drawer, R.string.drawer_open, R.string.drawer_close) {
 			public void onDrawerClosed(View view) {
-				getActionBar().setTitle(gTitle);
-				invalidateOptionsMenu();
+				if(getActionBar() != null) {
+					getActionBar().setTitle(gTitle);
+					invalidateOptionsMenu();
+				}
 			}
 
 			public void onDrawerOpened(View drawerView) {
-				getActionBar().setTitle(gDrawerTitle);
-				invalidateOptionsMenu();
+				if(getActionBar() != null) {
+					getActionBar().setTitle(gDrawerTitle);
+					invalidateOptionsMenu();
+				}
 			}
 		};
 		gDrawerLayout.setDrawerListener(gDrawerToggle);
 
 		if (savedInstanceState == null) {
-			selectItem(1);
+			//selectItem(1);
 			selectItem(0);
 		}
 
@@ -147,11 +156,11 @@ public class MainActivity extends BaseActivity {
 	private void selectItem(int position) {
 		FragmentManager fragmentManager = getFragmentManager();
 		String tag = null;
-		if (currentItem == 1 && position != 1) {
+		/*if (currentItem == 1 && position != 1) {
 			YoutubeVideoListFragment youtubeFragment = (YoutubeVideoListFragment) currentFragment;
 			youtubeFragment.hideSearchFragment();
 		}
-		currentItem = position;
+		currentItem = position;*/
 		Fragment toShow;
 		switch (position) {
 		case 0:
@@ -162,13 +171,13 @@ public class MainActivity extends BaseActivity {
 			}
 			break;
 		case 1:
-			tag = YOUTUBE_VIDEO_TAG;
+			/*tag = YOUTUBE_VIDEO_TAG;
 			toShow = fragmentManager.findFragmentByTag(tag);
 			if (toShow == null) {
 				toShow = YoutubeVideoListFragment.newInstance();
 			}
 			break;
-		case 2:
+		case 2:*/
 			tag = SAMPLE_PIC_TAG;
 			toShow = fragmentManager.findFragmentByTag(tag);
 			if (toShow == null) {
@@ -219,7 +228,9 @@ public class MainActivity extends BaseActivity {
 	@Override
 	public void setTitle(CharSequence title) {
 		gTitle = title;
-		getActionBar().setTitle(gTitle);
+		if(getActionBar() != null) {
+			getActionBar().setTitle(gTitle);
+		}
 	}
 
 	@Override
