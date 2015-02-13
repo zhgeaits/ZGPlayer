@@ -9,6 +9,7 @@
     <string name="load_error">load youtube video error!</string>
     <string name="click_search">click to search</string>
     <string name="cancel">cancel</string>
+    <string name="no_videos">Videos not founded here!\nWe support these formats:\n3gp, mp4, ts, mkv, webm.</string>
 
     <string-array name="menu_array">
         <item>Local Videos</item>

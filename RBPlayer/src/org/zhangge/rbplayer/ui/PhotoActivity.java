@@ -3,8 +3,11 @@ package org.zhangge.rbplayer.ui;
 import org.zhangge.almightyzgbox_android.net.http.VolleyManager;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
+
 import org.zhangge.rbplayerpro.R;
+
 import android.os.Bundle;
+import android.view.Window;
 import android.widget.ImageView;
 
 public class PhotoActivity extends BaseActivity {
@@ -14,6 +17,7 @@ public class PhotoActivity extends BaseActivity {
 	@Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        requestWindowFeature(Window.FEATURE_NO_TITLE);
         setContentView(R.layout.activity_photo);
         ImageView imageView = (ImageView) findViewById(R.id.image);
         if(getIntent().getExtras() != null) {

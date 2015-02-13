@@ -28,6 +28,7 @@ import android.widget.TextView;
 public class VideoListLocalFragment extends BaseFragment {
 
 	private ProgressBar gLoading;
+	private View gNotFound;
 	private ListView gListView;
 	private Context gContext;
 	private VideoListAdapter gAdapter;
@@ -49,6 +50,7 @@ public class VideoListLocalFragment extends BaseFragment {
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 		View rootView = inflater.inflate(R.layout.activity_video_list, container, false);
 		gLoading = (ProgressBar) rootView.findViewById(R.id.loading);
+		gNotFound = rootView.findViewById(R.id.novideos);
 		gListView = (ListView) rootView.findViewById(R.id.localvideolist);
 		gListView.setVisibility(View.GONE);
 		gLoading.setVisibility(View.VISIBLE);
@@ -88,7 +90,6 @@ public class VideoListLocalFragment extends BaseFragment {
 
 	private void setVideoList(List<MediaData> medias) {
 		gListView.setVisibility(View.VISIBLE);
-		gLoading.setVisibility(View.GONE);
 		gAdapter = new VideoListAdapter(medias, gContext);
 		gListView.setAdapter(gAdapter);
 		gListView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
@@ -98,6 +99,12 @@ public class VideoListLocalFragment extends BaseFragment {
 				Navigation.toMediaPlayer(gContext, media.url);
 			}
 		});
+		gLoading.setVisibility(View.GONE);
+		if(medias == null || medias.size() == 0) {
+			gNotFound.setVisibility(View.VISIBLE);
+		} else {
+			gNotFound.setVisibility(View.GONE);
+		}
 	}
 
 	private class VideoListAdapter extends BaseAdapter {

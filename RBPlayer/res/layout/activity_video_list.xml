@@ -2,7 +2,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
-
     <ListView
         android:id="@+id/localvideolist"
         android:layout_width="match_parent"
@@ -18,13 +17,35 @@
         android:layout_height="wrap_content"
         android:layout_centerInParent="true" />
 
+    <RelativeLayout
+        android:id="@+id/novideos"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true" >
+
+        <ImageView
+            android:id="@+id/notfound"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:background="@drawable/notfound" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="18sp"
+            android:layout_below="@+id/notfound"
+            android:layout_centerHorizontal="true"
+            android:text="@string/no_videos" />
+    </RelativeLayout>
+
     <LinearLayout
         android:id="@+id/mainLayout"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
-        android:layout_height="wrap_content"
-        android:layout_width="wrap_content"
         android:orientation="horizontal" >
     </LinearLayout>
-    
+
 </RelativeLayout>
