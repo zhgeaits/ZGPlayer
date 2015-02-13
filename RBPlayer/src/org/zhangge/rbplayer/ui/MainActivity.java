@@ -58,8 +58,9 @@ public class MainActivity extends BaseActivity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		gContext = this;
-		getWindow().requestFeature(Window.FEATURE_ACTION_BAR);
+		
 		setContentView(R.layout.activity_main);
+		
 		gTitle = gDrawerTitle = getTitle();
 		gMenuTitles = getResources().getStringArray(R.array.menu_array);
 		gDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -70,9 +71,7 @@ public class MainActivity extends BaseActivity {
 
 		gDrawerList.setAdapter(new LeftDrawerAdapter(gContext, Arrays.asList(gMenuTitles)));
 		gDrawerList.setOnItemClickListener(new DrawerItemClickListener());
-if(getWindow().hasFeature(Window.FEATURE_ACTION_BAR)){
-	System.out.println("asd");
-}
+		
 		if(getActionBar() != null) {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 			getActionBar().setHomeButtonEnabled(true);
