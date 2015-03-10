@@ -13,7 +13,8 @@
 
     <string-array name="menu_array">
         <item>Local Videos</item>
-       <!--  <item>Network Videos</item> -->
+        <item>Local Pictures</item>
+       	<item>Network Videos</item>
         <item>Sample Pictures</item>
     </string-array>
 

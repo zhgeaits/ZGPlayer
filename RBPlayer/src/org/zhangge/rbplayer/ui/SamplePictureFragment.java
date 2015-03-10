@@ -7,8 +7,9 @@ import org.zhangge.almightyzgbox_android.net.http.VolleyManager;
 import org.zhangge.rbplayer.bmob.SamplePic;
 import org.zhangge.rbplayer.utils.AdUtils;
 import org.zhangge.rbplayer.utils.BaseConfig;
-
+import org.zhangge.rbplayer.utils.Navigation;
 import org.zhangge.rbplayerpro.R;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -101,9 +102,7 @@ public class SamplePictureFragment extends BaseFragment {
 			holder.image.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Intent intent = new Intent(getActivity(), PhotoActivity.class);
-					intent.putExtra(PhotoActivity.URL_KEY, holder.url.getText().toString());
-					getActivity().startActivity(intent);
+					Navigation.toPhotoActivity(getActivity(), holder.url.getText().toString());
 				}
 			});
             

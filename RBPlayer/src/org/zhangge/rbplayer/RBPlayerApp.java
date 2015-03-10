@@ -31,6 +31,7 @@ public class RBPlayerApp extends Application {
 		gContext = this;
 		if (isMainProcess()) {
 			AlmightAndroidBox.init(this);
+			BaseConfig.init();
 			Bmob.initialize(this, "63f7159ca32b64ab96dec8eee0e7c39c");
 			getSamplePicList();
 			MobclickAgent.updateOnlineConfig(this);

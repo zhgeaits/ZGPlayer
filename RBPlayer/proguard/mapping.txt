@@ -24907,6 +24907,7 @@ org.zhangge.almightyzgbox_android.log.ZGLog -> org.zhangge.almightyzgbox_android
     boolean initialize(java.lang.String,org.zhangge.almightyzgbox_android.log.ZGLog$LogOptions) -> a
     void info(java.lang.Object,java.lang.String,java.lang.Object[]) -> a
     void error(java.lang.Object,java.lang.String,java.lang.Object[]) -> b
+    void error(java.lang.Object,java.lang.String,java.lang.Throwable,java.lang.Object[]) -> a
     void error(java.lang.Object,java.lang.Throwable) -> a
     boolean setOptions(org.zhangge.almightyzgbox_android.log.ZGLog$LogOptions) -> a
     void executeCommand(java.lang.Runnable) -> a
@@ -25050,6 +25051,7 @@ org.zhangge.almightyzgbox_android.utils.AbstractSharedPref -> org.zhangge.almigh
 org.zhangge.almightyzgbox_android.utils.CommonUtils -> org.zhangge.almightyzgbox_android.b.b:
     java.lang.String getApplicationName(android.content.Context) -> a
     java.lang.String objClassName(java.lang.Object) -> a
+    java.lang.String stackTraceOf(java.lang.Throwable) -> a
     boolean externalStorageExist() -> a
     boolean isNullOrEmpty(java.lang.String) -> a
     void showIME(android.app.Activity,android.view.View) -> a
@@ -25282,9 +25284,10 @@ org.zhangge.rbplayer.ui.SamplePictureFragment$SamplePicAdapter$ViewHolder -> org
     org.zhangge.rbplayer.ui.SamplePictureFragment$SamplePicAdapter this$1 -> c
 org.zhangge.rbplayer.ui.VideoListLocalFragment -> org.zhangge.rbplayer.ui.r:
     android.widget.ProgressBar gLoading -> b
-    android.widget.ListView gListView -> c
-    android.content.Context gContext -> d
-    org.zhangge.rbplayer.ui.VideoListLocalFragment$VideoListAdapter gAdapter -> e
+    android.view.View gNotFound -> c
+    android.widget.ListView gListView -> d
+    android.content.Context gContext -> e
+    org.zhangge.rbplayer.ui.VideoListLocalFragment$VideoListAdapter gAdapter -> f
     org.zhangge.rbplayer.ui.VideoListLocalFragment newInstance() -> a
     void onCreate(android.os.Bundle) -> onCreate
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
@@ -25422,16 +25425,15 @@ org.zhangge.rbplayer.youtube.YoutubeVideoListFragment -> org.zhangge.rbplayer.c.
     org.zhangge.rbplayer.youtube.YoutubeVideoListFragment$YoutubeListAdapter adapter -> h
     android.app.AlertDialog$Builder builder -> i
     android.app.Dialog dialog -> j
-    org.zhangge.rbplayer.youtube.YoutubeVideoListFragment newInstance() -> a
     void onCreate(android.os.Bundle) -> onCreate
     android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     void onResume() -> onResume
     void onPause() -> onPause
     void onDestroy() -> onDestroy
-    void hideSearchFragment() -> b
-    boolean isShowingSearch() -> c
+    void hideSearchFragment() -> a
+    boolean isShowingSearch() -> b
     void defaultSearch(java.lang.String) -> b
-    void initListener() -> d
+    void initListener() -> c
     void onQueryVideoResult(java.util.List,boolean,java.lang.String) -> a
     org.zhangge.rbplayer.youtube.MySearchFragment creatSearchFragment(android.app.Activity) -> a
     void showProgressDialog(java.lang.String) -> a

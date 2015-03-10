@@ -12,6 +12,7 @@ import org.zhangge.almightyzgbox_android.utils.CommonUtils;
 import org.zhangge.almightyzgbox_android.utils.ZGConstant;
 import org.zhangge.almightyzgbox_android.utils.ZGPreference;
 import org.zhangge.almightyzgbox_android.utils.ZGTask;
+import org.zhangge.rbplayer.utils.Navigation;
 import org.zhangge.rbplayer.youtube.YoutubeVideoListFragment;
 import org.zhangge.rbplayerpro.R;
 
@@ -71,6 +72,7 @@ public class MainActivity extends BaseActivity {
 		gDrawerList.setAdapter(new LeftDrawerAdapter(gContext, Arrays.asList(gMenuTitles)));
 		gDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 		
+		//开启ActionBar上APP ICON的功能  
 		if(getActionBar() != null) {
 			getActionBar().setDisplayHomeAsUpEnabled(true);
 			getActionBar().setHomeButtonEnabled(true);
@@ -92,9 +94,9 @@ public class MainActivity extends BaseActivity {
 			}
 		};
 		gDrawerLayout.setDrawerListener(gDrawerToggle);
-
+		
 		if (savedInstanceState == null) {
-			//selectItem(1);
+			selectItem(1);
 			selectItem(0);
 		}
 
@@ -140,25 +142,15 @@ public class MainActivity extends BaseActivity {
 			}, 0);
 		}
 	}
-
-	@SuppressWarnings("unused")
-	@Override
-	public boolean onPrepareOptionsMenu(Menu menu) {
-		// 当我们调用invalidateOptionsMenu()方法时候会调到这里
-		// 在这里可以根据drawerOpen是否打开了来隐藏右上角的按钮菜单
-		boolean drawerOpen = gDrawerLayout.isDrawerOpen(gDrawerList);
-		// menu.findItem(R.id.action_websearch).setVisible(!drawerOpen);
-		return super.onPrepareOptionsMenu(menu);
-	}
-
+	
 	private void selectItem(int position) {
 		FragmentManager fragmentManager = getFragmentManager();
 		String tag = null;
-		/*if (currentItem == 1 && position != 1) {
+		if (currentItem == 1 && position != 1) {
 			YoutubeVideoListFragment youtubeFragment = (YoutubeVideoListFragment) currentFragment;
 			youtubeFragment.hideSearchFragment();
 		}
-		currentItem = position;*/
+		currentItem = position;
 		Fragment toShow;
 		switch (position) {
 		case 0:
@@ -169,13 +161,13 @@ public class MainActivity extends BaseActivity {
 			}
 			break;
 		case 1:
-			/*tag = YOUTUBE_VIDEO_TAG;
+			tag = YOUTUBE_VIDEO_TAG;
 			toShow = fragmentManager.findFragmentByTag(tag);
 			if (toShow == null) {
 				toShow = YoutubeVideoListFragment.newInstance();
 			}
 			break;
-		case 2:*/
+		case 2:
 			tag = SAMPLE_PIC_TAG;
 			toShow = fragmentManager.findFragmentByTag(tag);
 			if (toShow == null) {
@@ -215,12 +207,34 @@ public class MainActivity extends BaseActivity {
 		gDrawerLayout.closeDrawer(gDrawerList);
 	}
 
+	@Override  
+    public boolean onCreateOptionsMenu(Menu menu) {  
+        // Inflate the menu; this adds items to the action bar if it is present.  
+        getMenuInflater().inflate(R.menu.main, menu);  
+        return true;  
+    } 
+
+	@Override
+	public boolean onPrepareOptionsMenu(Menu menu) {
+		// 当我们调用invalidateOptionsMenu()方法时候会调到这里
+		// 在这里可以根据drawerOpen是否打开了来隐藏右上角的按钮菜单
+		boolean drawerOpen = gDrawerLayout.isDrawerOpen(gDrawerList);
+		menu.findItem(R.id.action_camera).setVisible(!drawerOpen);
+		return super.onPrepareOptionsMenu(menu);
+	}
+	
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		if (gDrawerToggle.onOptionsItemSelected(item)) {
 			return true;
 		}
-		return super.onOptionsItemSelected(item);
+        switch(item.getItemId()) {
+        case R.id.action_camera:
+        	Navigation.toCameraActivity(gContext);
+            return true;
+        default:
+            return super.onOptionsItemSelected(item);
+        }
 	}
 
 	@Override

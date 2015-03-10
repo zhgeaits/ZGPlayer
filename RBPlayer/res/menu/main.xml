@@ -1,11 +1,9 @@
-<menu xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    tools:context="org.zhangge.rbplayer.ui.MainActivity" >
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:showAsAction="never"
-        android:title="@string/action_settings"/>
+        android:id="@+id/action_camera"
+        android:icon="@drawable/camera_white"
+        android:showAsAction="ifRoom|withText"
+        android:title="@string/action_camera"/>
 
 </menu>
