@@ -1,5 +1,6 @@
 package org.zhangge.rbplayer.utils;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,6 +15,9 @@ public class BaseConfig {
 	
 	public static void init() {
 		picturePath = ZGConstant.SDCARD_ROOT + AlmightAndroidBox.gAppName + "/pictures/";
+		File file = new File(picturePath);
+		if(!file.exists())
+			file.mkdirs();
 	}
 	
 	public static List<SamplePic> getSamplePic() {

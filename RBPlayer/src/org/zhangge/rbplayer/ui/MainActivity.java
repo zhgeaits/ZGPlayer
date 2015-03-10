@@ -12,6 +12,7 @@ import org.zhangge.almightyzgbox_android.utils.CommonUtils;
 import org.zhangge.almightyzgbox_android.utils.ZGConstant;
 import org.zhangge.almightyzgbox_android.utils.ZGPreference;
 import org.zhangge.almightyzgbox_android.utils.ZGTask;
+import org.zhangge.rbplayer.utils.BaseConfig;
 import org.zhangge.rbplayer.utils.Navigation;
 import org.zhangge.rbplayer.youtube.YoutubeVideoListFragment;
 import org.zhangge.rbplayerpro.R;
@@ -230,7 +231,7 @@ public class MainActivity extends BaseActivity {
 		}
         switch(item.getItemId()) {
         case R.id.action_camera:
-        	Navigation.toCameraActivity(gContext);
+        	Navigation.toCameraActivity(gContext, BaseConfig.getPicturePath());
             return true;
         default:
             return super.onOptionsItemSelected(item);

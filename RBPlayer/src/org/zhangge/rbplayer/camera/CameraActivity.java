@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import org.zhangge.almightyzgbox_android.log.ZGLog;
 import org.zhangge.almightyzgbox_android.utils.CommonUtils;
 import org.zhangge.rbplayer.utils.BaseConfig;
 import org.zhangge.rbplayerpro.R;
@@ -46,16 +47,21 @@ import android.widget.Toast;
 @SuppressLint({ "SimpleDateFormat", "InlinedApi" })
 public class CameraActivity extends Activity {
 
+	public static String KEY_PIC_PATH = "key_pic_path";
 	private Preview preview;
 	private TextView text;
 	public static Bitmap firstCameraBitmap = null;
 	public static Bitmap secondCameraBitmap = null;
+	private String picturePath;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
+		if(getIntent().getExtras() != null) {
+			picturePath = getIntent().getExtras().getString(KEY_PIC_PATH);
+		}
 		preview = new Preview(this);
 		setContentView(preview);
 		text = new TextView(this);
@@ -78,7 +84,6 @@ public class CameraActivity extends Activity {
 		private int[] wh;
 		private int rightOffset;
 		private List<Bitmap> willRecycle = new ArrayList<Bitmap>();
-		private String PicturePath = BaseConfig.getPicturePath();
 		
 		private PictureCallback pictureCallback = new PictureCallback() {
 
@@ -167,8 +172,8 @@ public class CameraActivity extends Activity {
 					SimpleDateFormat format = new SimpleDateFormat("yyyyMMdd_hhmmss");
 					String pictureName = format.format(new Date());
 					// 保存两张图片,拍的第一张图片是右眼的，拍第二张图片需要左移动，是左眼的
-					File file1 = new File(PicturePath + "/Tongli_" + pictureName + "-2.jpg");
-					File file2 = new File(PicturePath + "/Tongli_" + pictureName + ".jpg");
+					File file1 = new File(picturePath + "/RBPlayer_" + pictureName + "-2.jpg");
+					File file2 = new File(picturePath + "/RBPlayer_" + pictureName + ".jpg");
 					try {
 						BufferedOutputStream bos1 = new BufferedOutputStream(new FileOutputStream(file1));
 						BufferedOutputStream bos2 = new BufferedOutputStream(new FileOutputStream(file2));
@@ -184,11 +189,11 @@ public class CameraActivity extends Activity {
 						e.printStackTrace();
 					}
 
-					// camera.stopPreview();
+					camera.stopPreview();
 					camera = null;
 					firstCameraBitmap = null;
 					secondCameraBitmap = null;
-					// finish();
+					finish();
 					Preview.this.setBackgroundDrawable(null);
 					CameraActivity.this.setContentView(preview);
 					CommonUtils.recycleBitmap(willRecycle);
@@ -224,7 +229,7 @@ public class CameraActivity extends Activity {
 				parameters.setFocusMode(Camera.Parameters.FOCUS_MODE_CONTINUOUS_PICTURE);// 连续对焦
 				camera.setParameters(parameters);// 设置相机参数
 			} catch (Exception e) {
-				Log.i("Tongli", "奇葩手机不支持连续对焦");
+				ZGLog.error(this, "奇葩手机不支持连续对焦");
 				parameters.setFocusMode(focusMode);
 				camera.setParameters(parameters);// 设置相机参数
 			}
@@ -233,7 +238,6 @@ public class CameraActivity extends Activity {
 				public void onAutoFocus(boolean success, Camera camera) {
 					if (success) {
 						camera.cancelAutoFocus();// 只有加上了这一句，才会自动对焦。
-						// ivFocus.setImageResource(R.drawable.ic_launcher);
 					}
 				}
 			});
@@ -243,13 +247,6 @@ public class CameraActivity extends Activity {
 		public void surfaceCreated(SurfaceHolder holder) {
 			camera = Camera.open();
 			try {
-				// ivFocus.setImageResource(R.drawable.ic_launcher);
-				// LayoutParams layoutParams = new
-				// LayoutParams(LayoutParams.MATCH_PARENT,
-				// LayoutParams.MATCH_PARENT);
-				// ivFocus.setScaleType(ScaleType.CENTER);
-				// ivFocus.setVisibility(VISIBLE);
-				// addContentView(ivFocus, layoutParams);
 				camera.setPreviewDisplay(holder);
 				camera.startPreview();
 			} catch (IOException e) {
@@ -280,16 +277,6 @@ public class CameraActivity extends Activity {
 		public void takePicture() {
 			if (camera != null) {
 				camera.takePicture(null, null, pictureCallback);
-				// camera.autoFocus(new AutoFocusCallback(){
-				// @Override
-				// public void onAutoFocus(boolean success, Camera camera) {
-				// if (success) {
-				// camera.cancelAutoFocus();//只有加上了这一句，才会自动对焦。
-				// // ivFocus.setImageResource(R.drawable.ic_launcher);
-				// camera.takePicture(null, null, pictureCallback);
-				// }
-				// }
-				// });
 			}
 		}
 	}
