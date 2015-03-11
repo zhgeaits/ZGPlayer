@@ -11,7 +11,6 @@ import android.content.Context;
 import android.graphics.SurfaceTexture;
 import android.media.MediaPlayer;
 import android.opengl.GLSurfaceView;
-import android.util.Log;
 import android.view.Surface;
 
 public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnFrameAvailableListener {
