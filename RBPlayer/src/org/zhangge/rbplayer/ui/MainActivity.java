@@ -12,6 +12,7 @@ import org.zhangge.almightyzgbox_android.utils.CommonUtils;
 import org.zhangge.almightyzgbox_android.utils.ZGConstant;
 import org.zhangge.almightyzgbox_android.utils.ZGPreference;
 import org.zhangge.almightyzgbox_android.utils.ZGTask;
+import org.zhangge.rbplayer.camera.LocalPictureFragment;
 import org.zhangge.rbplayer.utils.BaseConfig;
 import org.zhangge.rbplayer.utils.Navigation;
 import org.zhangge.rbplayer.youtube.YoutubeVideoListFragment;
@@ -40,6 +41,7 @@ public class MainActivity extends BaseActivity {
 
 	public static final String LOCAL_VIDEO_TAG = "local_video_tag";
 	public static final String YOUTUBE_VIDEO_TAG = "youtube_video_tag";
+	public static final String LOCAL_PIC_TAG = "local_pic_tag";
 	public static final String SAMPLE_PIC_TAG = "sample_pic_tag";
 	public static final String SAMPLE_PATH = "samplepics";
 
@@ -97,7 +99,7 @@ public class MainActivity extends BaseActivity {
 		gDrawerLayout.setDrawerListener(gDrawerToggle);
 		
 		if (savedInstanceState == null) {
-			selectItem(1);
+			selectItem(2);
 			selectItem(0);
 		}
 
@@ -147,7 +149,7 @@ public class MainActivity extends BaseActivity {
 	private void selectItem(int position) {
 		FragmentManager fragmentManager = getFragmentManager();
 		String tag = null;
-		if (currentItem == 1 && position != 1) {
+		if (currentItem == 2 && position != 2) {
 			YoutubeVideoListFragment youtubeFragment = (YoutubeVideoListFragment) currentFragment;
 			youtubeFragment.hideSearchFragment();
 		}
@@ -162,13 +164,20 @@ public class MainActivity extends BaseActivity {
 			}
 			break;
 		case 1:
+			tag = LOCAL_PIC_TAG;
+			toShow = fragmentManager.findFragmentByTag(tag);
+			if (toShow == null) {
+				toShow = LocalPictureFragment.newInstance();
+			}
+			break;
+		case 2:
 			tag = YOUTUBE_VIDEO_TAG;
 			toShow = fragmentManager.findFragmentByTag(tag);
 			if (toShow == null) {
 				toShow = YoutubeVideoListFragment.newInstance();
 			}
 			break;
-		case 2:
+		case 3:
 			tag = SAMPLE_PIC_TAG;
 			toShow = fragmentManager.findFragmentByTag(tag);
 			if (toShow == null) {
@@ -262,7 +271,7 @@ public class MainActivity extends BaseActivity {
 
 	@Override
 	public void onBackPressed() {
-		if (currentItem == 1) {
+		if (currentItem == 2) {
 			YoutubeVideoListFragment youtubeFragment = (YoutubeVideoListFragment) currentFragment;
 			if (youtubeFragment.isShowingSearch()) {
 				youtubeFragment.hideSearchFragment();

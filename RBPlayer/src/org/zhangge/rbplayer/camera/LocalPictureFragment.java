@@ -1,17 +1,18 @@
-package org.zhangge.rbplayer.ui;
+package org.zhangge.rbplayer.camera;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.zhangge.almightyzgbox_android.net.http.VolleyManager;
-import org.zhangge.rbplayer.bmob.SamplePic;
+import org.zhangge.almightyzgbox_android.log.ZGLog;
+import org.zhangge.rbplayer.ui.BaseFragment;
 import org.zhangge.rbplayer.utils.AdUtils;
 import org.zhangge.rbplayer.utils.BaseConfig;
 import org.zhangge.rbplayer.utils.Navigation;
+import org.zhangge.rbplayer.utils.SimpleImageLoader;
 import org.zhangge.rbplayerpro.R;
 
 import android.annotation.SuppressLint;
-import android.content.Context;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,15 +21,14 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
-import android.widget.TextView;
 
-public class SamplePictureFragment extends BaseFragment {
+public class LocalPictureFragment extends BaseFragment {
 
 	private ListView gListView;
-	private SamplePicAdapter gAdapter;
+	private LocalPicAdapter gAdapter;
 	
-	public static SamplePictureFragment newInstance() {
-		return new SamplePictureFragment();
+	public static LocalPictureFragment newInstance() {
+		return new LocalPictureFragment();
 	}
 	
 	@Override
@@ -38,16 +38,43 @@ public class SamplePictureFragment extends BaseFragment {
 
 	@Override
 	public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-		View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_youtube_video_list, container, false);
-		view.findViewById(R.id.search_fragment_container_content).setVisibility(View.GONE);
-		view.findViewById(R.id.search_text_container).setVisibility(View.GONE);;
-		gListView = (ListView) view.findViewById(R.id.youtubelist);
-		gAdapter = new SamplePicAdapter(getActivity(), 0, new ArrayList<SamplePic>());
+		View view = LayoutInflater.from(getActivity()).inflate(R.layout.fragment_local_picture_list, container, false);
+		gListView = (ListView) view.findViewById(R.id.localpiclist);
+		gAdapter = new LocalPicAdapter();
 		gListView.setAdapter(gAdapter);
 		gListView.setDivider(null);
-		gAdapter.addAll(BaseConfig.getSamplePic());
 		AdUtils.addAdModBanner(getActivity(), view);
+		loadLocalPic();
 		return view;
+	}
+	
+	private void onLoadPic(List<String> files) {
+		gAdapter.addAll(files);
+	}
+	
+	private void loadLocalPic() {
+		gHandler.postDelayed(new Runnable() {
+
+			@Override
+			public void run() {
+				String path = BaseConfig.getPicturePath();
+				File dir = new File(path);
+				if(dir.exists() && dir.isDirectory()) {
+					List<String> fileArray = new ArrayList<String>();
+					File[] files = dir.listFiles();
+					for (File file : files) {
+						String filePath = file.getAbsolutePath();
+						if(!filePath.endsWith("-2.jpg")) {
+							fileArray.add(filePath);
+						}
+					}
+					onLoadPic(fileArray);
+				} else {
+					ZGLog.info(this, "not exists, not directory!");
+				}
+			}
+			
+		}, 0);
 	}
 	
 	@Override
@@ -67,18 +94,14 @@ public class SamplePictureFragment extends BaseFragment {
 		AdUtils.onDestory();
 		super.onDestroy();
 	}
+	
+	private class LocalPicAdapter extends BaseAdapter {
 
-	private class SamplePicAdapter extends BaseAdapter {
-
-		private List<SamplePic> datas;
-
-		public SamplePicAdapter(Context context, int resource, List<SamplePic> objects) {
-			datas = objects;
-		}
-
-		public void addAll(List<SamplePic> objects) {
+		private List<String> datas = new ArrayList<String>();
+		
+		public void addAll(List<String> objects) {
 			datas.addAll(objects);
-			this.notifyDataSetChanged();
+			notifyDataSetChanged();
 		}
 
 		@SuppressLint("InflateParams")
@@ -88,20 +111,18 @@ public class SamplePictureFragment extends BaseFragment {
 			if (convertView == null) {
 				holder = new ViewHolder();
 				LayoutInflater inflater = getActivity().getLayoutInflater();
-				convertView = inflater.inflate(R.layout.samplepic_list_item, null);
+				convertView = inflater.inflate(R.layout.fragment_local_pic_list_item, null);
 				holder.image = (ImageView) convertView.findViewById(R.id.image);
-				holder.url = (TextView) convertView.findViewById(R.id.url);
 				convertView.setTag(holder);
 			} else {
 				holder = (ViewHolder) convertView.getTag();
 			}
-			String url = datas.get(position).getPic().getFileUrl(getActivity());
-			holder.url.setText(url);
-			VolleyManager.getInstance().loadImage(url, holder.image, R.drawable.red_blue_3d, R.drawable.red_blue_3d);
+			final String path = datas.get(position);
+			SimpleImageLoader.getInstance().loadImage(path, holder.image, R.drawable.red_blue_3d);
 			holder.image.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Navigation.toPhotoActivity(getActivity(), holder.url.getText().toString(), null);
+					Navigation.toPhotoActivity(getActivity(), null, path);
 				}
 			});
             
@@ -125,7 +146,6 @@ public class SamplePictureFragment extends BaseFragment {
 		
 		private class ViewHolder {
 			ImageView image;
-			TextView url;
 		}
 		
 	}
