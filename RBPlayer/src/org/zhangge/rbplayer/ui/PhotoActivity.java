@@ -8,6 +8,8 @@ import org.zhangge.rbplayerpro.R;
 
 import uk.co.senab.photoview.PhotoViewAttacher;
 import android.content.pm.ActivityInfo;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.view.View;
 import android.view.Window;
@@ -52,6 +54,8 @@ public class PhotoActivity extends BaseActivity {
         		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
         		setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE); 
         		gPath2 = gPath.replace(".jpg", "-2.jpg");
+        		Bitmap bitmap1 = BitmapFactory.decodeFile(gPath);
+        		Bitmap bitmap2 = BitmapFactory.decodeFile(gPath2);
         		SimpleImageLoader.getInstance().loadImage(gPath, imageView, R.drawable.red_blue_3d);
         	}
         }
