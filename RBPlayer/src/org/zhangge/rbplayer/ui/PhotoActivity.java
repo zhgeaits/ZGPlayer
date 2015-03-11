@@ -62,7 +62,7 @@ public class PhotoActivity extends BaseActivity {
         		gBitmap1 = BitmapFactory.decodeFile(gPath1);
         		gBitmap2 = BitmapFactory.decodeFile(gPath2);
         		Bitmap dst = ImageHandler.leftRightCombineTwoPicture(gBitmap1, gBitmap2, gOffset);
-        		gImageView.setBackground(new BitmapDrawable(dst));
+        		gImageView.setImageBitmap(dst);
         	}
         }
         
@@ -80,7 +80,7 @@ public class PhotoActivity extends BaseActivity {
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 				gOffset = progress - OFFSET_MAX;
 				Bitmap dst = ImageHandler.leftRightCombineTwoPicture(gBitmap1, gBitmap2, gOffset);
-				gImageView.setBackground(new BitmapDrawable(dst));
+				gImageView.setImageBitmap(dst);
 			}
 		});
     }
