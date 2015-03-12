@@ -42,7 +42,7 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
 				updateSurface = false;
 			}
 		}
-
+		
 		mTextureRender.drawFrame(mSurfaceTexture);
 	}
 
