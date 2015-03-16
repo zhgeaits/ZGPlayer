@@ -2,8 +2,11 @@ package org.zhangge.rbplayer;
 
 import java.util.List;
 
+import org.zgmlt.ttkmz.bmob.Advertisement;
 import org.zhangge.almightyzgbox_android.AlmightAndroidBox;
 import org.zhangge.almightyzgbox_android.log.ZGLog;
+import org.zhangge.almightyzgbox_android.utils.ZGPreference;
+import org.zhangge.rbplayer.bmob.RBSwithcer;
 import org.zhangge.rbplayer.bmob.SBSSamplePic;
 import org.zhangge.rbplayer.bmob.SamplePic;
 import org.zhangge.rbplayer.utils.BaseConfig;
@@ -35,6 +38,7 @@ public class RBPlayerApp extends Application {
 			BaseConfig.init();
 			Bmob.initialize(this, "63f7159ca32b64ab96dec8eee0e7c39c");
 			getSamplePicList();
+			checkSwitcher();
 			MobclickAgent.updateOnlineConfig(this);
 		} else {
 			Log.i(TAG, "return");
@@ -71,6 +75,25 @@ public class RBPlayerApp extends Application {
 			public void onError(int code, String msg) {
 				ZGLog.info(this, "get SBSSamplePic from bmob error code:" + code + ",msg:" + msg);
 			}
+		});
+	}
+	
+	protected void checkSwitcher() {
+		BmobQuery<RBSwithcer> query = new BmobQuery<RBSwithcer>();
+		query.setLimit(1);
+		query.findObjects(this, new FindListener<RBSwithcer>() {
+		        @Override
+		        public void onSuccess(List<RBSwithcer> switchers) {
+		        	ZGLog.info(this, "get RBSwithcer from bmob size:" + switchers.size());
+		        	if(switchers != null) {
+		        		RBSwithcer switcher = switchers.get(0);
+		        		BaseConfig.setSwitcher(switcher);
+		        	}
+		        }
+		        @Override
+		        public void onError(int code, String msg) {
+		        	ZGLog.info(this, "get RBSwithcer from bmob error code:" + code + ",msg:" + msg);
+		        }
 		});
 	}
 

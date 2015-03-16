@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.zhangge.almightyzgbox_android.AlmightAndroidBox;
 import org.zhangge.almightyzgbox_android.utils.ZGConstant;
+import org.zhangge.rbplayer.bmob.RBSwithcer;
 import org.zhangge.rbplayer.bmob.SBSSamplePic;
 import org.zhangge.rbplayer.bmob.SamplePic;
 
@@ -15,6 +16,7 @@ public class BaseConfig {
 	private static List<SBSSamplePic> sbsSamplePicList = new ArrayList<SBSSamplePic>();
 	private static String picturePath;;
 	private static String sbsPath;
+	private static RBSwithcer switcher;
 	
 	public static void init() {
 		picturePath = ZGConstant.SDCARD_ROOT + AlmightAndroidBox.gAppName + "/pictures/";
@@ -26,6 +28,14 @@ public class BaseConfig {
 		File sbsfile = new File(picturePath);
 		if(!sbsfile.exists())
 			sbsfile.mkdirs();
+	}
+	
+	public static void setSwitcher(RBSwithcer swithcer) {
+		switcher = swithcer;
+	}
+	
+	public static RBSwithcer getSwitcher() {
+		return switcher;
 	}
 	
 	public static List<SamplePic> getSamplePic() {
