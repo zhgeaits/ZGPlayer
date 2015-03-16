@@ -1,12 +1,8 @@
 package org.zhangge.rbplayer.camera;
 
-import org.zhangge.rbplayerpro.R;
-
 import android.content.Context;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.ColorMatrix;
 import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Paint;
@@ -15,41 +11,68 @@ import android.widget.ImageView;
 
 public class ColorView extends ImageView {
 
-	private Paint myPaint = null;
-	private Bitmap bitmap = null;
-	private ColorMatrix myColorMatrix = null;
-	private float[] colorArray = { 1, 0, 0, 0, 0,   0, 0, 0, 0, 0,   0, 0, 0, 0, 0,
-			0, 0, 0, 1, 0 };
+	private Paint gPaint = null;
+	private Bitmap gBitmap1 = null;
+	private Bitmap gBitmap2 = null;
+	private ColorMatrix gRedColorMatrix = null;
+	private ColorMatrix gBlueGreenMatrix = null;
+	private float[] gRedColor = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0};
+	private float[] gBlueGreenColor = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0.5f, 0};
+	private ColorMatrixColorFilter gRedFilter;
+	private ColorMatrixColorFilter gBlueGreenFilter;
+	private int gOffset;
 
 	public ColorView(Context context, AttributeSet attrs) {
 		super(context, attrs);
+		init();
+	}
+	
+	public ColorView(Context context, AttributeSet attrs, int defStyle) {
+		super(context, attrs, defStyle);
+		init();
+	}
+
+	public ColorView(Context context) {
+		super(context);
+		init();
+	}
+
+	private void init() {
+		gPaint = new Paint();
+		
+		gRedColorMatrix = new ColorMatrix();
+		gRedColorMatrix.set(gRedColor);
+		gRedFilter = new ColorMatrixColorFilter(gRedColorMatrix);
+		
+		gBlueGreenMatrix = new ColorMatrix();
+		gBlueGreenMatrix.set(gBlueGreenColor);
+		gBlueGreenFilter = new ColorMatrixColorFilter(gBlueGreenMatrix);
 	}
 
 	@Override
 	protected void onDraw(Canvas canvas) {
 		super.onDraw(canvas);
-		// 新建画笔对象
-		myPaint = new Paint();
-		// 描画（原始图片）
-//		canvas.drawBitmap(bitmap, 0, 0, myPaint);
-		// 新建颜色矩阵对象
-		myColorMatrix = new ColorMatrix();
-		// 设置颜色矩阵的值
-		myColorMatrix.set(colorArray);
-		// 设置画笔颜色过滤器
-		myPaint.setColorFilter(new ColorMatrixColorFilter(myColorMatrix));
-		// 描画（处理后的图片）
-		canvas.drawBitmap(bitmap, 0, 0, myPaint);
+		
+		gPaint.setColorFilter(gRedFilter);
+		canvas.drawBitmap(gBitmap1, 0, 0, gPaint);
+		
+		gPaint.setColorFilter(gBlueGreenFilter);
+		canvas.drawBitmap(gBitmap2, gOffset, 0, gPaint);
+		
+	}
+
+	public void setColorArray(float[] colorArray) {
+		this.gRedColor = colorArray;
+	}
+	
+	public void setOffset(int offset) {
+		gOffset = offset;
 		invalidate();
 	}
 
-	// 设置颜色数值
-	public void setColorArray(float[] colorArray) {
-		this.colorArray = colorArray;
-	}
-
-	// 设置图片
-	public void setBitmap(Bitmap bitmap) {
-		this.bitmap = bitmap;
+	public void setBitmap(Bitmap bitmap1, Bitmap bitmap2) {
+		this.gBitmap1 = bitmap1;
+		this.gBitmap2 = bitmap2;
+		invalidate();
 	}
 }

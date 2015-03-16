@@ -25,7 +25,7 @@ public class PhotoActivity extends BaseActivity {
 	public static String URL_KEY = "url_key";
 	public static String PATH_KEY = "path_key";
 	public static int SCREEN_MODE_NORMAL = 0;
-	private static final int OFFSET_MAX = 30;
+	private static final int OFFSET_MAX = 80;
 	
 	private VerticalSeekBar gOffsetSeekbar;
 	private ImageView gImageView;
@@ -79,7 +79,7 @@ public class PhotoActivity extends BaseActivity {
 		gPath2 = gPath1.replace(".jpg", "-2.jpg");
 		gBitmap1 = BitmapFactory.decodeFile(gPath1);
 		gBitmap2 = BitmapFactory.decodeFile(gPath2);
-		gColor.setBitmap(gBitmap1);
+		gColor.setBitmap(gBitmap1, gBitmap2);
 		
 //		gRender = new PicTextureRender(gBitmap1, gBitmap2);
 ////		gRender = new MyGLRenderer(this, gBitmap1);
@@ -103,6 +103,7 @@ public class PhotoActivity extends BaseActivity {
 			@Override
 			public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
 				gOffset = progress - OFFSET_MAX;
+				gColor.setOffset(gOffset);
 //				gRender.setOffset(gOffset);
 //				Bitmap dst = ImageHandler.leftRightCombineTwoPicture(gBitmap1, gBitmap2, gOffset);
 //				gImageView.setImageBitmap(dst);
