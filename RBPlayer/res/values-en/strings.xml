@@ -10,12 +10,16 @@
     <string name="click_search">click to search</string>
     <string name="cancel">cancel</string>
     <string name="no_videos">Videos not founded here!\nWe support these formats:\n3gp, mp4, ts, mkv, webm.</string>
+    <string name="camera_one">Please use landscape mode.</string>
+    <string name="camera_two">Please gently shift to take a second picture.</string>
+    <string name="action_camera">Camera</string>
 
     <string-array name="menu_array">
         <item>Local Videos</item>
         <item>Local Pictures</item>
        	<item>Network Videos</item>
         <item>Sample Pictures</item>
+        <item>SBS Pictures</item>
     </string-array>
 
 </resources>

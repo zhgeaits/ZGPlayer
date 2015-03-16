@@ -10,12 +10,16 @@
     <string name="click_search">搜索视频</string>
     <string name="cancel">取消</string>
     <string name="no_videos">找不到视频!\n我们目前仅支持以下格式:\n3gp, mp4, ts, mkv, webm.</string>
+    <string name="camera_one">请使用横屏进行拍照</string>
+    <string name="camera_two">请移动摄像机使图像重合</string>
+    <string name="action_camera">拍照</string>
 
     <string-array name="menu_array">
         <item>本机视频</item>
         <item>本机图片</item>
         <item>网络视频</item>
         <item>示例图片</item>
+        <item>左右图片</item>
     </string-array>
 
 </resources>

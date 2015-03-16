@@ -12,6 +12,8 @@ import java.util.List;
 
 import org.zhangge.almightyzgbox_android.log.ZGLog;
 import org.zhangge.almightyzgbox_android.utils.CommonUtils;
+import org.zhangge.rbplayer.ui.PhotoActivity;
+import org.zhangge.rbplayer.utils.Navigation;
 import org.zhangge.rbplayerpro.R;
 
 import android.annotation.SuppressLint;
@@ -193,8 +195,7 @@ public class CameraActivity extends Activity {
 					Preview.this.setBackgroundDrawable(null);
 					CameraActivity.this.setContentView(preview);
 					CommonUtils.recycleBitmap(willRecycle);
-					// PicActivity.startMe(CameraActivity.this, 0,
-					// file2.getAbsolutePath(), null);
+					Navigation.toPhotoActivity(CameraActivity.this, null, file2.getAbsolutePath(), PhotoActivity.SCREEN_MODE_COLOR);
 				}
 			}
 		};

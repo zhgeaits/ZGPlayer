@@ -1,12 +1,11 @@
-package org.zhangge.rbplayer.camera;
+package org.zhangge.rbplayer.ui;
 
 import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.zhangge.almightyzgbox_android.log.ZGLog;
-import org.zhangge.rbplayer.ui.BaseFragment;
-import org.zhangge.rbplayer.ui.PhotoActivity;
+import org.zhangge.rbplayer.bmob.SBSSamplePic;
 import org.zhangge.rbplayer.utils.AdUtils;
 import org.zhangge.rbplayer.utils.BaseConfig;
 import org.zhangge.rbplayer.utils.Navigation;
@@ -23,13 +22,13 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 
-public class LocalPictureFragment extends BaseFragment {
+public class SBSPictureFragment extends BaseFragment {
 
 	private ListView gListView;
 	private LocalPicAdapter gAdapter;
 	
-	public static LocalPictureFragment newInstance() {
-		return new LocalPictureFragment();
+	public static SBSPictureFragment newInstance() {
+		return new SBSPictureFragment();
 	}
 	
 	@Override
@@ -44,6 +43,7 @@ public class LocalPictureFragment extends BaseFragment {
 		gAdapter = new LocalPicAdapter();
 		gListView.setAdapter(gAdapter);
 		gListView.setDivider(null);
+		loadNetPic();
 		AdUtils.addAdModBanner(getActivity(), view);
 		loadLocalPic();
 		return view;
@@ -53,21 +53,28 @@ public class LocalPictureFragment extends BaseFragment {
 		gAdapter.addAll(files);
 	}
 	
+	private void loadNetPic() {
+		List<SBSSamplePic> datas = BaseConfig.getSBSSamplePic();
+		List<String> netDatas = new ArrayList<String>();
+		for (SBSSamplePic sbsSamplePic : datas) {
+			netDatas.add(sbsSamplePic.getPic().getFileUrl(getActivity()));
+		}
+		gAdapter.addAll(netDatas);
+	}
+	
 	private void loadLocalPic() {
 		gHandler.postDelayed(new Runnable() {
 
 			@Override
 			public void run() {
-				String path = BaseConfig.getPicturePath();
+				String path = BaseConfig.getSBSPicturePath();
 				File dir = new File(path);
 				if(dir.exists() && dir.isDirectory()) {
 					List<String> fileArray = new ArrayList<String>();
 					File[] files = dir.listFiles();
 					for (File file : files) {
 						String filePath = file.getAbsolutePath();
-						if(!filePath.endsWith("-2.jpg")) {
-							fileArray.add(filePath);
-						}
+						fileArray.add(filePath);
 					}
 					onLoadPic(fileArray);
 				} else {
@@ -123,7 +130,7 @@ public class LocalPictureFragment extends BaseFragment {
 			holder.image.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Navigation.toPhotoActivity(getActivity(), null, path, PhotoActivity.SCREEN_MODE_COLOR);
+					Navigation.toPhotoActivity(getActivity(), null, path, PhotoActivity.SCREEN_MODE_GLES);
 				}
 			});
             

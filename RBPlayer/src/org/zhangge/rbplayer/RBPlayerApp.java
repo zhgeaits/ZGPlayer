@@ -4,10 +4,9 @@ import java.util.List;
 
 import org.zhangge.almightyzgbox_android.AlmightAndroidBox;
 import org.zhangge.almightyzgbox_android.log.ZGLog;
+import org.zhangge.rbplayer.bmob.SBSSamplePic;
 import org.zhangge.rbplayer.bmob.SamplePic;
 import org.zhangge.rbplayer.utils.BaseConfig;
-
-import com.umeng.analytics.MobclickAgent;
 
 import android.app.ActivityManager;
 import android.app.Application;
@@ -16,6 +15,8 @@ import android.util.Log;
 import cn.bmob.v3.Bmob;
 import cn.bmob.v3.BmobQuery;
 import cn.bmob.v3.listener.FindListener;
+
+import com.umeng.analytics.MobclickAgent;
 
 /**
  * Created by zhangge on 2014/10/24.
@@ -54,6 +55,21 @@ public class RBPlayerApp extends Application {
 			@Override
 			public void onError(int code, String msg) {
 				ZGLog.info(this, "get SamplePic from bmob error code:" + code + ",msg:" + msg);
+			}
+		});
+		
+		BmobQuery<SBSSamplePic> sbsquery = new BmobQuery<SBSSamplePic>();
+		sbsquery.setLimit(100);
+		sbsquery.findObjects(gContext, new FindListener<SBSSamplePic>() {
+			@Override
+			public void onSuccess(List<SBSSamplePic> samplePics) {
+				ZGLog.info(this, "get SBSSamplePic from bmob size:" + samplePics.size());
+				BaseConfig.addSBSSamplePicList(samplePics);
+			}
+
+			@Override
+			public void onError(int code, String msg) {
+				ZGLog.info(this, "get SBSSamplePic from bmob error code:" + code + ",msg:" + msg);
 			}
 		});
 	}

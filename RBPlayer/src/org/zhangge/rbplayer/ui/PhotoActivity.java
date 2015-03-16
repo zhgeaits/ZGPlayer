@@ -79,6 +79,7 @@ public class PhotoActivity extends BaseActivity {
 		gOffsetSeekbar.setVisibility(View.GONE);
 		gSurfaceView.setVisibility(View.GONE);
 		gColor.setVisibility(View.GONE);
+		gImageView.setVisibility(View.VISIBLE);
 		VolleyManager.getInstance().loadImage(url, gImageView, R.drawable.red_blue_3d, R.drawable.red_blue_3d);
 		PhotoViewAttacher mAttacher = new PhotoViewAttacher((ImageView) gImageView);
     	mAttacher.update();

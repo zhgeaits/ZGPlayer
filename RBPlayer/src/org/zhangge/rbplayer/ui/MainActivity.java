@@ -8,8 +8,6 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.zhangge.almightyzgbox_android.log.ZGLog;
-import org.zhangge.almightyzgbox_android.utils.CommonUtils;
-import org.zhangge.almightyzgbox_android.utils.ZGConstant;
 import org.zhangge.almightyzgbox_android.utils.ZGPreference;
 import org.zhangge.almightyzgbox_android.utils.ZGTask;
 import org.zhangge.rbplayer.camera.LocalPictureFragment;
@@ -43,7 +41,8 @@ public class MainActivity extends BaseActivity {
 	public static final String YOUTUBE_VIDEO_TAG = "youtube_video_tag";
 	public static final String LOCAL_PIC_TAG = "local_pic_tag";
 	public static final String SAMPLE_PIC_TAG = "sample_pic_tag";
-	public static final String SAMPLE_PATH = "samplepics";
+	public static final String SBS_PATH_TAG = "sbs_path";
+	public static final String SAMPLE_PATH = "samples";
 
 	private Context gContext;
 	private DrawerLayout gDrawerLayout;
@@ -110,8 +109,8 @@ public class MainActivity extends BaseActivity {
 				@Override
 				public void run() {
 					try {
-						String fileNames[] = getAssets().list(SAMPLE_PATH);
-						String destDir = ZGConstant.SDCARD_ROOT + CommonUtils.getApplicationName(gContext) + File.separator + SAMPLE_PATH;
+						String fileNames[] = getAssets().list("samples");
+						String destDir = BaseConfig.getSBSPicturePath();
 						File fileDir = new File(destDir);
 						if(!fileDir.exists()) {
 							fileDir.mkdirs();
@@ -182,6 +181,13 @@ public class MainActivity extends BaseActivity {
 			toShow = fragmentManager.findFragmentByTag(tag);
 			if (toShow == null) {
 				toShow = SamplePictureFragment.newInstance();
+			}
+			break;
+		case 4:
+			tag = SBS_PATH_TAG;
+			toShow = fragmentManager.findFragmentByTag(tag);
+			if (toShow == null) {
+				toShow = SBSPictureFragment.newInstance();
 			}
 			break;
 		default:
