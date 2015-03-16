@@ -189,8 +189,8 @@ public class MainActivity extends BaseActivity {
 				YoutubeVideoListFragment youtubeFragment = (YoutubeVideoListFragment) currentFragment;
 				youtubeFragment.hideSearchFragment();
 			}
-			currentItem = position;
 		}
+		currentItem = position;
 		Fragment toShow = null;
 		if(position == indexVideo) {
 			tag = LOCAL_VIDEO_TAG;
@@ -302,11 +302,13 @@ public class MainActivity extends BaseActivity {
 
 	@Override
 	public void onBackPressed() {
-		if (currentItem == 2) {
-			YoutubeVideoListFragment youtubeFragment = (YoutubeVideoListFragment) currentFragment;
-			if (youtubeFragment.isShowingSearch()) {
-				youtubeFragment.hideSearchFragment();
-				return;
+		if(!gNoYoutube) {
+			if (currentItem == 2) {
+				YoutubeVideoListFragment youtubeFragment = (YoutubeVideoListFragment) currentFragment;
+				if (youtubeFragment.isShowingSearch()) {
+					youtubeFragment.hideSearchFragment();
+					return;
+				}
 			}
 		}
 		if (currentItem != 0) {
