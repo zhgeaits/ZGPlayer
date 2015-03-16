@@ -2,10 +2,8 @@ package org.zhangge.rbplayer;
 
 import java.util.List;
 
-import org.zgmlt.ttkmz.bmob.Advertisement;
 import org.zhangge.almightyzgbox_android.AlmightAndroidBox;
 import org.zhangge.almightyzgbox_android.log.ZGLog;
-import org.zhangge.almightyzgbox_android.utils.ZGPreference;
 import org.zhangge.rbplayer.bmob.RBSwithcer;
 import org.zhangge.rbplayer.bmob.SBSSamplePic;
 import org.zhangge.rbplayer.bmob.SamplePic;
