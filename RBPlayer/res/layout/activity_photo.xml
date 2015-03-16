@@ -9,6 +9,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
+        android:visibility="gone"
         />
     
     <org.zhangge.rbplayer.camera.ColorView 
@@ -16,14 +17,16 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerInParent="true"
+        android:visibility="gone"
         />
     
-    <!-- <android.opengl.GLSurfaceView
+    <android.opengl.GLSurfaceView
             android:id="@+id/surfaceview"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_centerInParent="true"
-            /> -->
+            android:visibility="gone"
+            />
     
     <org.zhangge.almightyzgbox_android.ui.bar.VerticalSeekBar
         android:id="@+id/offset_seekbar"

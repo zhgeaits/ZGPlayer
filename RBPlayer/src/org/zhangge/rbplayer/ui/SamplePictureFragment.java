@@ -101,7 +101,7 @@ public class SamplePictureFragment extends BaseFragment {
 			holder.image.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Navigation.toPhotoActivity(getActivity(), holder.url.getText().toString(), null);
+					Navigation.toPhotoActivity(getActivity(), holder.url.getText().toString(), null, PhotoActivity.SCREEN_MODE_NORMAL);
 				}
 			});
             

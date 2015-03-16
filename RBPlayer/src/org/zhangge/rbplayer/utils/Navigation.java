@@ -21,10 +21,11 @@ public class Navigation {
 		context.startActivity(intent);
 	}
 	
-	public static void toPhotoActivity(Context context, String url, String path) {
+	public static void toPhotoActivity(Context context, String url, String path, int mode) {
 		Intent intent = new Intent(context, PhotoActivity.class);
 		intent.putExtra(PhotoActivity.URL_KEY, url);
 		intent.putExtra(PhotoActivity.PATH_KEY, path);
+		intent.putExtra(PhotoActivity.TYPE_KEY, mode);
 		context.startActivity(intent);
 	}
 }

@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.zhangge.almightyzgbox_android.log.ZGLog;
 import org.zhangge.rbplayer.ui.BaseFragment;
+import org.zhangge.rbplayer.ui.PhotoActivity;
 import org.zhangge.rbplayer.utils.AdUtils;
 import org.zhangge.rbplayer.utils.BaseConfig;
 import org.zhangge.rbplayer.utils.Navigation;
@@ -122,7 +123,7 @@ public class LocalPictureFragment extends BaseFragment {
 			holder.image.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Navigation.toPhotoActivity(getActivity(), null, path);
+					Navigation.toPhotoActivity(getActivity(), null, path, PhotoActivity.SCREEN_MODE_COLOR);
 				}
 			});
             
