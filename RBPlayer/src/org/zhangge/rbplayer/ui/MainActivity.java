@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,6 +45,12 @@ public class MainActivity extends BaseActivity {
 	public static final String SAMPLE_PIC_TAG = "sample_pic_tag";
 	public static final String SBS_PATH_TAG = "sbs_path";
 	public static final String SAMPLE_PATH = "samples";
+	
+	private int indexVideo = 0;
+	private int indexLocalPic = 1;
+	private int indexYoutubeVideo = 2;
+	private int indexSample = 3;
+	private int indexSBS = 4;
 
 	private Context gContext;
 	private DrawerLayout gDrawerLayout;
@@ -55,7 +62,6 @@ public class MainActivity extends BaseActivity {
 	private String[] gMenuTitles;
 
 	private boolean gNoYoutube;
-	private boolean gNoSample;
 	private int currentItem;
 	private Fragment currentFragment;
 
@@ -75,7 +81,7 @@ public class MainActivity extends BaseActivity {
 		gDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
 		List<String> titles = Arrays.asList(gMenuTitles);
-		modifyTitles(titles);
+		titles = modifyTitles(titles);
 		gDrawerList.setAdapter(new LeftDrawerAdapter(gContext, titles));
 		gDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 		
@@ -150,78 +156,73 @@ public class MainActivity extends BaseActivity {
 		}
 	}
 	
-	private void modifyTitles(List<String> titles) {
+	private List<String> modifyTitles(List<String> titles) {
+		List<String> returnLists = new ArrayList<String>();
+		returnLists.addAll(titles);
 		RBSwithcer switcer = BaseConfig.getSwitcher();
+		boolean fouse = false;
 		if (switcer == null) {
-			return;
+			fouse = true;
 		}
-		if(!switcer.isYoutubeswitcher()) {
-			titles.remove(2);
+		if(fouse || !switcer.isYoutubeswitcher()) {
+			returnLists.remove(2);
 			gNoYoutube = true;
+			indexSample--;
+			indexSBS--;
 		}
-		if(!switcer.isSampleswitcher()) {
+		if(fouse || !switcer.isSampleswitcher()) {
 			if(gNoYoutube) {
-				titles.remove(2);
+				returnLists.remove(2);
 			} else {
-				titles.remove(3);
+				returnLists.remove(3);
 			}
-			gNoSample = true;
+			indexSBS--;
 		}
+		return returnLists;
 	}
 	
 	private void selectItem(int position) {
 		FragmentManager fragmentManager = getFragmentManager();
 		String tag = null;
-		if (currentItem == 2 && position != 2) {
-			YoutubeVideoListFragment youtubeFragment = (YoutubeVideoListFragment) currentFragment;
-			youtubeFragment.hideSearchFragment();
+		if(!gNoYoutube) {
+			if (currentItem == 2 && position != 2) {
+				YoutubeVideoListFragment youtubeFragment = (YoutubeVideoListFragment) currentFragment;
+				youtubeFragment.hideSearchFragment();
+			}
+			currentItem = position;
 		}
-		currentItem = position;
-		Fragment toShow;
-		switch (position) {
-		case 0:
+		Fragment toShow = null;
+		if(position == indexVideo) {
 			tag = LOCAL_VIDEO_TAG;
 			toShow = fragmentManager.findFragmentByTag(tag);
 			if (toShow == null) {
 				toShow = VideoListLocalFragment.newInstance();
 			}
-			break;
-		case 1:
+		} else if(position == indexLocalPic) {
 			tag = LOCAL_PIC_TAG;
 			toShow = fragmentManager.findFragmentByTag(tag);
 			if (toShow == null) {
 				toShow = LocalPictureFragment.newInstance();
 			}
-			break;
-		case 2:
-			tag = YOUTUBE_VIDEO_TAG;
-			toShow = fragmentManager.findFragmentByTag(tag);
-			if (toShow == null) {
-				toShow = YoutubeVideoListFragment.newInstance();
-			}
-			break;
-		case 3:
-			tag = SAMPLE_PIC_TAG;
-			toShow = fragmentManager.findFragmentByTag(tag);
-			if (toShow == null) {
-				toShow = SamplePictureFragment.newInstance();
-			}
-			break;
-		case 4:
+		} else if(position == indexSBS) {
 			tag = SBS_PATH_TAG;
 			toShow = fragmentManager.findFragmentByTag(tag);
 			if (toShow == null) {
 				toShow = SBSPictureFragment.newInstance();
 			}
-			break;
-		default:
-			tag = LOCAL_VIDEO_TAG;
+		} else if(position == indexSample) {
+			tag = SAMPLE_PIC_TAG;
 			toShow = fragmentManager.findFragmentByTag(tag);
 			if (toShow == null) {
-				toShow = VideoListLocalFragment.newInstance();
+				toShow = SamplePictureFragment.newInstance();
 			}
-			break;
-		}
+		} else if(position == indexYoutubeVideo) {
+			tag = YOUTUBE_VIDEO_TAG;
+			toShow = fragmentManager.findFragmentByTag(tag);
+			if (toShow == null) {
+				toShow = YoutubeVideoListFragment.newInstance();
+			}
+		} 
 		
 		FragmentTransaction ft = getFragmentManager().beginTransaction();
 		

@@ -26,8 +26,10 @@ public class AdUtils {
 		if (switcer != null) {
 			if(switcer.isAdvswitcher())
 				return true;
+			else
+				return false;
 		}
-		return false;
+		return true;
 	}
 
 	public static void addAdModBanner(Context context, View rootView) {
