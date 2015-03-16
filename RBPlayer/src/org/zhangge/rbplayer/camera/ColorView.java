@@ -16,7 +16,7 @@ public class ColorView extends ImageView {
 	private Bitmap gBitmap2 = null;
 	private ColorMatrix gRedColorMatrix = null;
 	private ColorMatrix gBlueGreenMatrix = null;
-	private float[] gRedColor = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 1, 0};
+	private float[] gRedColor = {1, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0.8f, 0};
 	private float[] gBlueGreenColor = {0, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0.5f, 0};
 	private ColorMatrixColorFilter gRedFilter;
 	private ColorMatrixColorFilter gBlueGreenFilter;
