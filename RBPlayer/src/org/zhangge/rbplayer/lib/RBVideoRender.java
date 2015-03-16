@@ -60,7 +60,7 @@ public class RBVideoRender implements GLSurfaceView.Renderer, SurfaceTexture.OnF
 		Surface surface = new Surface(mSurfaceTexture);
 		mMediaPlayer.setSurface(surface);
 		surface.release();
-
+		
 		try {
 			mMediaPlayer.prepare();
 		} catch (IOException t) {

@@ -93,7 +93,7 @@ public class PhotoActivity extends BaseActivity {
 		gBitmap1 = BitmapFactory.decodeFile(gPath1);
 		
 		gRender = new PicTextureRender(gBitmap1);
-//		gSurfaceView.setEGLContextClientVersion(2);
+		gSurfaceView.setEGLContextClientVersion(2);
 		gSurfaceView.setRenderer(gRender);
 		gSurfaceView.setRenderMode(GLSurfaceView.RENDERMODE_CONTINUOUSLY);
 		

@@ -123,7 +123,7 @@ public class LocalPictureFragment extends BaseFragment {
 			holder.image.setOnClickListener(new OnClickListener() {
 				@Override
 				public void onClick(View v) {
-					Navigation.toPhotoActivity(getActivity(), null, path, PhotoActivity.SCREEN_MODE_COLOR);
+					Navigation.toPhotoActivity(getActivity(), null, path, PhotoActivity.SCREEN_MODE_GLES);
 				}
 			});
             
