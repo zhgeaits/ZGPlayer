@@ -10,6 +10,7 @@ import java.util.List;
 import org.zhangge.almightyzgbox_android.log.ZGLog;
 import org.zhangge.almightyzgbox_android.utils.ZGPreference;
 import org.zhangge.almightyzgbox_android.utils.ZGTask;
+import org.zhangge.rbplayer.bmob.RBSwithcer;
 import org.zhangge.rbplayer.camera.LocalPictureFragment;
 import org.zhangge.rbplayer.utils.BaseConfig;
 import org.zhangge.rbplayer.utils.Navigation;
@@ -53,6 +54,8 @@ public class MainActivity extends BaseActivity {
 	private CharSequence gTitle;
 	private String[] gMenuTitles;
 
+	private boolean gNoYoutube;
+	private boolean gNoSample;
 	private int currentItem;
 	private Fragment currentFragment;
 
@@ -71,7 +74,9 @@ public class MainActivity extends BaseActivity {
 		// 设置阴影效果
 		gDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
-		gDrawerList.setAdapter(new LeftDrawerAdapter(gContext, Arrays.asList(gMenuTitles)));
+		List<String> titles = Arrays.asList(gMenuTitles);
+		modifyTitles(titles);
+		gDrawerList.setAdapter(new LeftDrawerAdapter(gContext, titles));
 		gDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 		
 		//开启ActionBar上APP ICON的功能  
@@ -142,6 +147,25 @@ public class MainActivity extends BaseActivity {
 					}
 				}
 			}, 0);
+		}
+	}
+	
+	private void modifyTitles(List<String> titles) {
+		RBSwithcer switcer = BaseConfig.getSwitcher();
+		if (switcer == null) {
+			return;
+		}
+		if(!switcer.isYoutubeswitcher()) {
+			titles.remove(2);
+			gNoYoutube = true;
+		}
+		if(!switcer.isSampleswitcher()) {
+			if(gNoYoutube) {
+				titles.remove(2);
+			} else {
+				titles.remove(3);
+			}
+			gNoSample = true;
 		}
 	}
 	

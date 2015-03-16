@@ -9,6 +9,7 @@ import cn.bmob.v3.BmobObject;
  */
 public class RBSwithcer extends BmobObject  {
 
+	private static final long serialVersionUID = 7774273146006152099L;
 	private String packagename;
 	private boolean advswitcher;
 	private boolean sampleswitcher;

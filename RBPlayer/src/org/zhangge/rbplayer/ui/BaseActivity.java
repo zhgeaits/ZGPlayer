@@ -1,5 +1,7 @@
 package org.zhangge.rbplayer.ui;
 
+import org.zhangge.rbplayer.utils.BaseConfig;
+
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.FragmentActivity;
@@ -29,6 +31,7 @@ public class BaseActivity extends FragmentActivity {
 	@Override
 	public void onResume() {
 		super.onResume();
+		BaseConfig.checkPackageName(getPackageName());
 		MobclickAgent.onResume(this);
 	}
 

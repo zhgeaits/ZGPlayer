@@ -30,6 +30,15 @@ public class BaseConfig {
 			sbsfile.mkdirs();
 	}
 	
+	public static void checkPackageName(String packageName) {
+		if(switcher != null) {
+			String pn = switcher.getPackagename();
+			if(!pn.equalsIgnoreCase(packageName)) {
+				throw new RuntimeException();
+			}
+		}
+	}
+	
 	public static void setSwitcher(RBSwithcer swithcer) {
 		switcher = swithcer;
 	}

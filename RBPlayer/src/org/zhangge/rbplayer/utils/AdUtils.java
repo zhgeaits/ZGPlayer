@@ -1,8 +1,9 @@
 package org.zhangge.rbplayer.utils;
 
 import org.zhangge.almightyzgbox_android.utils.ZGPreference;
-
+import org.zhangge.rbplayer.bmob.RBSwithcer;
 import org.zhangge.rbplayerpro.R;
+
 import android.content.Context;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -19,8 +20,20 @@ public class AdUtils {
 	public static String ADMOD_INTER_COUNT = "ADMOD_INTER_COUNT";
 	private static AdView adView;
 	private static InterstitialAd interstitial;
+	
+	public static boolean checkAdvSwitcher() {
+		RBSwithcer switcer = BaseConfig.getSwitcher();
+		if (switcer != null) {
+			if(switcer.isAdvswitcher())
+				return true;
+		}
+		return false;
+	}
 
 	public static void addAdModBanner(Context context, View rootView) {
+		if(!checkAdvSwitcher())
+			return;
+		
 		adView = new AdView(context);
 		adView.setAdUnitId(AdUtils.ADMOD_BANNER_ID);
 		adView.setAdSize(AdSize.BANNER);
@@ -32,6 +45,9 @@ public class AdUtils {
 	}
 
 	public static void addInterstitialAd(Context context) {
+		if(!checkAdvSwitcher())
+			return;
+		
 		interstitial = new InterstitialAd(context);
 		interstitial.setAdUnitId(ADMOD_InterstitialAd_ID);
 
@@ -41,6 +57,9 @@ public class AdUtils {
 	}
 
 	public static void displayInterstitial() {
+		if(!checkAdvSwitcher())
+			return;
+		
 		int count = ZGPreference.getInstance().getInt(ADMOD_INTER_COUNT, 0);
 		if (interstitial.isLoaded() && count % 2 == 0) {
 			interstitial.show();
