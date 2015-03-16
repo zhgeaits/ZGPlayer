@@ -6,6 +6,7 @@ import java.util.List;
 
 import org.zhangge.almightyzgbox_android.AlmightAndroidBox;
 import org.zhangge.almightyzgbox_android.utils.ZGConstant;
+import org.zhangge.almightyzgbox_android.utils.ZGPreference;
 import org.zhangge.rbplayer.bmob.RBSwithcer;
 import org.zhangge.rbplayer.bmob.SBSSamplePic;
 import org.zhangge.rbplayer.bmob.SamplePic;
@@ -33,17 +34,37 @@ public class BaseConfig {
 	public static void checkPackageName(String packageName) {
 		if(switcher != null) {
 			String pn = switcher.getPackagename();
-			if(!pn.equalsIgnoreCase(packageName)) {
+			if(pn != null && !pn.equalsIgnoreCase(packageName)) {
 				throw new RuntimeException();
 			}
 		}
 	}
 	
+	private static void saveSwitcher(RBSwithcer swithcer) {
+		ZGPreference.getInstance().put("packagename", swithcer.getPackagename());
+		ZGPreference.getInstance().putBoolean("advswitcher", swithcer.isAdvswitcher());
+		ZGPreference.getInstance().putBoolean("sampleswitcher", swithcer.isSampleswitcher());
+		ZGPreference.getInstance().putBoolean("youtubeswitcher", swithcer.isYoutubeswitcher());
+	}
+	
+	private static RBSwithcer querySwitcher() {
+		RBSwithcer switcher = new RBSwithcer();
+		switcher.setPackagename(ZGPreference.getInstance().get("packagename"));
+		switcher.setAdvswitcher(ZGPreference.getInstance().getBoolean("advswitcher", true));
+		switcher.setSampleswitcher(ZGPreference.getInstance().getBoolean("sampleswitcher", false));
+		switcher.setYoutubeswitcher(ZGPreference.getInstance().getBoolean("youtubeswitcher", false));
+		return switcher;
+	}
+	
 	public static void setSwitcher(RBSwithcer swithcer) {
 		switcher = swithcer;
+		saveSwitcher(swithcer);
 	}
 	
 	public static RBSwithcer getSwitcher() {
+		if(switcher == null) {
+			switcher = querySwitcher();
+		}
 		return switcher;
 	}
 	
