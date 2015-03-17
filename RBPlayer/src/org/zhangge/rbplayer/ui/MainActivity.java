@@ -60,6 +60,7 @@ public class MainActivity extends BaseActivity {
 	private CharSequence gDrawerTitle;
 	private CharSequence gTitle;
 	private String[] gMenuTitles;
+	private List<String> gMenuTitlesList;
 
 	private boolean gNoYoutube;
 	private int currentItem;
@@ -80,9 +81,9 @@ public class MainActivity extends BaseActivity {
 		// 设置阴影效果
 		gDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
 
-		List<String> titles = Arrays.asList(gMenuTitles);
-		titles = modifyTitles(titles);
-		gDrawerList.setAdapter(new LeftDrawerAdapter(gContext, titles));
+		gMenuTitlesList = Arrays.asList(gMenuTitles);
+		gMenuTitlesList = modifyTitles(gMenuTitlesList);
+		gDrawerList.setAdapter(new LeftDrawerAdapter(gContext, gMenuTitlesList));
 		gDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 		
 		//开启ActionBar上APP ICON的功能  
@@ -244,7 +245,7 @@ public class MainActivity extends BaseActivity {
         }
 
 		gDrawerList.setItemChecked(position, true);
-		setTitle(gMenuTitles[position]);
+		setTitle(gMenuTitlesList.get(position));
 		gDrawerLayout.closeDrawer(gDrawerList);
 	}
 
