@@ -51,7 +51,7 @@ public class RBTextureRender {
             "uniform int mode;\n" +
             "uniform float offset;\n" +
             "uniform float width;\n" +
-            "void doModeOne(){\n" +
+            "void doModeOne(){\n" +//普通红蓝转换 Color Anaglyph Mode
             "  float origx = vTextureCoord.x;\n" +
             "  if(origx < 0.5) {\n" +
             "	vec2 vTexL;\n" +
@@ -66,9 +66,114 @@ public class RBTextureRender {
             "   discard;\n"+
             "  }\n" +
             "}\n" +
+            "void doModeTwo(){\n" +//Red/Blue Monochrome Mode
+            "  float origx = vTextureCoord.x;\n" +
+            "  if(origx < 0.5) {\n" +
+            "	vec2 vTexL;\n" +
+            "	vec2 vTexR;\n" +
+            "	vTexL.y = vTextureCoord.y;\n" +
+            "	vTexR.y = vTextureCoord.y;\n" +
+            "	vTexL.x = vTextureCoord.x;\n" +
+            "	vTexR.x = vTextureCoord.x + 0.5 + offset / width;\n" +
+            "	vec4 lcolor = texture2D(sTexture, vTexL);\n" +
+            "	vec4 rcolor = texture2D(sTexture, vTexR);\n" +
+            "	gl_FragColor.r = lcolor.r*0.299 + lcolor.g*0.587 + lcolor.b*0.114;\n" +
+            "	gl_FragColor.g = 0.0;\n" +
+            "	gl_FragColor.b = rcolor.r*0.299 + rcolor.g*0.587 + rcolor.b*0.114;\n" +
+            "  	gl_FragColor.a = (lcolor.a + rcolor.a) * 0.5;\n" +
+            "  } else {\n" +
+            "   discard;\n"+
+            "  }\n" +
+            "}\n" +
+            "void doModeThree(){\n" +//Red/Cyan Monochrome Mode
+            "  float origx = vTextureCoord.x;\n" +
+            "  if(origx < 0.5) {\n" +
+            "	vec2 vTexL;\n" +
+            "	vec2 vTexR;\n" +
+            "	vTexL.y = vTextureCoord.y;\n" +
+            "	vTexR.y = vTextureCoord.y;\n" +
+            "	vTexL.x = vTextureCoord.x;\n" +
+            "	vTexR.x = vTextureCoord.x + 0.5 + offset / width;\n" +
+            "	vec4 lcolor = texture2D(sTexture, vTexL);\n" +
+            "	vec4 rcolor = texture2D(sTexture, vTexR);\n" +
+            "	gl_FragColor.r = lcolor.r*0.299 + lcolor.g*0.587 + lcolor.b*0.114;\n" +
+            "	gl_FragColor.g = rcolor.r*0.299 + rcolor.g*0.587 + rcolor.b*0.114;\n" +
+            "	gl_FragColor.b = rcolor.r*0.299 + rcolor.g*0.587 + rcolor.b*0.114;\n" +
+            "  	gl_FragColor.a = (lcolor.a + rcolor.a) * 0.5;\n" +
+            "  } else {\n" +
+            "   discard;\n"+
+            "  }\n" +
+            "}\n" +
+            "void doModeFour(){\n" +//Color Anaglyph Half-Color Mode
+            "  float origx = vTextureCoord.x;\n" +
+            "  if(origx < 0.5) {\n" +
+            "	vec2 vTexL;\n" +
+            "	vec2 vTexR;\n" +
+            "	vTexL.y = vTextureCoord.y;\n" +
+            "	vTexR.y = vTextureCoord.y;\n" +
+            "	vTexL.x = vTextureCoord.x;\n" +
+            "	vTexR.x = vTextureCoord.x + 0.5 + offset / width;\n" +
+            "	vec4 lcolor = texture2D(sTexture, vTexL);\n" +
+            "	vec4 rcolor = texture2D(sTexture, vTexR);\n" +
+            "	gl_FragColor.r = lcolor.r*0.299 + lcolor.g*0.587 + lcolor.b*0.114;\n" +
+            "	gl_FragColor.g = rcolor.g;\n" +
+            "	gl_FragColor.b = rcolor.b;\n" +
+            "  	gl_FragColor.a = (lcolor.a + rcolor.a) * 0.5;\n" +
+            "  } else {\n" +
+            "   discard;\n"+
+            "  }\n" +
+            "}\n" +
+            "void doModeFive(){\n" +//Optimized Anaglyph Mode
+            "  float origx = vTextureCoord.x;\n" +
+            "  if(origx < 0.5) {\n" +
+            "	vec2 vTexL;\n" +
+            "	vec2 vTexR;\n" +
+            "	vTexL.y = vTextureCoord.y;\n" +
+            "	vTexR.y = vTextureCoord.y;\n" +
+            "	vTexL.x = vTextureCoord.x;\n" +
+            "	vTexR.x = vTextureCoord.x + 0.5 + offset / width;\n" +
+            "	vec4 lcolor = texture2D(sTexture, vTexL);\n" +
+            "	vec4 rcolor = texture2D(sTexture, vTexR);\n" +
+            "	gl_FragColor.r = lcolor.r*0.0 + lcolor.g*0.45 + lcolor.b*1.05;\n" +
+            "	gl_FragColor.g = rcolor.g;\n" +
+            "	gl_FragColor.b = rcolor.b;\n" +
+            "  	gl_FragColor.a = (lcolor.a + rcolor.a) * 0.5;\n" +
+            "  } else {\n" +
+            "   discard;\n"+
+            "  }\n" +
+            "}\n" +
+            "void doModeSix(){\n" +//Dubois Anaglyph Mode
+            "  float origx = vTextureCoord.x;\n" +
+            "  if(origx < 0.5) {\n" +
+            "	vec2 vTexL;\n" +
+            "	vec2 vTexR;\n" +
+            "	vTexL.y = vTextureCoord.y;\n" +
+            "	vTexR.y = vTextureCoord.y;\n" +
+            "	vTexL.x = vTextureCoord.x;\n" +
+            "	vTexR.x = vTextureCoord.x + 0.5 + offset / width;\n" +
+            "	vec4 lcolor = texture2D(sTexture, vTexL);\n" +
+            "	vec4 rcolor = texture2D(sTexture, vTexR);\n" +
+            "	gl_FragColor.r = lcolor.r*0.456 + lcolor.g*0.5 + lcolor.b*0.176 - rcolor.r*0.043 - rcolor.g*0.088 - rcolor.b*0.002;\n" +
+            "	gl_FragColor.g = lcolor.r*-0.04 - lcolor.g*0.038 - lcolor.b*0.016 + rcolor.r*0.378 + rcolor.g*0.743 - rcolor.b*0.018;\n" +
+            "	gl_FragColor.b = lcolor.r*-0.015 - lcolor.g*0.021 - lcolor.b*0.005 - rcolor.r*0.072 - rcolor.g*0.113 + rcolor.b*1.226;\n" +
+            "  	gl_FragColor.a = (lcolor.a + rcolor.a) * 0.5;\n" +
+            "  } else {\n" +
+            "   discard;\n"+
+            "  }\n" +
+            "}\n" +
             "void main() {\n" +
             "   if(mode == 1) {\n" +
             "       doModeOne();\n" +
+            "	} else if(mode == 2) {" +
+            "       doModeTwo();\n" +
+            "	} else if(mode == 3) {" +
+            "       doModeThree();\n" +
+            "	} else if(mode == 4) {" +
+            "       doModeFour();\n" +
+            "	} else if(mode == 5) {" +
+            "       doModeFive();\n" +
+            "	} else if(mode == 6) {" +
+            "       doModeSix();\n" +
             "   } else {\n" +
             "       gl_FragColor = texture2D(sTexture, vTextureCoord);\n" +
             "   }\n" +
