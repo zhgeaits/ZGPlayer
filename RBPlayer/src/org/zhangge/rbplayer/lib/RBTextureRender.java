@@ -199,6 +199,10 @@ public class RBTextureRender {
     public static int MODE_NORMAL = 0;
     public static int MODE_ONE = 1;
     public static int MODE_TWO = 2;
+    public static int MODE_THREE = 3;
+    public static int MODE_FOUR = 4;
+    public static int MODE_FIVE = 5;
+    public static int MODE_SIX = 6;
 
     public RBTextureRender() {
         mTriangleVertices = ByteBuffer.allocateDirect(
@@ -264,7 +268,7 @@ public class RBTextureRender {
         ShaderUtils.checkGlError("glEnableVertexAttribArray maTextureHandle");
 
         Matrix.setIdentityM(mMVPMatrix, 0);
-        if(mode == MODE_ONE) {
+        if(mode == MODE_ONE || mode == MODE_TWO || mode == MODE_THREE || mode == MODE_FOUR || mode == MODE_FIVE || mode == MODE_SIX) {
         	Matrix.scaleM(mMVPMatrix, 0, 2f, 1f, 1f);
         	Matrix.translateM(mMVPMatrix, 0, 0.5f, 0, 0);
         }

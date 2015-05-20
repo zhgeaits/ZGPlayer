@@ -127,7 +127,17 @@ public class MediaPlayerActivity extends BaseActivity {
 					gRenderer.setMode(RBTextureRender.MODE_ONE);
 					gModeBtn.setBackgroundResource(R.drawable.btn_3d);
 					gOffsetSeekbar.setVisibility(View.VISIBLE);
-				} else {
+				} else if(gRenderer.getMode() == RBTextureRender.MODE_ONE) {
+					gRenderer.setMode(RBTextureRender.MODE_TWO);
+				} else if(gRenderer.getMode() == RBTextureRender.MODE_TWO) {
+					gRenderer.setMode(RBTextureRender.MODE_THREE);
+				} else if(gRenderer.getMode() == RBTextureRender.MODE_THREE) {
+					gRenderer.setMode(RBTextureRender.MODE_FOUR);
+				} else if(gRenderer.getMode() == RBTextureRender.MODE_FOUR) {
+					gRenderer.setMode(RBTextureRender.MODE_FIVE);
+				} else if(gRenderer.getMode() == RBTextureRender.MODE_FIVE) {
+					gRenderer.setMode(RBTextureRender.MODE_SIX);
+				} else if(gRenderer.getMode() == RBTextureRender.MODE_SIX) {
 					gRenderer.setMode(RBTextureRender.MODE_NORMAL);
 					gModeBtn.setBackgroundResource(R.drawable.btn_2d);
 					gOffsetSeekbar.setVisibility(View.GONE);
